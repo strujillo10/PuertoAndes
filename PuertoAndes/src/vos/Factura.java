@@ -1,15 +1,30 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Factura 
 {
+	@JsonProperty(value="idFactura")
 	private int idFactura; 
+	
+	@JsonProperty(value="medioTransporte")
 	private String medioTransporte; 
+	
+	@JsonProperty(value="numEquipos")
 	private int numEquipos; 
+	
+	@JsonProperty(value="espacio")
 	private int espacio; 
+	
+	@JsonProperty(value="numDias")
 	private int numDias; 
+	
+	@JsonProperty(value="costoTotal")
 	private int costoTotal; 
 	
-	public Factura(int f, String mT, int nE, int e, int nD, int cT)
+	public Factura(@JsonProperty(value="idFactura")int f, @JsonProperty(value="medioTransporte")String mT, 
+			@JsonProperty(value="numEquipo")int nE, @JsonProperty(value="espacio")int e, 
+			@JsonProperty(value="numDias")int nD, @JsonProperty(value="costoTotal")int cT)
 	{
 		idFactura = f; 
 		medioTransporte = mT; 

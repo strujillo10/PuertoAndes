@@ -1,15 +1,30 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Maquinaria 
 {
+	@JsonProperty(value="idMaquina")
 	private int idMaquina; 
+	
+	@JsonProperty(value="capacidad")
 	private int capacidad; 
+	
+	@JsonProperty(value="cantidad")
 	private int cantidad; 
+	
+	@JsonProperty(value="tipo")
 	private String tipo; 
+	
+	@JsonProperty(value="idPuerto")
 	private int idPuerto; 
+	
+	@JsonProperty(value="idOperador")
 	private int idOperador; 
 	
-	public Maquinaria(int m, int cap, int can, String t, int p, int op)
+	public Maquinaria(@JsonProperty(value="idMaquina")int m, @JsonProperty(value="capacidad")int cap, 
+			@JsonProperty(value="cantidad")int can, @JsonProperty(value="tipo")String t, 
+			@JsonProperty(value="idPuerto")int p, @JsonProperty(value="idOperador")int op)
 	{
 		idMaquina = m; 
 		capacidad = cap; 

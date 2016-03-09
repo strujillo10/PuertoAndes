@@ -1,12 +1,20 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Operador 
 {
+	@JsonProperty(value="idOperador")
 	private int idOperador;
+	
+	@JsonProperty(value="nombre")
 	private String nombre; 
+	
+	@JsonProperty(value="operacion")
 	private String operacion; 
 	
-	public Operador(int idO, String n, String o)
+	public Operador(@JsonProperty(value="idOperador")int idO, @JsonProperty(value="nombre")String n, 
+			@JsonProperty(value="operacion")String o)
 	{
 		idOperador = idO;
 		nombre = n; 

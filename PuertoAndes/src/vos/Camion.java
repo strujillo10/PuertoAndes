@@ -2,17 +2,35 @@ package vos;
 
 import java.sql.Date;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Camion 
 {
+	@JsonProperty(value="idCamion")
 	private int idCamion; 
+	
+	@JsonProperty(value="fechaLlegada")
 	private Date fechaLlegada; 
+	
+	@JsonProperty(value="fechaSalida")
 	private Date fechaSalida; 
+	
+	@JsonProperty(value="nombreAgente")
 	private String nombreAgente; 
+	
+	@JsonProperty(value="carga")
 	private int carga; 
+	
+	@JsonProperty(value="cantidadContenedores")
 	private int cantidadContenedores;
+	
+	@JsonProperty(value="idPuerto")
 	private int idPuerto; 
 	
-	public Camion(int iC, Date fL, Date fS, String nA, int c, int cC, int iP)
+	public Camion(@JsonProperty(value="idCamion")int iC, @JsonProperty(value="fechaLlegada")Date fL, 
+			@JsonProperty(value="fechaSalida")Date fS, @JsonProperty(value="nombreAgente")String nA, 
+			@JsonProperty(value="carga")int c, @JsonProperty(value="cantidadContenedores")int cC, 
+			@JsonProperty(value="idPuerto")int iP)
 	{
 		idCamion = iC;
 		fechaLlegada = fL; 

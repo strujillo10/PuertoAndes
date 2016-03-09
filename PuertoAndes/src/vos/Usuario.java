@@ -1,15 +1,30 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Usuario 
 {
+	@JsonProperty(value="idUsuario")
 	private int idUsuario;
+	
+	@JsonProperty(value="nombre")
 	private String nombre; 
+	
+	@JsonProperty(value="registro")
 	private String registro; 
+	
+	@JsonProperty(value="tipo")
 	private String tipo;
+	
+	@JsonProperty(value="importador")
 	private int importador; 
+	
+	@JsonProperty(value="rut")
 	private String rut; 
 	
-	public Usuario(int iU, String n, String r, String t, int i, String nRut)
+	public Usuario(@JsonProperty(value="idUsuario")int iU, @JsonProperty(value="nombre")String n, 
+			@JsonProperty(value="registro")String r, @JsonProperty(value="tipo")String t, 
+			@JsonProperty(value="importador")int i, @JsonProperty(value="rut")String nRut)
 	{
 		idUsuario = iU;
 		nombre = n; 

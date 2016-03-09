@@ -1,15 +1,30 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Puerto 
 {
+	@JsonProperty(value="idPuerto")
 	private int idPuerto; 
+	
+	@JsonProperty(value="nombre")
 	private String nombre; 
+	
+	@JsonProperty(value="pais")
 	private String pais; 
+	
+	@JsonProperty(value="ciudad")
 	private String ciudad; 
+	
+	@JsonProperty(value="capacidad")
 	private int capacidad; 
+	
+	@JsonProperty(value="localizacion")
 	private String localizacion; 
 	
-	public Puerto(int idP, String n, String p, String ciu, int c, String loc)
+	public Puerto(@JsonProperty(value="idPuerto")int idP, @JsonProperty(value="nombre")String n, 
+			@JsonProperty(value="pais")String p, @JsonProperty(value="ciudad")String ciu, 
+			@JsonProperty(value="capacidad")int c, @JsonProperty(value="localizacion")String loc)
 	{
 		idPuerto = idP; 
 		nombre = n; 

@@ -1,17 +1,37 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Buque 
 {
+	@JsonProperty(value="idBuque")
 	private int idBuque; 
+	
+	@JsonProperty(value="registro")
 	private int registro; 
+	
+	@JsonProperty(value="nombreBuque")
 	private String nombreBuque; 
+	
+	@JsonProperty(value="nombreAgente")
 	private String nombreAgente; 
+	
+	@JsonProperty(value="tipo")
 	private String tipo;
+	
+	@JsonProperty(value="capacidad")
 	private int capacidad; 
+	
+	@JsonProperty(value="cantidadContenedores")
 	private int cantidadContenedores; 
+	
+	@JsonProperty(value="carga")
 	private int carga; 
 	
-	public Buque(int iB, int r, String nB, String nA, String t, int c, int cC, int car)
+	public Buque(@JsonProperty(value="idBuque")int iB, @JsonProperty(value="registro")int r, 
+			@JsonProperty(value="nombreBuque")String nB, @JsonProperty(value="nombreAgente")String nA, 
+			@JsonProperty(value="tipo")String t, @JsonProperty(value="capacidad")int c, 
+			@JsonProperty(value="cantidadContenedores")int cC, @JsonProperty(value="carga")int car)
 	{
 		idBuque = iB; 
 		registro = r; 

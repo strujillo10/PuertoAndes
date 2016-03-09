@@ -1,27 +1,66 @@
 package vos;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 public class Almacen 
 {
+	@JsonProperty(value="idAlmacen")
 	private int idAlmacen; 
+	
+	@JsonProperty(value="tipo")
 	private String tipo; 
+	
+	@JsonProperty(value="tipoCarga")
 	private String tipoCarga; 
+	
+	@JsonProperty(value="nombre")
 	private String nombre; 
+	
+	@JsonProperty(value="capacidad")
 	private int capacidad; 
+	
+	@JsonProperty(value="ancho")
 	private int ancho; 
+	
+	@JsonProperty(value="largo")
 	private int largo;
+	
+	@JsonProperty(value="plataforma")
 	private int plataforma; 
+	
+	@JsonProperty(value="separacion")
 	private int separacion; 
+	
+	@JsonProperty(value="cuartoFrio")
 	private int cuartoFrio; 
+	
+	@JsonProperty(value="areaFrio")
 	private int areaFrio; 
+	
+	@JsonProperty(value="largoFrio")
 	private int largoFrio; 
+	
+	@JsonProperty(value="anchoFrio")
 	private int anchoFrio; 
+	
+	@JsonProperty(value="altoFrio")
 	private int altoFrio; 
+	
+	@JsonProperty(value="areaUsada")
 	private int areaUsada; 
+	
+	@JsonProperty(value="idPuerto")
 	private int idPuerto; 
+	
+	@JsonProperty(value="lleno")
 	private int lleno; 
 	
-	public Almacen(int iA, String t, String tC, String n, int c, int a, int l, int p, int s, int cF,
-			int aF, int lF, int anF, int alF, int aU, int iP, int llen)
+	public Almacen(@JsonProperty(value="idAlmacen")int iA, @JsonProperty(value="tipo")String t, @JsonProperty(value="tipoCarga")String tC, 
+			@JsonProperty(value="nombre")String n, @JsonProperty(value="capacidad")int c, @JsonProperty(value="ancho")int a, 
+			@JsonProperty(value="largo")int l, @JsonProperty(value="plataforma")int p, @JsonProperty(value="separacion")int s, 
+			@JsonProperty(value="cuartoFrio")int cF,@JsonProperty(value="areaFrio")int aF, @JsonProperty(value="largoFrio")int lF, 
+			@JsonProperty(value="anchoFrio")int anF, @JsonProperty(value="altoFrio")int alF, @JsonProperty(value="areaUsada")int aU, 
+			@JsonProperty(value="idPuerto")int iP, @JsonProperty(value="lleno")int llen)
 	{
 		idAlmacen = iA; 
 		tipo = t; 
