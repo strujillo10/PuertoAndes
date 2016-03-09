@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -69,7 +70,7 @@ public class DAOCamion
 	 */
 	public ArrayList<Camion> darCamiones() throws SQLException, Exception 
 	{
-		ArrayList<Camion> videos = new ArrayList<Camion>();
+		ArrayList<Camion> camiones = new ArrayList<Camion>();
 
 		String sql = "SELECT * FROM CAMION";
 
@@ -77,14 +78,17 @@ public class DAOCamion
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Almacen(id, name, duration));
+			String name = rs.getString("NOMBRE_AGENTE");
+			int id = Integer.parseInt(rs.getString("ID_CAMION"));
+			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
+			Date fechaSalida = rs.getDate("FECHA_SALIDA");
+			int carga = Integer.parseInt(rs.getString("CARGA"));
+			int cantiCont = Integer.parseInt(rs.getString("CANTIDAD_CONTENEDORES"));
+			int idPuert = Integer.parseInt(rs.getString("ID_PUERTO"));
+			camiones.add(new Camion(id, fechaLlegada, fechaSalida, name, carga, cantiCont, idPuert));
 		}
-		return videos;
+		return camiones;
 	}
 
 	/**
@@ -98,7 +102,7 @@ public class DAOCamion
 	{
 		ArrayList<Camion> camiones = new ArrayList<Camion>();
 
-		String sql = "SELECT * FROM CAMION WHERE ID ='" + id + "'";
+		String sql = "SELECT * FROM CAMION WHERE ID_CAMION ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -106,12 +110,15 @@ public class DAOCamion
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			String name = rs.getString("NOMBRE_AGENTE");
+			int id2 = Integer.parseInt(rs.getString("ID_CAMION"));
+			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
+			Date fechaSalida = rs.getDate("FECHA_SALIDA");
+			int carga = Integer.parseInt(rs.getString("CARGA"));
+			int cantiCont = Integer.parseInt(rs.getString("CANTIDAD_CONTENEDORES"));
+			int idPuert = Integer.parseInt(rs.getString("ID_PUERTO"));
+			camiones.add(new Camion(id2, fechaLlegada, fechaSalida, name, carga, cantiCont, idPuert));
 		}
 
 		return camiones;
@@ -128,9 +135,13 @@ public class DAOCamion
 	public void addCamion(Camion camion) throws SQLException, Exception 
 	{
 		String sql = "INSERT INTO ALMACEN VALUES (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		sql += camion.getIdCamion() + ",'";
+		sql += camion.getFechaLlegada() + ",'";
+		sql += camion.getFechaSalida() + ",'";
+		sql += camion.getNombreAgente() + ",'";
+		sql += camion.getCarga() + "',";
+		sql += camion.getCantidadContenedores() + ",'";
+		sql += camion.getIdPuerto() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -151,9 +162,14 @@ public class DAOCamion
 	public void updateCamion(Camion camion) throws SQLException, Exception 
 	{
 		String sql = "UPDATE CAMION SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "id_camion='" + camion.getIdCamion() + "',";
+		sql += "fecha_llegada='" + camion.getFechaLlegada() + "',";
+		sql += "fecha_salida='" + camion.getFechaSalida() + "',";
+		sql += "nombre_agente='" + camion.getNombreAgente() + "',";
+		sql += "carga='" + camion.getCarga() + "',";
+		sql += "cantidad_contenedores='" + camion.getCantidadContenedores() + "',";
+		sql += "id_puerto=" + camion.getIdPuerto();
+		sql += " WHERE id = " + camion.getIdCamion();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -174,7 +190,7 @@ public class DAOCamion
 	{
 
 		String sql = "DELETE FROM CAMION";
-		sql += " WHERE id = " + camion.getId();
+		sql += " WHERE id = " + camion.getIdCamion();
 
 		System.out.println("SQL stmt:" + sql);
 
