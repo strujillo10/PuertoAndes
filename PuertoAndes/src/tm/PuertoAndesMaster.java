@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import dao.DAOPuerto;
+import vos.Puerto;
+
 
 public class PuertoAndesMaster 
 {
@@ -81,97 +84,21 @@ public class PuertoAndesMaster
 	////////////////////////////////////////
 	///////Transacciones////////////////////
 	////////////////////////////////////////
-
-
-	/**
-	 * Método que modela la transacción que retorna todos los videos de la base de datos.
-	 * @return ListaVideos - objeto que modela  un arreglo de videos. este arreglo contiene el resultado de la búsqueda
-	 * @throws Exception -  cualquier error que se genere durante la transacción
-	 */
-	public ListaVideos darVideos() throws Exception {
-		ArrayList<Video> videos;
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			videos = daoVideos.darVideos();
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoVideos.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-		return new ListaVideos(videos);
-	}
-
-	/**
-	 * Método que modela la transacción que busca el/los videos en la base de datos con el nombre entra como parámetro.
-	 * @param name - Nombre del video a buscar. name != null
-	 * @return ListaVideos - objeto que modela  un arreglo de videos. este arreglo contiene el resultado de la búsqueda
-	 * @throws Exception -  cualquier error que se genere durante la transacción
-	 */
-	public ListaVideos buscarVideosPorName(String name) throws Exception {
-		ArrayList<Video> videos;
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			videos = daoVideos.buscarVideosPorName(name);
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoVideos.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-		return new ListaVideos(videos);
-	}
 	
 	/**
-	 * Método que modela la transacción que agrega un solo video a la base de datos.
-	 * <b> post: </b> se ha agregado el video que entra como parámetro
-	 * @param video - el video a agregar. video != null
+	 * Método que modela la transacción que agrega un solo puerto a la base de datos.
+	 * <b> post: </b> se ha agregado el puerto que entra como parámetro
+	 * @param puerto - el puerto a agregar. puerto != null
 	 * @throws Exception - cualquier error que se genera agregando el video
 	 */
-	public void addVideo(Video video) throws Exception {
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
+	public void addPuerto(Puerto puerto) throws Exception {
+		DAOPuerto daoPuerto = new DAOPuerto();
 		try 
 		{
 			//////Transacción
 			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			daoVideos.addVideo(video);
+			daoPuerto.setConn(conn);
+			daoPuerto.addPuerto(puerto);
 			conn.commit();
 
 		} catch (SQLException e) {
@@ -184,7 +111,7 @@ public class PuertoAndesMaster
 			throw e;
 		} finally {
 			try {
-				daoVideos.cerrarRecursos();
+				daoPuerto.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {
@@ -196,59 +123,19 @@ public class PuertoAndesMaster
 	}
 	
 	/**
-	 * Método que modela la transacción que agrega los videos que entran como parámetro a la base de datos.
-	 * <b> post: </b> se han agregado los videos que entran como parámetro
-	 * @param videos - objeto que modela una lista de videos y se estos se pretenden agregar. videos != null
-	 * @throws Exception - cualquier error que se genera agregando los videos
+	 * Método que modela la transacción que actualiza el puerto que entra como parámetro a la base de datos.
+	 * <b> post: </b> se ha actualizado el puerto que entra como parámetro
+	 * @param puerto - puerto a actualizar. puerto != null
+	 * @throws Exception - cualquier error que se genera actualizando los puertos
 	 */
-	public void addVideos(ListaVideos videos) throws Exception {
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
-		try 
-		{
-			//////Transacción - ACID Example
-			this.conn = darConexion();
-			conn.setAutoCommit(false);
-			daoVideos.setConn(conn);
-			for(Video video : videos.getVideos())
-				daoVideos.addVideo(video);
-			conn.commit();
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			conn.rollback();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			conn.rollback();
-			throw e;
-		} finally {
-			try {
-				daoVideos.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-	}
-	
-	/**
-	 * Método que modela la transacción que actualiza el video que entra como parámetro a la base de datos.
-	 * <b> post: </b> se ha actualizado el video que entra como parámetro
-	 * @param video - Video a actualizar. video != null
-	 * @throws Exception - cualquier error que se genera actualizando los videos
-	 */
-	public void updateVideo(Video video) throws Exception {
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
+	public void updatePuerto(Puerto puerto) throws Exception {
+		DAOPuerto daoPuerto = new DAOPuerto();
 		try 
 		{
 			//////Transacción
 			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			daoVideos.updateVideo(video);
+			daoPuerto.setConn(conn);
+			daoPuerto.updatePuerto(puerto);
 
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
@@ -260,7 +147,7 @@ public class PuertoAndesMaster
 			throw e;
 		} finally {
 			try {
-				daoVideos.cerrarRecursos();
+				daoPuerto.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {
@@ -272,19 +159,19 @@ public class PuertoAndesMaster
 	}
 
 	/**
-	 * Método que modela la transacción que elimina el video que entra como parámetro a la base de datos.
-	 * <b> post: </b> se ha eliminado el video que entra como parámetro
-	 * @param video - Video a eliminar. video != null
-	 * @throws Exception - cualquier error que se genera actualizando los videos
+	 * Método que modela la transacción que elimina el Puerto que entra como parámetro a la base de datos.
+	 * <b> post: </b> se ha eliminado el puerto que entra como parámetro
+	 * @param puerto - puerto a eliminar. puerto != null
+	 * @throws Exception - cualquier error que se genera actualizando los puertos
 	 */
-	public void deleteVideo(Video video) throws Exception {
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
+	public void deletePuerto(Puerto puerto) throws Exception {
+		DAOPuerto daoPuerto = new DAOPuerto();
 		try 
 		{
 			//////Transacción
 			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			daoVideos.deleteVideo(video);
+			daoPuerto.setConn(conn);
+			daoPuerto.deletePuerto(puerto);
 
 		} catch (SQLException e) {
 			System.err.println("SQLException:" + e.getMessage());
@@ -296,7 +183,7 @@ public class PuertoAndesMaster
 			throw e;
 		} finally {
 			try {
-				daoVideos.cerrarRecursos();
+				daoPuerto.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
 			} catch (SQLException exception) {
@@ -306,44 +193,4 @@ public class PuertoAndesMaster
 			}
 		}
 	}
-
-	/**
-	 * Método que modela la transacción que retorna el/los videos mas alquilados
-	 * @return ListaVideos - objeto que modela  un arreglo de videos. este arreglo contiene el resultado de la búsqueda
-	 * @throws Exception -  cualquier error que se genere durante la transacción
-	 */
-	public ListaVideos videosMasAlquilados() throws Exception {
-		ArrayList<Video> videos;
-		DAOTablaVideos daoVideos = new DAOTablaVideos();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoVideos.setConn(conn);
-			videos = daoVideos.darVideoMasAlquilado();
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoVideos.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-		return new ListaVideos(videos);
-	}
-	
-}
-
 }
