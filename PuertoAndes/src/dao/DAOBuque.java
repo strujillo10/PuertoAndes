@@ -77,12 +77,16 @@ public class DAOBuque
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Buque(id, name, duration));
+			int id = Integer.parseInt(rs.getString("ID_BUQUE"));
+			int regis = Integer.parseInt(rs.getString("REGISTRO_CAP"));
+			String name = rs.getString("NOMBRE_PUERTO");
+			String nameAgen = rs.getString("NOMBRE_AGENTE");
+			String tipo = rs.getString("TIPO");
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int capacidadCont = Integer.parseInt(rs.getString("CAPACIDAD_CONTENEDORES"));
+			int carga = Integer.parseInt(rs.getString("CARGA"));
+			buques.add(new Buque(id, regis, name, nameAgen, tipo, capacidad, capacidadCont, carga));
 		}
 		return buques;
 	}
@@ -94,11 +98,11 @@ public class DAOBuque
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Buque> buscarBuquePorName(String name) throws SQLException, Exception 
+	public ArrayList<Buque> buscarBuquePorName(int id) throws SQLException, Exception 
 	{
 		ArrayList<Buque> buques = new ArrayList<Buque>();
 
-		String sql = "SELECT * FROM BUQUE WHERE NAME ='" + name + "'";
+		String sql = "SELECT * FROM BUQUE WHERE ID_BUQUE ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -106,12 +110,16 @@ public class DAOBuque
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			int id2 = Integer.parseInt(rs.getString("ID_BUQUE"));
+			int regis = Integer.parseInt(rs.getString("REGISTRO_CAP"));
+			String name = rs.getString("NOMBRE_PUERTO");
+			String nameAgen = rs.getString("NOMBRE_AGENTE");
+			String tipo = rs.getString("TIPO");
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int capacidadCont = Integer.parseInt(rs.getString("CANTIDAD_CONTENEDORES"));
+			int carga = Integer.parseInt(rs.getString("CARGA"));
+			buques.add(new Buque(id2, regis, name, nameAgen, tipo, capacidad, capacidadCont, carga));
 		}
 
 		return buques;
@@ -127,10 +135,15 @@ public class DAOBuque
 	 */
 	public void addBuque(Buque buque) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO ALMACEN BUQUE (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		String sql = "INSERT INTO BUQUE (";
+		sql += buque.getIdBuque() + ",'";
+		sql += buque.getRegistro() + ",'";
+		sql += buque.getNombreBuque() + ",'";
+		sql += buque.getNombreAgente() + ",'";
+		sql += buque.getTipo() + ",'";
+		sql += buque.getCapacidad() + ",'";
+		sql += buque.getCantidadContenedores() + ",'";
+		sql += buque.getCarga() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -151,9 +164,14 @@ public class DAOBuque
 	public void updateBuque(Buque buque) throws SQLException, Exception 
 	{
 		String sql = "UPDATE BUQUE SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "registro_cap='" + buque.getRegistro() + "',";
+		sql += "nombre_buque='" + buque.getNombreBuque() + "',";
+		sql += "nombre_agente='" + buque.getNombreAgente() + "',";
+		sql += "tipo='" + buque.getTipo() + "',";
+		sql += "capacidad='" + buque.getCapacidad() + "',";
+		sql += "cantidad_contenedores='" + buque.getCantidadContenedores() + "',";
+		sql += "carga='" + buque.getCarga() + "',";
+		sql += " WHERE id = " + buque.getIdBuque();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -174,7 +192,7 @@ public class DAOBuque
 	{
 
 		String sql = "DELETE FROM BUQUE";
-		sql += " WHERE id = " + video.getId();
+		sql += " WHERE id = " + buque.getIdBuque();
 
 		System.out.println("SQL stmt:" + sql);
 
