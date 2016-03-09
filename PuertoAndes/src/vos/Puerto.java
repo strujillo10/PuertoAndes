@@ -18,4 +18,54 @@ public class Puerto
 		capacidad = c;
 		localizacion = loc; 
 	}
+
+	public int getIdPuerto() {
+		return idPuerto;
+	}
+
+	public void setIdPuerto(int idPuerto) {
+		this.idPuerto = idPuerto;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public int getCapacidad() {
+		return capacidad;
+	}
+
+	public void setCapacidad(int capacidad) {
+		this.capacidad = capacidad;
+	}
+
+	public String getLocalizacion() {
+		return localizacion;
+	}
+
+	public void setLocalizacion(String localizacion) {
+		this.localizacion = localizacion;
+	}
+	
+	
 }

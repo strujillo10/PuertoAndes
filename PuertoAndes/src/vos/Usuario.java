@@ -18,4 +18,54 @@ public class Usuario
 		importador = i; 
 		rut = nRut;
 	}
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getRegistro() {
+		return registro;
+	}
+
+	public void setRegistro(String registro) {
+		this.registro = registro;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public int getImportador() {
+		return importador;
+	}
+
+	public void setImportador(int importador) {
+		this.importador = importador;
+	}
+
+	public String getRut() {
+		return rut;
+	}
+
+	public void setRut(String rut) {
+		this.rut = rut;
+	}
+	
+	
 }
