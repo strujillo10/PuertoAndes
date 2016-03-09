@@ -77,12 +77,14 @@ public class DAOUsuario
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID_USUARIO"));
 			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Maquinaria(id, name, duration));
+			String registro = rs.getString("REGISTRO");
+			String tipo = rs.getString("TIPO");
+			int importador = Integer.parseInt(rs.getString("IMPORTADOR"));
+			String rut = rs.getString("RUT");
+			usuarios.add(new Usuario(id, name, registro, tipo, importador, rut));
 		}
 		return usuarios;
 	}
@@ -98,7 +100,7 @@ public class DAOUsuario
 	{
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 
-		String sql = "SELECT * FROM USUARIO WHERE ID ='" + id + "'";
+		String sql = "SELECT * FROM USUARIO WHERE ID_USUARIO ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -106,14 +108,15 @@ public class DAOUsuario
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			int id2 = Integer.parseInt(rs.getString("ID_USUARIO"));
+			String name = rs.getString("NAME");
+			String registro = rs.getString("REGISTRO");
+			String tipo = rs.getString("TIPO");
+			int importador = Integer.parseInt(rs.getString("IMPORTADOR"));
+			String rut = rs.getString("RUT");
+			usuarios.add(new Usuario(id2, name, registro, tipo, importador, rut));
 		}
-
 		return usuarios;
 	}
 
@@ -128,9 +131,12 @@ public class DAOUsuario
 	public void addUsuario(Usuario usuario) throws SQLException, Exception 
 	{
 		String sql = "INSERT INTO USUARIO (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		sql += usuario.getIdUsuario() + ",'";
+		sql += usuario.getNombre() + "',";
+		sql += usuario.getRegistro() + "',";
+		sql += usuario.getTipo() + "',";
+		sql += usuario.getImportador() + "',";
+		sql += usuario.getRut() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -151,9 +157,12 @@ public class DAOUsuario
 	public void updateUsuario(Usuario usuario) throws SQLException, Exception 
 	{
 		String sql = "UPDATE USUARIO SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "nombre='" + usuario.getNombre() + "',";
+		sql += "registro=" + usuario.getRegistro() + "',";
+		sql += "tipo=" + usuario.getTipo() + "',";
+		sql += "importador=" + usuario.getImportador() + "',";
+		sql += "rut=" + usuario.getRut() + "',";
+		sql += " WHERE id = " + usuario.getIdUsuario();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -172,9 +181,8 @@ public class DAOUsuario
 	 */
 	public void deleteUsuario(Usuario usuario) throws SQLException, Exception 
 	{
-
 		String sql = "DELETE FROM USUARIO";
-		sql += " WHERE id = " + usuario.getId();
+		sql += " WHERE ID_USUARIO = " + usuario.getIdUsuario();
 
 		System.out.println("SQL stmt:" + sql);
 
