@@ -173,7 +173,7 @@ public class DAOPuerto
 	{
 
 		String sql = "DELETE FROM PUERTO";
-		sql += " WHERE id = " + operador.getId();
+		sql += " WHERE id_puerto = " + pue.getId();
 
 		System.out.println("SQL stmt:" + sql);
 

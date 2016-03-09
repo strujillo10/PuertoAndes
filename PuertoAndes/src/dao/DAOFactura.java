@@ -182,7 +182,7 @@ public class DAOFactura
 	{
 
 		String sql = "DELETE FROM FACTURA";
-		sql += " WHERE id = " + factura.getIdFactura();
+		sql += " WHERE id_factura = " + factura.getIdFactura();
 
 		System.out.println("SQL stmt:" + sql);
 

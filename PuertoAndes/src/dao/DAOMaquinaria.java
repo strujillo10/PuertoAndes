@@ -76,12 +76,14 @@ public class DAOMaquinaria
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Maquinaria(id, name, duration));
+			int id = Integer.parseInt(rs.getString("ID_MAQUINA"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int cantidad = Integer.parseInt(rs.getString("CANTIDAD"));
+			String tipo = rs.getString("TIPO");
+			int idPuerto = Integer.parseInt(rs.getString("ID_PUERTO"));
+			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
+			maquinarias.add(new Maquinaria(id, capacidad, cantidad, tipo, idPuerto, idOperador));
 		}
 		return maquinarias;
 	}
@@ -97,7 +99,7 @@ public class DAOMaquinaria
 	{
 		ArrayList<Maquinaria> maquinarias = new ArrayList<Maquinaria>();
 
-		String sql = "SELECT * FROM MAQUINARIA WHERE ID_FACTURA ='" + id + "'";
+		String sql = "SELECT * FROM MAQUINARIA WHERE ID_MAQUINA ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -105,14 +107,15 @@ public class DAOMaquinaria
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			int id2 = Integer.parseInt(rs.getString("ID_MAQUINA"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int cantidad = Integer.parseInt(rs.getString("CANTIDAD"));
+			String tipo = rs.getString("TIPO");
+			int idPuerto = Integer.parseInt(rs.getString("ID_PUERTO"));
+			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
+			maquinarias.add(new Maquinaria(id2, capacidad, cantidad, tipo, idPuerto, idOperador));
 		}
-
 		return maquinarias;
 	}
 
@@ -126,10 +129,13 @@ public class DAOMaquinaria
 	 */
 	public void addMaquinaria(Maquinaria maquinaria) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO FACTURA (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		String sql = "INSERT INTO MAQUINARIA (";
+		sql += maquinaria.getIdMaquina() + ",'";
+		sql += maquinaria.getCapacidad() + ",'";
+		sql += maquinaria.getCantidad() + ",'";
+		sql += maquinaria.getTipo() + ",'";
+		sql += maquinaria.getIdPuerto() + "',";
+		sql += maquinaria.getIdOperador() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -150,9 +156,12 @@ public class DAOMaquinaria
 	public void updateMaquinaria(Maquinaria maquinaria) throws SQLException, Exception 
 	{
 		String sql = "UPDATE MAQUINARIA SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "capacidad='" + maquinaria.getCapacidad() + "',";
+		sql += "cantidad='" + maquinaria.getCantidad() + "',";
+		sql += "tipo='" + maquinaria.getTipo() + "',";
+		sql += "id_puerto='" + maquinaria.getIdPuerto() + "',";
+		sql += "id_operador=" + maquinaria.getIdOperador();
+		sql += " WHERE id_maquina = " + maquinaria.getIdMaquina();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -173,7 +182,7 @@ public class DAOMaquinaria
 	{
 
 		String sql = "DELETE FROM MAQUINARIA";
-		sql += " WHERE id = " + maquinaria.getId();
+		sql += " WHERE id_maquina = " + maquinaria.getIdMaquina();
 
 		System.out.println("SQL stmt:" + sql);
 

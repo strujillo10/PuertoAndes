@@ -192,7 +192,7 @@ public class DAOBuque
 	{
 
 		String sql = "DELETE FROM BUQUE";
-		sql += " WHERE id = " + buque.getIdBuque();
+		sql += " WHERE id_buque = " + buque.getIdBuque();
 
 		System.out.println("SQL stmt:" + sql);
 

@@ -187,7 +187,7 @@ public class DAOCarga {
 	{
 
 		String sql = "DELETE FROM CARGA";
-		sql += " WHERE id = " + carga.getIdCarga();
+		sql += " WHERE id_carga = " + carga.getIdCarga();
 
 		System.out.println("SQL stmt:" + sql);
 

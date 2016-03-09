@@ -170,7 +170,7 @@ public class DAOOperador
 	{
 
 		String sql = "DELETE FROM OPERADOR";
-		sql += " WHERE id = " + operador.getIdOperador();
+		sql += " WHERE id_operador = " + operador.getIdOperador();
 
 		System.out.println("SQL stmt:" + sql);
 

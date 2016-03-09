@@ -190,7 +190,7 @@ public class DAOCamion
 	{
 
 		String sql = "DELETE FROM CAMION";
-		sql += " WHERE id = " + camion.getIdCamion();
+		sql += " WHERE id_camion = " + camion.getIdCamion();
 
 		System.out.println("SQL stmt:" + sql);
 
