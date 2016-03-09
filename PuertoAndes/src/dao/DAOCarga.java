@@ -76,14 +76,17 @@ public class DAOCarga {
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Buque(id, name, duration));
+			String name = rs.getString("NOMBRE_CARGA");
+			int id = Integer.parseInt(rs.getString("ID_CARGA"));
+			String procedencia = rs.getString("PROCEDENCIA");
+			String destino = rs.getString("DESTINO");
+			int idBuque = Integer.parseInt(rs.getString("ID_BUQUE"));
+			int idAlmacen = Integer.parseInt(rs.getString("ID_ALMACEN"));
+			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
+			cargas.add(new Carga(id, name, procedencia, destino, idBuque, idAlmacen, idUsuario));
 		}
-		return buques;
+		return cargas;
 	}
 
 	/**
@@ -93,11 +96,11 @@ public class DAOCarga {
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Carga> buscarCargaPorName(String name) throws SQLException, Exception 
+	public ArrayList<Carga> buscarCargaPorId(int id) throws SQLException, Exception 
 	{
 		ArrayList<Carga> cargas = new ArrayList<Carga>();
 
-		String sql = "SELECT * FROM CARGA WHERE NAME ='" + name + "'";
+		String sql = "SELECT * FROM CARGA WHERE ID_CARGA ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -105,12 +108,15 @@ public class DAOCarga {
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			String name = rs.getString("NOMBRE_CARGA");
+			int id2 = Integer.parseInt(rs.getString("ID_CARGA"));
+			String procedencia = rs.getString("PROCEDENCIA");
+			String destino = rs.getString("DESTINO");
+			int idBuque = Integer.parseInt(rs.getString("ID_BUQUE"));
+			int idAlmacen = Integer.parseInt(rs.getString("ID_ALMACEN"));
+			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
+			cargas.add(new Carga(id2, name, procedencia, destino, idBuque, idAlmacen, idUsuario));
 		}
 
 		return cargas;
@@ -126,10 +132,14 @@ public class DAOCarga {
 	 */
 	public void addCarga(Carga carga) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO ALMACEN BUQUE (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		String sql = "INSERT INTO CARGA (";
+		sql += carga.getIdCarga() + ",'";
+		sql += carga.getNombre() + ",'";
+		sql += carga.getProcedencia() + ",'";
+		sql += carga.getDestino() + ",'";
+		sql += carga.getIdBuque() + "',";
+		sql += carga.getIdAlmacen() + ",'";
+		sql += carga.getIdUsuario() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -150,9 +160,13 @@ public class DAOCarga {
 	public void updateCarga(Carga carga) throws SQLException, Exception 
 	{
 		String sql = "UPDATE CARGA SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "nombre_carga='" + carga.getNombre() + "',";
+		sql += "procedencia='" + carga.getProcedencia() + "',";
+		sql += "destino='" + carga.getDestino() + "',";
+		sql += "id_buque='" + carga.getIdBuque() + "',";
+		sql += "id_almacen='" + carga.getIdAlmacen() + "',";
+		sql += "id_usuario=" + carga.getIdUsuario();
+		sql += " WHERE id_carga = " + carga.getIdCarga();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -173,7 +187,7 @@ public class DAOCarga {
 	{
 
 		String sql = "DELETE FROM CARGA";
-		sql += " WHERE id = " + video.getId();
+		sql += " WHERE id = " + carga.getIdCarga();
 
 		System.out.println("SQL stmt:" + sql);
 

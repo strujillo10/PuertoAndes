@@ -162,7 +162,7 @@ public class DAOUsuario
 		sql += "tipo=" + usuario.getTipo() + "',";
 		sql += "importador=" + usuario.getImportador() + "',";
 		sql += "rut=" + usuario.getRut() + "',";
-		sql += " WHERE id = " + usuario.getIdUsuario();
+		sql += " WHERE id_usuario = " + usuario.getIdUsuario();
 
 		System.out.println("SQL stmt:" + sql);
 

@@ -98,7 +98,7 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Camion> buscarCamionPorName(int id) throws SQLException, Exception 
+	public ArrayList<Camion> buscarCamionPorId(int id) throws SQLException, Exception 
 	{
 		ArrayList<Camion> camiones = new ArrayList<Camion>();
 
@@ -134,7 +134,7 @@ public class DAOCamion
 	 */
 	public void addCamion(Camion camion) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO ALMACEN VALUES (";
+		String sql = "INSERT INTO CAMION VALUES (";
 		sql += camion.getIdCamion() + ",'";
 		sql += camion.getFechaLlegada() + ",'";
 		sql += camion.getFechaSalida() + ",'";
@@ -169,7 +169,7 @@ public class DAOCamion
 		sql += "carga='" + camion.getCarga() + "',";
 		sql += "cantidad_contenedores='" + camion.getCantidadContenedores() + "',";
 		sql += "id_puerto=" + camion.getIdPuerto();
-		sql += " WHERE id = " + camion.getIdCamion();
+		sql += " WHERE id_camion = " + camion.getIdCamion();
 
 		System.out.println("SQL stmt:" + sql);
 

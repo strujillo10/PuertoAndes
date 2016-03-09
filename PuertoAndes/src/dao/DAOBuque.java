@@ -98,7 +98,7 @@ public class DAOBuque
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Buque> buscarBuquePorName(int id) throws SQLException, Exception 
+	public ArrayList<Buque> buscarBuquePorId(int id) throws SQLException, Exception 
 	{
 		ArrayList<Buque> buques = new ArrayList<Buque>();
 
@@ -171,7 +171,7 @@ public class DAOBuque
 		sql += "capacidad='" + buque.getCapacidad() + "',";
 		sql += "cantidad_contenedores='" + buque.getCantidadContenedores() + "',";
 		sql += "carga='" + buque.getCarga() + "',";
-		sql += " WHERE id = " + buque.getIdBuque();
+		sql += " WHERE id_buque = " + buque.getIdBuque();
 
 		System.out.println("SQL stmt:" + sql);
 

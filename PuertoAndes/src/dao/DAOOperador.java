@@ -70,7 +70,7 @@ public class DAOOperador
 	{
 		ArrayList<Operador> operadores = new ArrayList<Operador>();
 
-		String sql = "SELECT * FROM MAQUINARIA";
+		String sql = "SELECT * FROM OPERADOR";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -149,7 +149,7 @@ public class DAOOperador
 		String sql = "UPDATE OPERADOR SET ";
 		sql += "nombre='" + operador.getNombre() + "',";
 		sql += "operacion=" + operador.getOperacion();
-		sql += " WHERE id = " + operador.getIdOperador();
+		sql += " WHERE id_operador = " + operador.getIdOperador();
 
 		System.out.println("SQL stmt:" + sql);
 
