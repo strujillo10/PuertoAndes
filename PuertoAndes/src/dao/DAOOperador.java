@@ -76,12 +76,11 @@ public class DAOOperador
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Maquinaria(id, name, duration));
+			String name = rs.getString("NOMBRE");
+			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
+			String operacion = rs.getString("OPERACION");
+			operadores.add(new Operador(idOperador, name, operacion));
 		}
 		return operadores;
 	}
@@ -97,7 +96,7 @@ public class DAOOperador
 	{
 		ArrayList<Operador> operadores = new ArrayList<Operador>();
 
-		String sql = "SELECT * FROM OPERADOR WHERE ID_FACTURA ='" + id + "'";
+		String sql = "SELECT * FROM OPERADOR WHERE ID_OPERADOR ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -105,14 +104,12 @@ public class DAOOperador
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			String name = rs.getString("NOMBRE");
+			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
+			String operacion = rs.getString("OPERACION");
+			operadores.add(new Operador(idOperador, name, operacion));
 		}
-
 		return operadores;
 	}
 
@@ -127,9 +124,9 @@ public class DAOOperador
 	public void addOperador(Operador operador) throws SQLException, Exception 
 	{
 		String sql = "INSERT INTO OPERADOR (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		sql += operador.getIdOperador() + ",'";
+		sql += operador.getNombre() + "',";
+		sql += operador.getOperacion() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -150,9 +147,9 @@ public class DAOOperador
 	public void updateOperador(Operador operador) throws SQLException, Exception 
 	{
 		String sql = "UPDATE OPERADOR SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "nombre='" + operador.getNombre() + "',";
+		sql += "operacion=" + operador.getOperacion();
+		sql += " WHERE id = " + operador.getIdOperador();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -173,7 +170,7 @@ public class DAOOperador
 	{
 
 		String sql = "DELETE FROM OPERADOR";
-		sql += " WHERE id = " + operador.getId();
+		sql += " WHERE id = " + operador.getIdOperador();
 
 		System.out.println("SQL stmt:" + sql);
 
