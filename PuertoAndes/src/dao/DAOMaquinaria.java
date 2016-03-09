@@ -60,9 +60,9 @@ public class DAOMaquinaria
 
 
 	/**
-	 * Método que, usando la conexión a la base de datos, saca todos los maquinarias de la base de datos
+	 * Método que, usando la conexión a la base de datos, saca todos las maquinarias de la base de datos
 	 * <b>SQL Statement:</b> SELECT * FROM MAQUINARIA;
-	 * @return Arraylist con los maquinarias de la base de datos.
+	 * @return Arraylist con las maquinarias de la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
@@ -87,9 +87,9 @@ public class DAOMaquinaria
 	}
 
 	/**
-	 * Método que busca el/los Factura con el id que entra como parámetro.
-	 * @param id - Id de el/los facturas a buscar
-	 * @return Arraylist con los facturas encontrados
+	 * Método que busca el/los Maquinaria con el id que entra como parámetro.
+	 * @param id - Id de el/los maquinarias a buscar
+	 * @return Arraylist con los maquinarias encontrados
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
@@ -117,10 +117,10 @@ public class DAOMaquinaria
 	}
 
 	/**
-	 * Método que agrega el factura que entra como parámetro a la base de datos.
-	 * @param factura - el factura a agregar. factura !=  null
-	 * <b> post: </b> se ha agregado el factura a la base de datos en la transaction actual. pendiente que el puerto master
-	 * haga commit para que el factura baje  a la base de datos.
+	 * Método que agrega el maquinaria que entra como parámetro a la base de datos.
+	 * @param maquinaria - el maquinaria a agregar. maquinaria !=  null
+	 * <b> post: </b> se ha agregado el maquinaria a la base de datos en la transaction actual. pendiente que el puerto master
+	 * haga commit para que el maquinaria baje  a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
@@ -140,9 +140,9 @@ public class DAOMaquinaria
 	}
 	
 	/**
-	 * Método que actualiza el factura que entra como parámetro en la base de datos.
-	 * @param factura - el factura a actualizar. factura !=  null
-	 * <b> post: </b> se ha actualizado el factura en la base de datos en la transaction actual. pendiente que el puerto master
+	 * Método que actualiza el maquinaria que entra como parámetro en la base de datos.
+	 * @param maquinaria - el maquinaria a actualizar. maquinaria !=  null
+	 * <b> post: </b> se ha actualizado el maquinaria en la base de datos en la transaction actual. pendiente que el puerto master
 	 * haga commit para que los cambios bajen a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
@@ -162,9 +162,9 @@ public class DAOMaquinaria
 	}
 
 	/**
-	 * Método que elimina el factura que entra como parámetro en la base de datos.
-	 * @param factura - el factura a borrar. factura !=  null
-	 * <b> post: </b> se ha borrado el factura en la base de datos en la transaction actual. pendiente que el puerto master
+	 * Método que elimina el maquinaria que entra como parámetro en la base de datos.
+	 * @param maquinaria - el maquinaria a borrar. maquinaria !=  null
+	 * <b> post: </b> se ha borrado el maquinaria en la base de datos en la transaction actual. pendiente que el puerto master
 	 * haga commit para que los cambios bajen a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
@@ -173,7 +173,7 @@ public class DAOMaquinaria
 	{
 
 		String sql = "DELETE FROM MAQUINARIA";
-		sql += " WHERE id = " + video.getId();
+		sql += " WHERE id = " + maquinaria.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
