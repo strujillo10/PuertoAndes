@@ -76,12 +76,14 @@ public class DAOFactura
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			buques.add(new Factura(id, name, duration));
+			String medio = rs.getString("MEDIO_TRANSPORTE");
+			int id = Integer.parseInt(rs.getString("ID_FACTURA"));
+			int numEquip = Integer.parseInt(rs.getString("NUM_EQUIPOS"));
+			int numDias = Integer.parseInt(rs.getString("NUM_DIAS"));
+			int espacio= Integer.parseInt(rs.getString("ESPACIO_USADO"));
+			int costo = Integer.parseInt(rs.getString("COSTO_TOTAL"));
+			facturas.add(new Factura(id, medio, numEquip, espacio, numDias, costo));
 		}
 		return facturas;
 	}
@@ -105,15 +107,16 @@ public class DAOFactura
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			String medio = rs.getString("MEDIO_TRANSPORTE");
+			int id2 = Integer.parseInt(rs.getString("ID_FACTURA"));
+			int numEquip = Integer.parseInt(rs.getString("NUM_EQUIPOS"));
+			int numDias = Integer.parseInt(rs.getString("NUM_DIAS"));
+			int espacio= Integer.parseInt(rs.getString("ESPACIO_USADO"));
+			int costo = Integer.parseInt(rs.getString("COSTO_TOTAL"));
+			facturas.add(new Factura(id2, medio, numEquip, espacio, numDias, costo));
 		}
-
-		return buques;
+		return facturas;
 	}
 
 	/**
@@ -127,9 +130,12 @@ public class DAOFactura
 	public void addFactura(Factura factura) throws SQLException, Exception 
 	{
 		String sql = "INSERT INTO FACTURA (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		sql += factura.getIdFactura() + ",'";
+		sql += factura.getMedioTransporte() + ",'";
+		sql += factura.getNumEquipos() + ",'";
+		sql += factura.getEspacio() + ",'";
+		sql += factura.getNumDias() + "',";
+		sql += factura.getCostoTotal() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -150,9 +156,12 @@ public class DAOFactura
 	public void updateFactura(Factura factura) throws SQLException, Exception 
 	{
 		String sql = "UPDATE FACTURA SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		sql += "medio_transporte='" + factura.getMedioTransporte() + "',";
+		sql += "num_equipos='" + factura.getNumEquipos() + "',";
+		sql += "espacio_usado='" + factura.getEspacio() + "',";
+		sql += "num_dias='" + factura.getNumDias() + "',";
+		sql += "costo_total=" + factura.getCostoTotal();
+		sql += " WHERE id_factura = " + factura.getIdFactura();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -173,7 +182,7 @@ public class DAOFactura
 	{
 
 		String sql = "DELETE FROM FACTURA";
-		sql += " WHERE id = " + video.getId();
+		sql += " WHERE id = " + factura.getIdFactura();
 
 		System.out.println("SQL stmt:" + sql);
 
