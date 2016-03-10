@@ -1,16 +1,14 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.ArrayList;
 
-import vos.Camion;
+import vos.Bodega;
 
-public class DAOCamion 
+public class DAOBuquePortacontenedores 
 {
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -26,7 +24,7 @@ public class DAOCamion
 	 * Método constructor que crea DAOAlmacen
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOCamion() 
+	public DAOBuquePortacontenedores() 
 	{
 		recursos = new ArrayList<Object>();
 	}
@@ -68,11 +66,11 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Camion> darCamiones() throws SQLException, Exception 
+	public ArrayList<Bodega> darBodegas() throws SQLException, Exception 
 	{
-		ArrayList<Camion> camiones = new ArrayList<Camion>();
+		ArrayList<Bodega> bodegas = new ArrayList<Bodega>();
 
-		String sql = "SELECT * FROM CAMION";
+		String sql = "SELECT * FROM BODEGAS";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -80,17 +78,17 @@ public class DAOCamion
 
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
-			String procedencia = rs.getString("PROCEDENCIA");
-			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
-			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String empresa = rs.getString("EMPRESA_OPERARIA");
-			Time horaLlegada = rs.getTime("HORA_LLEGADA");
-			Time horaSalida = rs.getTime("HORA_SALIDA");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
-			String destino = rs.getString("DESTINO");
-			camiones.add(new Camion(id, procedencia, fechaLlegada, fechaSalida, empresa, horaLlegada, horaSalida, cantidad, destino));
+			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			String plataforma = rs.getString("PLATAFORMA_EXTERNA");
+			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CUARTOS_FRIOS"));
+			int separacion = Integer.parseInt(rs.getString("SEPARACION_ENTRE_COLUMNAS"));
+			int ancho = Integer.parseInt(rs.getString("ANCHO_EN_METROS"));
+			int largo = Integer.parseInt(rs.getString("LARGO_EN_METROS"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			bodegas.add(new Bodega(id, idArea, ocupacion, plataforma, cantidad, separacion, ancho, largo, capacidad));
 		}
-		return camiones;
+		return bodegas;
 	}
 
 	/**
@@ -100,11 +98,11 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Camion> buscarCamionPorId(int id) throws SQLException, Exception 
+	public ArrayList<Bodega> buscarBodegaPorId(int id) throws SQLException, Exception 
 	{
-		ArrayList<Camion> camiones = new ArrayList<Camion>();
+		ArrayList<Bodega> bodegas = new ArrayList<Bodega>();
 
-		String sql = "SELECT * FROM CAMION WHERE ID ='" + id + "'";
+		String sql = "SELECT * FROM BODEGAS WHERE ID ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -114,17 +112,17 @@ public class DAOCamion
 		
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
-			String procedencia = rs.getString("PROCEDENCIA");
-			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
-			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String empresa = rs.getString("EMPRESA_OPERARIA");
-			Time horaLlegada = rs.getTime("HORA_LLEGADA");
-			Time horaSalida = rs.getTime("HORA_SALIDA");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
-			String destino = rs.getString("DESTINO");
-			camiones.add(new Camion(id2, procedencia, fechaLlegada, fechaSalida, empresa, horaLlegada, horaSalida, cantidad, destino));
+			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			String plataforma = rs.getString("PLATAFORMA_EXTERNA");
+			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CUARTOS_FRIOS"));
+			int separacion = Integer.parseInt(rs.getString("SEPARACION_ENTRE_COLUMNAS"));
+			int ancho = Integer.parseInt(rs.getString("ANCHO_EN_METROS"));
+			int largo = Integer.parseInt(rs.getString("LARGO_EN_METROS"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			bodegas.add(new Bodega(id2, idArea, ocupacion, plataforma, cantidad, separacion, ancho, largo, capacidad));
 		}
-		return camiones;
+		return bodegas;
 	}
 
 	/**
@@ -135,18 +133,18 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addCamion(Camion camion) throws SQLException, Exception 
+	public void addBodega(Bodega bodega) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO CAMION VALUES (";
-		sql += camion.getId() + ",'";
-		sql += camion.getProcedencia() + ",'";
-		sql += camion.getFechaLlegada() + ",'";
-		sql += camion.getFechaSalida() + ",'";
-		sql += camion.getEmpresaOperaria() + ",'";
-		sql += camion.getHoraLlegada() + ",'";
-		sql += camion.getHoraSalida() + ",'";
-		sql += camion.getCantidadContenedores() + ",'";
-		sql += camion.getDestino() + ")";
+		String sql = "INSERT INTO BODEGAS VALUES (";
+		sql += bodega.getId() + ",'";
+		sql += bodega.getIdArea() + "',";
+		sql += bodega.getOcupacionTotal() + "',";
+		sql += bodega.getPlataformaExterna() + "',";
+		sql += bodega.getCantidadCuartosFrios() + "',";
+		sql += bodega.getSeparacionColumnas() + "',";
+		sql += bodega.getAncho() + "',";
+		sql += bodega.getLargo() + "',";
+		sql += bodega.getCapacidad() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -164,18 +162,18 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updateCamion(Camion camion) throws SQLException, Exception 
+	public void updateBodega(Bodega bodega) throws SQLException, Exception 
 	{
-		String sql = "UPDATE CAMION SET ";
-		sql += "procedencia='" + camion.getProcedencia() + "',";
-		sql += "fecha_llegada='" + camion.getFechaLlegada() + "',";
-		sql += "fecha_salida='" + camion.getFechaSalida() + "',";
-		sql += "empresa_operaria='" + camion.getEmpresaOperaria() + "',";
-		sql += "hora_llegada='" + camion.getHoraLlegada() + "',";
-		sql += "hora_salida='" + camion.getHoraSalida() + "',";
-		sql += "cantidad_de_contenedores='" + camion.getCantidadContenedores() + "',";
-		sql += "destino='" + camion.getDestino() + "',";
-		sql += " WHERE id = " + camion.getId();
+		String sql = "UPDATE BODEGAS SET ";
+		sql += "id_area='" + bodega.getIdArea() + "',";
+		sql += "ocupacion_actual='" + bodega.getOcupacionTotal() + "',";
+		sql += "plataforma_externa='" + bodega.getPlataformaExterna() + "',";
+		sql += "cantidad_de_cuartos_frios='" + bodega.getCantidadCuartosFrios() + "',";
+		sql += "separacion_entre_columnas='" + bodega.getSeparacionColumnas() + "',";
+		sql += "ancho_en_metros='" + bodega.getAncho() + "',";
+		sql += "largo_en_metros='" + bodega.getLargo() + "',";
+		sql += "capacidad=" + bodega.getCapacidad();
+		sql += " WHERE id = " + bodega.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -192,11 +190,11 @@ public class DAOCamion
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteCamion(Camion camion) throws SQLException, Exception 
+	public void deleteBodega(Bodega bodega) throws SQLException, Exception 
 	{
 
-		String sql = "DELETE FROM CAMION";
-		sql += " WHERE id = " + camion.getId();
+		String sql = "DELETE FROM BODEGAS";
+		sql += " WHERE id = " + bodega.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
