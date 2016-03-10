@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Almacen;
+import vos.AreaAlmacenamiento;
 
-public class DAOAlmacen 
+public class DAOAreaAlmacenamiento 
 {
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -24,7 +24,7 @@ public class DAOAlmacen
 	 * Método constructor que crea DAOAlmacen
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOAlmacen() 
+	public DAOAreaAlmacenamiento() 
 	{
 		recursos = new ArrayList<Object>();
 	}
@@ -66,24 +66,23 @@ public class DAOAlmacen
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Almacen> darAlmacenes() throws SQLException, Exception 
+	public ArrayList<AreaAlmacenamiento> darAreasAlmacenamiento() throws SQLException, Exception 
 	{
-		ArrayList<Almacen> videos = new ArrayList<Almacen>();
+		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
 
-		String sql = "SELECT * FROM ALMACEN";
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
-		FALTA ESTO:
 		while (rs.next()) {
-			String name = rs.getString("NAME");
 			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Almacen(id, name, duration));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			areas.add(new AreaAlmacenamiento(id, capacidad, ocupacion));
 		}
-		return videos;
+		return areas;
 	}
 
 	/**
@@ -93,11 +92,11 @@ public class DAOAlmacen
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Almacen> buscarAlmacenPorName(String name) throws SQLException, Exception 
+	public ArrayList<AreaAlmacenamiento> buscarAreaAlmacenamientoPorId(int id) throws SQLException, Exception 
 	{
-		ArrayList<Almacen> videos = new ArrayList<Almacen>();
+		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
 
-		String sql = "SELECT * FROM ALMACEN WHERE NAME ='" + name + "'";
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE ID ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -105,15 +104,13 @@ public class DAOAlmacen
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
-		FALTA ESTO: 
 		while (rs.next()) {
-			String name2 = rs.getString("NAME");
-			int id = Integer.parseInt(rs.getString("ID"));
-			int duration = Integer.parseInt(rs.getString("DURATION"));
-			videos.add(new Video(id, name2, duration));
+			int id2 = Integer.parseInt(rs.getString("ID"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			areas.add(new AreaAlmacenamiento(id2, capacidad, ocupacion));
 		}
-
-		return videos;
+		return areas;
 	}
 
 	/**
@@ -124,12 +121,12 @@ public class DAOAlmacen
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addAlmacen(Almacen almacen) throws SQLException, Exception 
+	public void addAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO ALMACEN VALUES (";
-		sql += video.getId() + ",'";
-		sql += video.getName() + "',";
-		sql += video.getDuration() + ")";
+		String sql = "INSERT INTO AREA_DE_ALMACENAMIENTO VALUES (";
+		sql += area.getId() + ",'";
+		sql += area.getCapacidad() + "',";
+		sql += area.getOcupacionActual() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -147,12 +144,12 @@ public class DAOAlmacen
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updateAlmacen(Almacen almacen) throws SQLException, Exception 
+	public void updateAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
-		String sql = "UPDATE VIDEOS SET ";
-		sql += "name='" + video.getName() + "',";
-		sql += "duration=" + video.getDuration();
-		sql += " WHERE id = " + video.getId();
+		String sql = "UPDATE AREA_DE_ALMACENAMIENTO SET ";
+		sql += "capacidad='" + area.getCapacidad() + "',";
+		sql += "ocupacion_actual=" + area.getOcupacionActual();
+		sql += " WHERE id = " + area.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -169,11 +166,11 @@ public class DAOAlmacen
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteAlmacen(Almacen video) throws SQLException, Exception 
+	public void deleteAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
 
-		String sql = "DELETE FROM VIDEOS";
-		sql += " WHERE id = " + video.getId();
+		String sql = "DELETE FROM AREA_DE_ALMACENAMIENTO";
+		sql += " WHERE id = " + area.getId();
 
 		System.out.println("SQL stmt:" + sql);
 

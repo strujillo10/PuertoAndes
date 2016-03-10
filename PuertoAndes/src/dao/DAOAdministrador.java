@@ -6,9 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import vos.Operador;
+import javax.resource.spi.AdministeredObject;
 
-public class DAOOperador 
+import vos.Administrador;
+
+public class DAOAdministrador 
 {
 	/**
 	 * Arraylits de recursos que se usan para la ejecución de sentencias SQL
@@ -21,10 +23,10 @@ public class DAOOperador
 	private Connection conn;
 
 	/**
-	 * Método constructor que crea DAOOperador
+	 * Método constructor que crea DAOAlmacen
 	 * <b>post: </b> Crea la instancia del DAO e inicializa el Arraylist de recursos
 	 */
-	public DAOOperador() 
+	public DAOAdministrador() 
 	{
 		recursos = new ArrayList<Object>();
 	}
@@ -60,43 +62,43 @@ public class DAOOperador
 
 
 	/**
-	 * Método que, usando la conexión a la base de datos, saca todos los operadores de la base de datos
-	 * <b>SQL Statement:</b> SELECT * FROM OPERADOR;
-	 * @return Arraylist con los operadores de la base de datos.
+	 * Método que, usando la conexión a la base de datos, saca todos los almacenes de la base de datos
+	 * <b>SQL Statement:</b> SELECT * FROM ALMACEN;
+	 * @return Arraylist con los almacenes de la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Operador> darOperadores() throws SQLException, Exception 
+	public ArrayList<Administrador> darAdministradores() throws SQLException, Exception 
 	{
-		ArrayList<Operador> operadores = new ArrayList<Operador>();
+		ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 
-		String sql = "SELECT * FROM OPERADOR";
+		String sql = "SELECT * FROM ADMINISTRADOR";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
 			String name = rs.getString("NOMBRE");
-			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
-			String operacion = rs.getString("OPERACION");
-			operadores.add(new Operador(idOperador, name, operacion));
+			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
+			administradores.add(new Administrador(id, name, idUsuario));
 		}
-		return operadores;
+		return administradores;
 	}
 
 	/**
-	 * Método que busca el/los Operador con el id que entra como parámetro.
-	 * @param id - Id de el/los operadores a buscar
-	 * @return Arraylist con los operadores encontrados
+	 * Método que busca el/los Almacen con el nombre que entra como parámetro.
+	 * @param name - Nombre de el/los almacenes a buscar
+	 * @return Arraylist con los almacenes encontrados
 	 * @throws SQLException - Cualquier error que la base de datos arroje.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public ArrayList<Operador> buscarOperadorPorId(int id) throws SQLException, Exception 
+	public ArrayList<Administrador> buscarAdministradorPorId(int id) throws SQLException, Exception 
 	{
-		ArrayList<Operador> operadores = new ArrayList<Operador>();
+		ArrayList<Administrador> administradores = new ArrayList<Administrador>();
 
-		String sql = "SELECT * FROM OPERADOR WHERE ID_OPERADOR ='" + id + "'";
+		String sql = "SELECT * FROM ADMINISTRADOR WHERE ID ='" + id + "'";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -105,28 +107,28 @@ public class DAOOperador
 		ResultSet rs = prepStmt.executeQuery();
 		
 		while (rs.next()) {
+			int id2 = Integer.parseInt(rs.getString("ID"));
 			String name = rs.getString("NOMBRE");
-			int idOperador = Integer.parseInt(rs.getString("ID_OPERADOR"));
-			String operacion = rs.getString("OPERACION");
-			operadores.add(new Operador(idOperador, name, operacion));
+			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
+			administradores.add(new Administrador(id, name, idUsuario));
 		}
-		return operadores;
+		return administradores;
 	}
 
 	/**
-	 * Método que agrega el operador que entra como parámetro a la base de datos.
-	 * @param operador - el operador a agregar. operador !=  null
-	 * <b> post: </b> se ha agregado el operador a la base de datos en la transaction actual. pendiente que el puerto master
-	 * haga commit para que el operador baje  a la base de datos.
+	 * Método que agrega el video que entra como parámetro a la base de datos.
+	 * @param almacen - el almacen a agregar. almacen !=  null
+	 * <b> post: </b> se ha agregado el almacen a la base de datos en la transaction actual. pendiente que el puerto master
+	 * haga commit para que el video baje  a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo agregar el video a la base de datos
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void addOperador(Operador operador) throws SQLException, Exception 
+	public void addAdministrador(Administrador administrador) throws SQLException, Exception 
 	{
-		String sql = "INSERT INTO OPERADOR (";
-		sql += operador.getIdOperador() + ",'";
-		sql += operador.getNombre() + "',";
-		sql += operador.getOperacion() + ")";
+		String sql = "INSERT INTO ADMINISTRADOR VALUES (";
+		sql += administrador.getId() + ",'";
+		sql += administrador.getNombre() + "',";
+		sql += administrador.getIdUsuario() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -137,19 +139,19 @@ public class DAOOperador
 	}
 	
 	/**
-	 * Método que actualiza el maquinaria que entra como parámetro en la base de datos.
-	 * @param Operador - el operador a actualizar. operador !=  null
-	 * <b> post: </b> se ha actualizado el operador en la base de datos en la transaction actual. pendiente que el puerto master
+	 * Método que actualiza el almacen que entra como parámetro en la base de datos.
+	 * @param almacen - el almacen a actualizar. almacen !=  null
+	 * <b> post: </b> se ha actualizado el almacen en la base de datos en la transaction actual. pendiente que el puerto master
 	 * haga commit para que los cambios bajen a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void updateOperador(Operador operador) throws SQLException, Exception 
+	public void updateAdministrador(Administrador administrador) throws SQLException, Exception 
 	{
-		String sql = "UPDATE OPERADOR SET ";
-		sql += "nombre='" + operador.getNombre() + "',";
-		sql += "operacion=" + operador.getOperacion();
-		sql += " WHERE id_operador = " + operador.getIdOperador();
+		String sql = "UPDATE ADMINISTRADOR SET ";
+		sql += "nombre='" + administrador.getNombre() + "',";
+		sql += "id_usuario=" + administrador.getIdUsuario();
+		sql += " WHERE id = " + administrador.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -159,18 +161,18 @@ public class DAOOperador
 	}
 
 	/**
-	 * Método que elimina el operador que entra como parámetro en la base de datos.
-	 * @param operador - el operador a borrar. operador !=  null
-	 * <b> post: </b> se ha borrado el operador en la base de datos en la transaction actual. pendiente que el puerto master
+	 * Método que elimina el almacen que entra como parámetro en la base de datos.
+	 * @param almacen - el almacen a borrar. almacen !=  null
+	 * <b> post: </b> se ha borrado el almacen en la base de datos en la transaction actual. pendiente que el puerto master
 	 * haga commit para que los cambios bajen a la base de datos.
 	 * @throws SQLException - Cualquier error que la base de datos arroje. No pudo actualizar el video.
 	 * @throws Exception - Cualquier error que no corresponda a la base de datos
 	 */
-	public void deleteOperador(Operador operador) throws SQLException, Exception 
+	public void deleteAdministrador(Administrador administrador) throws SQLException, Exception 
 	{
 
-		String sql = "DELETE FROM OPERADOR";
-		sql += " WHERE id_operador = " + operador.getIdOperador();
+		String sql = "DELETE FROM ADMINISTRADOR";
+		sql += " WHERE id = " + administrador.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -179,3 +181,4 @@ public class DAOOperador
 		prepStmt.executeQuery();
 	}
 }
+
