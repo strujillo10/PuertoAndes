@@ -4,91 +4,62 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 public class Buque 
 {
-	@JsonProperty(value="idBuque")
-	private int idBuque; 
+	@JsonProperty(value="id")
+	private int id;
 	
-	@JsonProperty(value="registro")
-	private int registro; 
+	@JsonProperty(value="nombre")
+	private String nombre; 
 	
-	@JsonProperty(value="nombreBuque")
-	private String nombreBuque; 
+	@JsonProperty(value="registroCapitania")
+	private String registroCapitania; 
 	
-	@JsonProperty(value="nombreAgente")
-	private String nombreAgente; 
-	
-	@JsonProperty(value="tipo")
-	private String tipo;
-	
-	@JsonProperty(value="capacidad")
-	private int capacidad; 
+	@JsonProperty(value="agenciaMaritima")
+	private String agenciaMaritima; 
 	
 	@JsonProperty(value="cantidadContenedores")
 	private int cantidadContenedores; 
 	
-	@JsonProperty(value="carga")
-	private int carga; 
-	
-	public Buque(@JsonProperty(value="idBuque")int iB, @JsonProperty(value="registro")int r, 
-			@JsonProperty(value="nombreBuque")String nB, @JsonProperty(value="nombreAgente")String nA, 
-			@JsonProperty(value="tipo")String t, @JsonProperty(value="capacidad")int c, 
-			@JsonProperty(value="cantidadContenedores")int cC, @JsonProperty(value="carga")int car)
+	public Buque(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
+			@JsonProperty(value="registroCapitania")String nRegistroCapitania, @JsonProperty(value="agenciaMaritima")String nAgencia,
+			@JsonProperty(value="cantidadContenedores")int nCantidad)
 	{
-		idBuque = iB; 
-		registro = r; 
-		nombreBuque = nB; 
-		nombreAgente = nA; 
-		tipo = t; 
-		capacidad = c; 
-		cantidadContenedores = cC; 
-		carga = car; 
+		id = nId; 
+		nombre = nNombre; 
+		registroCapitania = nRegistroCapitania; 
+		agenciaMaritima = nAgencia; 
+		cantidadContenedores = nCantidad; 
 	}
 
-	public int getIdBuque() {
-		return idBuque;
+	public int getId() {
+		return id;
 	}
 
-	public void setIdBuque(int idBuque) {
-		this.idBuque = idBuque;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public int getRegistro() {
-		return registro;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setRegistro(int registro) {
-		this.registro = registro;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getNombreBuque() {
-		return nombreBuque;
+	public String getRegistroCapitania() {
+		return registroCapitania;
 	}
 
-	public void setNombreBuque(String nombreBuque) {
-		this.nombreBuque = nombreBuque;
+	public void setRegistroCapitania(String registroCapitania) {
+		this.registroCapitania = registroCapitania;
 	}
 
-	public String getNombreAgente() {
-		return nombreAgente;
+	public String getAgenciaMaritima() {
+		return agenciaMaritima;
 	}
 
-	public void setNombreAgente(String nombreAgente) {
-		this.nombreAgente = nombreAgente;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
-
-	public int getCapacidad() {
-		return capacidad;
-	}
-
-	public void setCapacidad(int capacidad) {
-		this.capacidad = capacidad;
+	public void setAgenciaMaritima(String agenciaMaritima) {
+		this.agenciaMaritima = agenciaMaritima;
 	}
 
 	public int getCantidadContenedores() {
@@ -98,14 +69,4 @@ public class Buque
 	public void setCantidadContenedores(int cantidadContenedores) {
 		this.cantidadContenedores = cantidadContenedores;
 	}
-
-	public int getCarga() {
-		return carga;
-	}
-
-	public void setCarga(int carga) {
-		this.carga = carga;
-	}
-	
-	
 }
