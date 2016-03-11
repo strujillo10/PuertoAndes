@@ -14,11 +14,6 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import tm.PuertoAndesMaster;
-import tm.VideoAndesMaster;
-import vos.ListaAdministrador;
-import vos.ListaVideos;
-import vos.Video;
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Juan

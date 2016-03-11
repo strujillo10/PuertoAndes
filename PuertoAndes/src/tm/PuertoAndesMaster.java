@@ -8,9 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import dao.DAOPuerto;
-import vos.Puerto;
-
 
 public class PuertoAndesMaster 
 {
@@ -91,106 +88,106 @@ public class PuertoAndesMaster
 	 * @param puerto - el puerto a agregar. puerto != null
 	 * @throws Exception - cualquier error que se genera agregando el video
 	 */
-	public void addPuerto(Puerto puerto) throws Exception {
-		DAOPuerto daoPuerto = new DAOPuerto();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoPuerto.setConn(conn);
-			daoPuerto.addPuerto(puerto);
-			conn.commit();
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoPuerto.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-	}
-	
-	/**
-	 * Método que modela la transacción que actualiza el puerto que entra como parámetro a la base de datos.
-	 * <b> post: </b> se ha actualizado el puerto que entra como parámetro
-	 * @param puerto - puerto a actualizar. puerto != null
-	 * @throws Exception - cualquier error que se genera actualizando los puertos
-	 */
-	public void updatePuerto(Puerto puerto) throws Exception {
-		DAOPuerto daoPuerto = new DAOPuerto();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoPuerto.setConn(conn);
-			daoPuerto.updatePuerto(puerto);
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoPuerto.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-	}
-
-	/**
-	 * Método que modela la transacción que elimina el Puerto que entra como parámetro a la base de datos.
-	 * <b> post: </b> se ha eliminado el puerto que entra como parámetro
-	 * @param puerto - puerto a eliminar. puerto != null
-	 * @throws Exception - cualquier error que se genera actualizando los puertos
-	 */
-	public void deletePuerto(Puerto puerto) throws Exception {
-		DAOPuerto daoPuerto = new DAOPuerto();
-		try 
-		{
-			//////Transacción
-			this.conn = darConexion();
-			daoPuerto.setConn(conn);
-			daoPuerto.deletePuerto(puerto);
-
-		} catch (SQLException e) {
-			System.err.println("SQLException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} catch (Exception e) {
-			System.err.println("GeneralException:" + e.getMessage());
-			e.printStackTrace();
-			throw e;
-		} finally {
-			try {
-				daoPuerto.cerrarRecursos();
-				if(this.conn!=null)
-					this.conn.close();
-			} catch (SQLException exception) {
-				System.err.println("SQLException closing resources:" + exception.getMessage());
-				exception.printStackTrace();
-				throw exception;
-			}
-		}
-	}
+//	public void addAdmin(Administrador admin) throws Exception {
+//		DAOAdministrador daoAdministrador = new DAOAdministrador();
+//		try 
+//		{
+//			//////Transacción
+//			this.conn = darConexion();
+//			daoPuerto.setConn(conn);
+//			daoPuerto.addPuerto(puerto);
+//			conn.commit();
+//
+//		} catch (SQLException e) {
+//			System.err.println("SQLException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} catch (Exception e) {
+//			System.err.println("GeneralException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} finally {
+//			try {
+//				daoPuerto.cerrarRecursos();
+//				if(this.conn!=null)
+//					this.conn.close();
+//			} catch (SQLException exception) {
+//				System.err.println("SQLException closing resources:" + exception.getMessage());
+//				exception.printStackTrace();
+//				throw exception;
+//			}
+//		}
+//	}
+//	
+//	/**
+//	 * Método que modela la transacción que actualiza el puerto que entra como parámetro a la base de datos.
+//	 * <b> post: </b> se ha actualizado el puerto que entra como parámetro
+//	 * @param puerto - puerto a actualizar. puerto != null
+//	 * @throws Exception - cualquier error que se genera actualizando los puertos
+//	 */
+//	public void updatePuerto(Puerto puerto) throws Exception {
+//		DAOPuerto daoPuerto = new DAOPuerto();
+//		try 
+//		{
+//			//////Transacción
+//			this.conn = darConexion();
+//			daoPuerto.setConn(conn);
+//			daoPuerto.updatePuerto(puerto);
+//
+//		} catch (SQLException e) {
+//			System.err.println("SQLException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} catch (Exception e) {
+//			System.err.println("GeneralException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} finally {
+//			try {
+//				daoPuerto.cerrarRecursos();
+//				if(this.conn!=null)
+//					this.conn.close();
+//			} catch (SQLException exception) {
+//				System.err.println("SQLException closing resources:" + exception.getMessage());
+//				exception.printStackTrace();
+//				throw exception;
+//			}
+//		}
+//	}
+//
+//	/**
+//	 * Método que modela la transacción que elimina el Puerto que entra como parámetro a la base de datos.
+//	 * <b> post: </b> se ha eliminado el puerto que entra como parámetro
+//	 * @param puerto - puerto a eliminar. puerto != null
+//	 * @throws Exception - cualquier error que se genera actualizando los puertos
+//	 */
+//	public void deletePuerto(Puerto puerto) throws Exception {
+//		DAOPuerto daoPuerto = new DAOPuerto();
+//		try 
+//		{
+//			//////Transacción
+//			this.conn = darConexion();
+//			daoPuerto.setConn(conn);
+//			daoPuerto.deletePuerto(puerto);
+//
+//		} catch (SQLException e) {
+//			System.err.println("SQLException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} catch (Exception e) {
+//			System.err.println("GeneralException:" + e.getMessage());
+//			e.printStackTrace();
+//			throw e;
+//		} finally {
+//			try {
+//				daoPuerto.cerrarRecursos();
+//				if(this.conn!=null)
+//					this.conn.close();
+//			} catch (SQLException exception) {
+//				System.err.println("SQLException closing resources:" + exception.getMessage());
+//				exception.printStackTrace();
+//				throw exception;
+//			}
+//		}
+//	}
 }
