@@ -14,6 +14,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import tm.PuertoAndesMaster;
+import vos.Administrador;
+import vos.ListaAdministrador;
+
 /**
  * Clase que expone servicios REST con ruta base: http://"ip o nombre de host":8080/VideoAndes/rest/videos/...
  * @author Juan
@@ -52,7 +56,7 @@ public class AdministradorServices {
 	 */
 	@GET
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getVideos() {
+	public Response getAdmins() {
 		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		ListaAdministrador admins;
 		try {
@@ -74,7 +78,7 @@ public class AdministradorServices {
 	@GET
 	@Path("/id/{id}")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public Response getVideoName(@javax.ws.rs.PathParam("id") int id) {
+	public Response getAdminId(@javax.ws.rs.PathParam("id") int id) {
 		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		ListaAdministrador admins;
 		try {
@@ -94,17 +98,17 @@ public class AdministradorServices {
      * @return Json con el video que agrego o Json con el error que se produjo
      */
 	@PUT
-	@Path("/video")
+	@Path("/admin")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addVideo(Video video) {
-		VideoAndesMaster tm = new VideoAndesMaster(getPath());
+	public Response addAdmin(Administrador admin) {
+		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		try {
-			tm.addVideo(video);
+			tm.addAdmin(admin);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(video).build();
+		return Response.status(200).entity(admin).build();
 	}
 	
     /**
@@ -114,17 +118,17 @@ public class AdministradorServices {
      * @return Json con el video que agrego o Json con el error que se produjo
      */
 	@PUT
-	@Path("/videos")
+	@Path("/admins")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addVideo(ListaVideos videos) {
-		VideoAndesMaster tm = new VideoAndesMaster(getPath());
+	public Response addAdmin(ListaAdministrador admins) {
+		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		try {
-			tm.addVideos(videos);
+			tm.addAdmins(admins);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(videos).build();
+		return Response.status(200).entity(admins).build();
 	}
 	
     /**
@@ -134,17 +138,17 @@ public class AdministradorServices {
      * @return Json con el video que actualizo o Json con el error que se produjo
      */
 	@POST
-	@Path("/video")
+	@Path("/admin")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response updateVideo(Video video) {
-		VideoAndesMaster tm = new VideoAndesMaster(getPath());
+	public Response updateAdmin(Administrador admin) {
+		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		try {
-			tm.updateVideo(video);
+			tm.updateAdmin(admin);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(video).build();
+		return Response.status(200).entity(admin).build();
 	}
 	
     /**
@@ -157,15 +161,13 @@ public class AdministradorServices {
 	@Path("/a")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response deleteVideo(Video video) {
-		VideoAndesMaster tm = new VideoAndesMaster(getPath());
+	public Response deleteAdmin(Administrador admin) {
+		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		try {
-			tm.deleteVideo(video);
+			tm.deleteAdmin(admin);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(video).build();
+		return Response.status(200).entity(admin).build();
 	}
-
-
 }

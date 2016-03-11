@@ -8,6 +8,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import vos.Administrador;
+import vos.AreaAlmacenamiento;
+import vos.Bodega;
+import vos.BuqueMultiproposito;
+import vos.BuquePortaContenedores;
+import vos.BuqueRoro;
+import vos.ListaAdministrador;
+import vos.ListaAreaAlmacenamiento;
+import vos.ListaBodega;
+import vos.ListaBuqueMultiproposito;
+import vos.ListaBuquePortacontenedores;
+import vos.ListaBuqueRoro;
+
 
 public class PuertoAndesMaster 
 {
@@ -77,10 +90,180 @@ public class PuertoAndesMaster
 		return DriverManager.getConnection(url, user, password);
 	}
 
-	
-	////////////////////////////////////////
-	///////Transacciones////////////////////
-	////////////////////////////////////////
+	public ListaAdministrador buscarAdminsPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaAdministrador darAdmins() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addAdmin(Administrador admin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addAdmins(ListaAdministrador admins) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateAdmin(Administrador admin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteAdmin(Administrador admin) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaAreaAlmacenamiento darAreas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaAreaAlmacenamiento buscarAreasPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addAreas(ListaAreaAlmacenamiento areas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateArea(AreaAlmacenamiento area) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteArea(AreaAlmacenamiento area) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addArea(AreaAlmacenamiento area) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaBodega darBodegas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaBodega buscarBodegaPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addBodega(Bodega bodega) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addBodegas(ListaBodega bodegas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBodega(Bodega bodega) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteBodega(Bodega bodega) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaBuqueMultiproposito darBuquesM() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaBuqueMultiproposito buscarBuqueMPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addBuqueM(BuqueMultiproposito buqueM) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addBuquesM(ListaBuqueMultiproposito buquesM) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBuqueM(BuqueMultiproposito buqueM) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteBuqueM(BuqueMultiproposito buqueM) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaBuquePortacontenedores darBuquesP() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaBuquePortacontenedores buscarBuquePPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addBuqueP(BuquePortaContenedores buqueP) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBuqueP(BuquePortaContenedores buqueP) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteBuqueP(BuquePortaContenedores buqueP) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaBuqueRoro darBuquesR() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaBuqueRoro buscarBuqueRPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addBuqueR(BuqueRoro buqueR) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addBuquesR(ListaBuqueRoro buquesR) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBuqueR(BuqueRoro buqueR) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteBuqueR(BuqueRoro buqueR) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/**
 	 * Método que modela la transacción que agrega un solo puerto a la base de datos.
