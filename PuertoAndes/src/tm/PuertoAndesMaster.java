@@ -11,15 +11,31 @@ import java.util.Properties;
 import vos.Administrador;
 import vos.AreaAlmacenamiento;
 import vos.Bodega;
+import vos.Buque;
 import vos.BuqueMultiproposito;
 import vos.BuquePortaContenedores;
 import vos.BuqueRoro;
+import vos.Camion;
+import vos.Carga;
+import vos.Cobertizo;
+import vos.Contenedor;
+import vos.CuartoFrio;
+import vos.EquipoApoyo;
+import vos.Exportador;
 import vos.ListaAdministrador;
 import vos.ListaAreaAlmacenamiento;
 import vos.ListaBodega;
+import vos.ListaBuque;
 import vos.ListaBuqueMultiproposito;
 import vos.ListaBuquePortacontenedores;
 import vos.ListaBuqueRoro;
+import vos.ListaCamion;
+import vos.ListaCarga;
+import vos.ListaCobertizo;
+import vos.ListaContenedor;
+import vos.ListaCuartoFrio;
+import vos.ListaEquipoApoyo;
+import vos.ListaExportador;
 
 
 public class PuertoAndesMaster 
@@ -261,6 +277,246 @@ public class PuertoAndesMaster
 	}
 
 	public void deleteBuqueR(BuqueRoro buqueR) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaBuque darBuques() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaBuque buscarBuquePorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addBuque(Buque buque) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addBuques(ListaBuque buques) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteBuque(Buque buque) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateBuque(Buque buque) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaCamion darCamiones() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaCamion buscarCamionPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCamion(Camion camion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCamiones(ListaCamion camiones) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateCamion(Camion camion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteCamion(Camion camion) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaCarga darCargas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaCarga buscarCargaPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCarga(Carga carga) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCargas(ListaCarga cargas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateCarga(Carga carga) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteCarga(Carga carga) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaCobertizo darCobertizos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaCobertizo buscarCobertizoPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCobertizo(Cobertizo cobertizo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCobertizos(ListaCobertizo cobertizos) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateCobertizo(Cobertizo cobertizo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteCobertizo(Cobertizo cobertizo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaContenedor darContenedores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaContenedor buscarContenedorPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addContenedor(Contenedor contenedor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addContenedores(ListaContenedor contenedores) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateContenedor(Contenedor contenedor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteContenedor(Contenedor contenedor) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaCuartoFrio darCuartosFrios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaCuartoFrio buscarCuartoFrioPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addCuartoFrio(CuartoFrio cuartoFrio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addCuartosFrios(ListaCuartoFrio cuartosFrios) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateCuartoFrio(CuartoFrio cuartoFrio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteCuartoFrio(CuartoFrio cuartoFrio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaEquipoApoyo darEquiposApoyo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaEquipoApoyo buscarequipoApoyoPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addEquipoApoyo(EquipoApoyo equipoApoyo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addEquiposApoyo(ListaEquipoApoyo equiposApoyo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateEquipoApoyo(EquipoApoyo equipoApoyo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteEquipoApoyo(EquipoApoyo equipoApoyo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaExportador darExportadores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaExportador buscarexportadorPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addExportador(Exportador exportador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addExportadores(ListaExportador exportadores) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateExportador(Exportador exportador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteExportador(Exportador exportador) {
 		// TODO Auto-generated method stub
 		
 	}
