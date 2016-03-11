@@ -22,6 +22,7 @@ import vos.Contenedor;
 import vos.CuartoFrio;
 import vos.EquipoApoyo;
 import vos.Exportador;
+import vos.Importador;
 import vos.ListaAdministrador;
 import vos.ListaAreaAlmacenamiento;
 import vos.ListaBodega;
@@ -36,6 +37,15 @@ import vos.ListaContenedor;
 import vos.ListaCuartoFrio;
 import vos.ListaEquipoApoyo;
 import vos.ListaExportador;
+import vos.ListaImportador;
+import vos.ListaOperadorPortuario;
+import vos.ListaPatio;
+import vos.ListaSitio;
+import vos.ListaUsuario;
+import vos.OperadorPortuario;
+import vos.Patio;
+import vos.Sitio;
+import vos.Usuario;
 
 
 public class PuertoAndesMaster 
@@ -517,6 +527,156 @@ public class PuertoAndesMaster
 	}
 
 	public void deleteExportador(Exportador exportador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaImportador darImportadores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaImportador buscarImportadorPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addImportador(Importador importador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addImportadores(ListaImportador importadores) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateImportador(Importador importador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteImportador(Importador importador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaOperadorPortuario darOperadores() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaOperadorPortuario buscarOperadorPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addOperador(OperadorPortuario operador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addOperadores(ListaOperadorPortuario operadores) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateOperador(OperadorPortuario operador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteOperador(OperadorPortuario operador) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaPatio darPatios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaPatio buscarPatioPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addPatio(Patio patio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addPatios(ListaPatio patios) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updatePatio(Patio patio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deletePatio(Patio patio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaSitio darSitios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaSitio buscarSitioPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addSitio(Sitio sitio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addSitios(ListaSitio sitios) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateSitio(Sitio sitio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteSitio(Sitio sitio) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaUsuario darUsuarios() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaUsuario buscarUsuarioPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addUsuarios(ListaUsuario usuarios) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
 	}
