@@ -117,14 +117,14 @@ public class BuquePortacontenedoresServices
 	@Path("/buquesP")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response addBuquesM(ListaBuqueMultiproposito buquesM) {
+	public Response addBuquesP(ListaBuquePortacontenedores buquesP) {
 		PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 		try {
-			tm.addBuquesM(buquesM);
+			tm.addBuquesP(buquesP);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}
-		return Response.status(200).entity(buquesM).build();
+		return Response.status(200).entity(buquesP).build();
 	}
 	
     /**
