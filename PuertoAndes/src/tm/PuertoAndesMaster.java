@@ -150,9 +150,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addAdmin(Administrador admin) {
-		// TODO Auto-generated method stub
-		
+	public void addAdmin(Administrador admin) throws Exception {
+		DAOAdministrador daoAdministrador = new DAOAdministrador();
+		try 
+		{
+			this.conn = darConexion();
+			daoAdministrador.setConn(conn);
+			daoAdministrador.addAdministrador(admin);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoAdministrador.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addAdmins(ListaAdministrador admins) throws Exception {
@@ -347,9 +372,34 @@ public class PuertoAndesMaster
 		}	
 	}
 
-	public void addArea(AreaAlmacenamiento area) {
-		// TODO Auto-generated method stub
-		
+	public void addArea(AreaAlmacenamiento area) throws Exception {
+		DAOAreaAlmacenamiento daoAreaAlmacenamiento = new DAOAreaAlmacenamiento();
+		try 
+		{
+			this.conn = darConexion();
+			daoAreaAlmacenamiento.setConn(conn);
+			daoAreaAlmacenamiento.addAreaAlmacenamiento(area);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoAreaAlmacenamiento.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public ListaBodega darBodegas() {
@@ -362,9 +412,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addBodega(Bodega bodega) {
-		// TODO Auto-generated method stub
-		
+	public void addBodega(Bodega bodega) throws Exception {
+		DAOBodega daoBodega = new DAOBodega();
+		try 
+		{
+			this.conn = darConexion();
+			daoBodega.setConn(conn);
+			daoBodega.addBodega(bodega);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBodega.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addBodegas(ListaBodega bodegas) throws Exception {
@@ -468,9 +543,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addBuqueM(BuqueMultiproposito buqueM) {
-		// TODO Auto-generated method stub
-		
+	public void addBuqueM(BuqueMultiproposito buqueM) throws Exception {
+		DAOBuqueMultiproposito daoBuqueMultiproposito = new DAOBuqueMultiproposito();
+		try 
+		{
+			this.conn = darConexion();
+			daoBuqueMultiproposito.setConn(conn);
+			daoBuqueMultiproposito.addBuqueM(buqueM);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuqueMultiproposito.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addBuquesM(ListaBuqueMultiproposito buquesM) throws Exception {
@@ -574,9 +674,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addBuqueP(BuquePortaContenedores buqueP) {
-		// TODO Auto-generated method stub
-		
+	public void addBuqueP(BuquePortaContenedores buqueP) throws Exception {
+		DAOBuquePortacontenedores daoBuquePortacontenedores = new DAOBuquePortacontenedores();
+		try 
+		{
+			this.conn = darConexion();
+			daoBuquePortacontenedores.setConn(conn);
+			daoBuquePortacontenedores.addBuqueP(buqueP);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuquePortacontenedores.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 	
 	public void addBuquesP(ListaBuquePortacontenedores buquesP) throws Exception {
@@ -680,9 +805,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addBuqueR(BuqueRoro buqueR) {
-		// TODO Auto-generated method stub
-		
+	public void addBuqueR(BuqueRoro buqueR) throws Exception {
+		DAOBuqueRoro daoBuqueRoro = new DAOBuqueRoro();
+		try 
+		{
+			this.conn = darConexion();
+			daoBuqueRoro.setConn(conn);
+			daoBuqueRoro.addBuqueR(buqueR);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuqueRoro.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addBuquesR(ListaBuqueRoro buquesR) throws Exception {
@@ -786,9 +936,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addBuque(Buque buque) {
-		// TODO Auto-generated method stub
-		
+	public void addBuque(Buque buque) throws Exception {
+		DAOBuque daoBuque = new DAOBuque();
+		try 
+		{
+			this.conn = darConexion();
+			daoBuque.setConn(conn);
+			daoBuque.addBuque(buque);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuque.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addBuques(ListaBuque buques) throws Exception {
@@ -892,9 +1067,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addCamion(Camion camion) {
-		// TODO Auto-generated method stub
-		
+	public void addCamion(Camion camion) throws Exception {
+		DAOCamion daoCamion = new DAOCamion();
+		try 
+		{
+			this.conn = darConexion();
+			daoCamion.setConn(conn);
+			daoCamion.addCamion(camion);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCamion.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addCamiones(ListaCamion camiones) throws Exception {
@@ -998,9 +1198,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addCarga(Carga carga) {
-		// TODO Auto-generated method stub
-		
+	public void addCarga(Carga carga) throws Exception {
+		DAOCarga daoCarga = new DAOCarga();
+		try 
+		{
+			this.conn = darConexion();
+			daoCarga.setConn(conn);
+			daoCarga.addCarga(carga);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCarga.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addCargas(ListaCarga cargas) throws Exception {
@@ -1104,9 +1329,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addCobertizo(Cobertizo cobertizo) {
-		// TODO Auto-generated method stub
-		
+	public void addCobertizo(Cobertizo cobertizo) throws Exception {
+		DAOCobertizo daoCobertizo = new DAOCobertizo();
+		try 
+		{
+			this.conn = darConexion();
+			daoCobertizo.setConn(conn);
+			daoCobertizo.addCobertizo(cobertizo);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCobertizo.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addCobertizos(ListaCobertizo cobertizos) throws Exception {
@@ -1210,9 +1460,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addContenedor(Contenedor contenedor) {
-		// TODO Auto-generated method stub
-		
+	public void addContenedor(Contenedor contenedor) throws Exception {
+		DAOContenedor daoContenedor = new DAOContenedor();
+		try 
+		{
+			this.conn = darConexion();
+			daoContenedor.setConn(conn);
+			daoContenedor.addContenedor(contenedor);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoContenedor.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addContenedores(ListaContenedor contenedores) throws Exception {
@@ -1316,9 +1591,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addCuartoFrio(CuartoFrio cuartoFrio) {
-		// TODO Auto-generated method stub
-		
+	public void addCuartoFrio(CuartoFrio cuartoFrio) throws Exception {
+		DAOCuartoFrio daoCuartoFrio = new DAOCuartoFrio();
+		try 
+		{
+			this.conn = darConexion();
+			daoCuartoFrio.setConn(conn);
+			daoCuartoFrio.addCuarto(cuartoFrio);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCuartoFrio.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addCuartosFrios(ListaCuartoFrio cuartosFrios) throws Exception {
@@ -1422,9 +1722,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addEquipoApoyo(EquipoApoyo equipoApoyo) {
-		// TODO Auto-generated method stub
-		
+	public void addEquipoApoyo(EquipoApoyo equipoApoyo) throws Exception {
+		DAOEquipoApoyo daoEquipoApoyo = new DAOEquipoApoyo();
+		try 
+		{
+			this.conn = darConexion();
+			daoEquipoApoyo.setConn(conn);
+			daoEquipoApoyo.addEquipo(equipoApoyo);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoEquipoApoyo.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addEquiposApoyo(ListaEquipoApoyo equiposApoyo) throws Exception {
@@ -1528,9 +1853,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addExportador(Exportador exportador) {
-		// TODO Auto-generated method stub
-		
+	public void addExportador(Exportador exportador) throws Exception {
+		DAOExportador daoExportador = new DAOExportador();
+		try 
+		{
+			this.conn = darConexion();
+			daoExportador.setConn(conn);
+			daoExportador.addExportador(exportador);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoExportador.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addExportadores(ListaExportador exportadores) throws Exception {
@@ -1635,9 +1985,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addImportador(Importador importador) {
-		// TODO Auto-generated method stub
-		
+	public void addImportador(Importador importador) throws Exception {
+		DAOImportador daoImportador = new DAOImportador();
+		try 
+		{
+			this.conn = darConexion();
+			daoImportador.setConn(conn);
+			daoImportador.addImportador(importador);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoImportador.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addImportadores(ListaImportador importadores) throws Exception {
@@ -1741,9 +2116,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addOperador(OperadorPortuario operador) {
-		// TODO Auto-generated method stub
-		
+	public void addOperador(OperadorPortuario operador) throws Exception {
+		DAOOperadorPortuario daoOperadorPortuario = new DAOOperadorPortuario();
+		try 
+		{
+			this.conn = darConexion();
+			daoOperadorPortuario.setConn(conn);
+			daoOperadorPortuario.addOperador(operador);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoOperadorPortuario.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addOperadores(ListaOperadorPortuario operadores) throws Exception {
@@ -1847,9 +2247,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addPatio(Patio patio) {
-		// TODO Auto-generated method stub
-		
+	public void addPatio(Patio patio) throws Exception {
+		DAOPatio daoPatio = new DAOPatio();
+		try 
+		{
+			this.conn = darConexion();
+			daoPatio.setConn(conn);
+			daoPatio.addPatio(patio);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPatio.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addPatios(ListaPatio patios) throws Exception {
@@ -1953,9 +2378,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addSitio(Sitio sitio) {
-		// TODO Auto-generated method stub
-		
+	public void addSitio(Sitio sitio) throws Exception {
+		DAOSitio daoSitio = new DAOSitio();
+		try 
+		{
+			this.conn = darConexion();
+			daoSitio.setConn(conn);
+			daoSitio.addSitio(sitio);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoSitio.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addSitios(ListaSitio sitios) throws Exception {
@@ -2059,9 +2509,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
-		
+	public void addUsuario(Usuario usuario) throws Exception {
+		DAOUsuario daoUsuario = new DAOUsuario();
+		try 
+		{
+			this.conn = darConexion();
+			daoUsuario.setConn(conn);
+			daoUsuario.addUsuario(usuario);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoUsuario.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addUsuarios(ListaUsuario usuarios) throws Exception {
@@ -2165,9 +2640,34 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public void addFactura(Factura factura) {
-		// TODO Auto-generated method stub
-		
+	public void addFactura(Factura factura) throws Exception {
+		DAOFactura daoFactura = new DAOFactura();
+		try 
+		{
+			this.conn = darConexion();
+			daoFactura.setConn(conn);
+			daoFactura.addFactura(factura);
+			conn.commit();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoFactura.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
 	}
 
 	public void addFacturas(ListaFactura facturas) throws Exception {
