@@ -78,7 +78,7 @@ public class ExportadorServices
 		try {
 			if (id == 0)
 				throw new Exception("Id del video no valido");
-			exportadores = tm.buscarexportadorPorId(id);
+			exportadores = tm.buscarExportadorPorId(id);
 		} catch (Exception e) {
 			return Response.status(500).entity(doErrorMessage(e)).build();
 		}

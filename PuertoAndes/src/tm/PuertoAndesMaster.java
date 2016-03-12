@@ -1848,7 +1848,7 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaExportador buscarexportadorPorId(int id) {
+	public ListaExportador buscarExportadorPorId(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -1980,9 +1980,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaImportador buscarImportadorPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaImportador buscarImportadorPorId(int id) throws Exception {
+		ArrayList<Importador> importadors;
+		DAOImportador daoImportador = new DAOImportador();
+		try 
+		{
+			this.conn = darConexion();
+			daoImportador.setConn(conn);
+			importadors = daoImportador.buscarImportadorPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoImportador.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaImportador(importadors);
 	}
 
 	public void addImportador(Importador importador) throws Exception {
@@ -2111,9 +2137,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaOperadorPortuario buscarOperadorPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaOperadorPortuario buscarOperadorPorId(int id) throws Exception {
+		ArrayList<OperadorPortuario> operadorPortuarios;
+		DAOOperadorPortuario daoOperadorPortuario = new DAOOperadorPortuario();
+		try 
+		{
+			this.conn = darConexion();
+			daoOperadorPortuario.setConn(conn);
+			operadorPortuarios = daoOperadorPortuario.buscarOperadorPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoOperadorPortuario.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaOperadorPortuario(operadorPortuarios);
 	}
 
 	public void addOperador(OperadorPortuario operador) throws Exception {
@@ -2242,9 +2294,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaPatio buscarPatioPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaPatio buscarPatioPorId(int id) throws Exception {
+		ArrayList<Patio> patios;
+		DAOPatio daoPatio = new DAOPatio();
+		try 
+		{
+			this.conn = darConexion();
+			daoPatio.setConn(conn);
+			patios = daoPatio.buscarPatioPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoPatio.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaPatio(patios);
 	}
 
 	public void addPatio(Patio patio) throws Exception {
@@ -2373,9 +2451,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaSitio buscarSitioPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaSitio buscarSitioPorId(int id) throws Exception {
+		ArrayList<Sitio> sitios;
+		DAOSitio daoSitio = new DAOSitio();
+		try 
+		{
+			this.conn = darConexion();
+			daoSitio.setConn(conn);
+			sitios = daoSitio.buscarSitioPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoSitio.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaSitio(sitios);
 	}
 
 	public void addSitio(Sitio sitio) throws Exception {
@@ -2504,9 +2608,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaUsuario buscarUsuarioPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaUsuario buscarUsuarioPorId(int id) throws Exception {
+		ArrayList<Usuario> usuarios;
+		DAOUsuario daoUsuario = new DAOUsuario();
+		try 
+		{
+			this.conn = darConexion();
+			daoUsuario.setConn(conn);
+			usuarios = daoUsuario.buscarUsuarioPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoUsuario.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaUsuario(usuarios);
 	}
 
 	public void addUsuario(Usuario usuario) throws Exception {
@@ -2635,9 +2765,35 @@ public class PuertoAndesMaster
 		return null;
 	}
 
-	public ListaFactura buscarFacturaPorId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public ListaFactura buscarFacturaPorId(int id) throws Exception {
+		ArrayList<Factura> facturas;
+		DAOFactura daoFactura = new DAOFactura();
+		try 
+		{
+			this.conn = darConexion();
+			daoFactura.setConn(conn);
+			facturas = daoFactura.buscarFacturaPorId(id);
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoFactura.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaFactura(facturas);
 	}
 
 	public void addFactura(Factura factura) throws Exception {
