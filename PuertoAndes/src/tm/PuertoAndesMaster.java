@@ -22,6 +22,7 @@ import vos.Contenedor;
 import vos.CuartoFrio;
 import vos.EquipoApoyo;
 import vos.Exportador;
+import vos.Factura;
 import vos.Importador;
 import vos.ListaAdministrador;
 import vos.ListaAreaAlmacenamiento;
@@ -37,6 +38,7 @@ import vos.ListaContenedor;
 import vos.ListaCuartoFrio;
 import vos.ListaEquipoApoyo;
 import vos.ListaExportador;
+import vos.ListaFactura;
 import vos.ListaImportador;
 import vos.ListaOperadorPortuario;
 import vos.ListaPatio;
@@ -677,6 +679,36 @@ public class PuertoAndesMaster
 	}
 
 	public void deleteUsuario(Usuario usuario) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public ListaFactura darFacturas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public ListaFactura buscarFacturaPorId(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void addFactura(Factura factura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addFacturas(ListaFactura facturas) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void updateFactura(Factura factura) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void deleteFactura(Factura factura) {
 		// TODO Auto-generated method stub
 		
 	}
