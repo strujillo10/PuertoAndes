@@ -16,9 +16,6 @@ public class BuqueMultiproposito extends Buque
 	@JsonProperty(value="tipoCarga")
 	private String tipoCarga; 
 	
-	@JsonProperty(value="registroCapitania")
-	private String registroCapitania; 
-	
 	@JsonProperty(value="procedencia")
 	private String procedencia; 
 	
@@ -28,17 +25,12 @@ public class BuqueMultiproposito extends Buque
 	@JsonProperty(value="fechaSalida")
 	private Date fechaSalida; 
 	
-	@JsonProperty(value="agenciaMaritima")
-	private String agenciaMaritima; 
-	
 	@JsonProperty(value="horaLlegada")
 	private Time horaLlegada;
 	
 	@JsonProperty(value="horaSalida")
 	private Time horaSalida; 
 	
-	@JsonProperty(value="cantidadContenedores")
-	private int cantidadContenedores; 
 	
 	@JsonProperty(value="destino")
 	private String destino; 
@@ -47,25 +39,23 @@ public class BuqueMultiproposito extends Buque
 	private int buqueId;
 	
 	public BuqueMultiproposito(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
-			@JsonProperty(value="tipoCarga")String nTipoCarga, @JsonProperty(value="registroCapitania")String nRegistro,
+			@JsonProperty(value="tipoCarga")String nTipoCarga, 
 			@JsonProperty(value="procedencia")String nProcedencia, @JsonProperty(value="fechaLlegada")Date nFechaLlegada,
 			@JsonProperty(value="fechaSalida")Date nFechaSalida, @JsonProperty(value="agenciaMaritima")String nAgencia,
 			@JsonProperty(value="horaLlegada")Time nHoraLlegada, @JsonProperty(value="horaSalida")Time nHoraSalida,
-			@JsonProperty(value="cantidadContenedores")int nCantidad, @JsonProperty(value="destino")String nDestino,
+			 @JsonProperty(value="destino")String nDestino,
 			@JsonProperty(value="buqueId")int nBuqueId)
 	{
-		super(nId, nNombre, nRegistro, nAgencia, nCantidad);
+		super(nId, nNombre, nAgencia);
 		id = nId; 
 		nombre = nNombre; 
 		tipoCarga = nTipoCarga; 
-		registroCapitania = nRegistro; 
 		procedencia = nProcedencia; 
 		fechaLlegada = nFechaLlegada; 
 		fechaSalida = nFechaSalida; 
 		agenciaMaritima = nAgencia; 
 		horaLlegada = nHoraLlegada; 
 		horaSalida = nHoraSalida; 
-		cantidadContenedores = nCantidad; 
 		destino = nDestino; 
 		buqueId = nBuqueId; 
 	}
@@ -92,14 +82,6 @@ public class BuqueMultiproposito extends Buque
 
 	public void setTipoCarga(String tipoCarga) {
 		this.tipoCarga = tipoCarga;
-	}
-
-	public String getRegistroCapitania() {
-		return registroCapitania;
-	}
-
-	public void setRegistroCapitania(String registroCapitania) {
-		this.registroCapitania = registroCapitania;
 	}
 
 	public String getProcedencia() {
@@ -150,13 +132,6 @@ public class BuqueMultiproposito extends Buque
 		this.horaSalida = horaSalida;
 	}
 
-	public int getCantidadContenedores() {
-		return cantidadContenedores;
-	}
-
-	public void setCantidadContenedores(int cantidadContenedores) {
-		this.cantidadContenedores = cantidadContenedores;
-	}
 
 	public String getDestino() {
 		return destino;

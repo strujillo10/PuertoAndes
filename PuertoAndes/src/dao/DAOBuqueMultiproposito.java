@@ -83,16 +83,14 @@ public class DAOBuqueMultiproposito {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
 			String destino = rs.getString("DESTINO");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueM.add(new BuqueMultiproposito(id, nombre, tipo, registro, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, cantidad, destino, buqueId));
+			buqueM.add(new BuqueMultiproposito(id, nombre, tipo, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueM;
 	}
@@ -120,16 +118,16 @@ public class DAOBuqueMultiproposito {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
+
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
 			String destino = rs.getString("DESTINO");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
+
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueM.add(new BuqueMultiproposito(id2, nombre, tipo, registro, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, cantidad, destino, buqueId));
+			buqueM.add(new BuqueMultiproposito(id2, nombre, tipo, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueM;
 	}
@@ -147,14 +145,12 @@ public class DAOBuqueMultiproposito {
 		String sql = "INSERT INTO BUQUE_PORTACONTENEDORES VALUES (";
 		sql += buqueP.getId() + ",'";
 		sql += buqueP.getNombre() + ",'";
-		sql += buqueP.getRegistroCapitania() + ",'";
+		sql += buqueP.getTipoCarga() + ",'";
 		sql += buqueP.getProcedencia() + ",'";
 		sql += buqueP.getFechaLlegada() + ",'";
 		sql += buqueP.getFechaSalida() + ",'";
-		sql += buqueP.getAgenciaMaritima() + ",'";
 		sql += buqueP.getHoraLlegada() + ",'";
 		sql += buqueP.getHoraSalida() + ",'";
-		sql += buqueP.getCantidadContenedores() + ",'";
 		sql += buqueP.getDestino() + ",'";
 		sql += buqueP.getBuqueId() + ")";
 
@@ -178,16 +174,13 @@ public class DAOBuqueMultiproposito {
 	{
 		String sql = "UPDATE BUQUE_PORTACONTENEDORES SET ";
 		sql += "nomre='" + buqueP.getNombre() + "',";
-		sql += "registro_de_capitania='" + buqueP.getRegistroCapitania() + "',";
+		sql += "tipo_de_carga='" + buqueP.getTipoCarga() + "',";
 		sql += "procedencia='" + buqueP.getProcedencia() + "',";
 		sql += "fecha_llegada='" + buqueP.getFechaLlegada() + "',";
 		sql += "fecha_salida='" + buqueP.getFechaSalida() + "',";
-		sql += "agencia_maritima='" + buqueP.getAgenciaMaritima() + "',";
 		sql += "hora_llegada='" + buqueP.getHoraLlegada() + "',";
 		sql += "hora_salida='" + buqueP.getHoraSalida() + "',";
-		sql += "cantidad_de_contenedores='" + buqueP.getNombre() + "',";
 		sql += "destino='" + buqueP.getDestino() + "',";
-		sql += "buque_id='" + buqueP.getBuqueId() + "',";
 		sql += " WHERE id = " + buqueP.getId();
 
 		System.out.println("SQL stmt:" + sql);

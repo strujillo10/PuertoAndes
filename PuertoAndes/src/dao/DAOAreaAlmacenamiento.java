@@ -78,9 +78,8 @@ public class DAOAreaAlmacenamiento
 
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
-			areas.add(new AreaAlmacenamiento(id, capacidad, ocupacion));
+
+			areas.add(new AreaAlmacenamiento(id));
 		}
 		return areas;
 	}
@@ -106,9 +105,7 @@ public class DAOAreaAlmacenamiento
 		
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
-			areas.add(new AreaAlmacenamiento(id2, capacidad, ocupacion));
+			areas.add(new AreaAlmacenamiento(id2));
 		}
 		return areas;
 	}
@@ -125,8 +122,7 @@ public class DAOAreaAlmacenamiento
 	{
 		String sql = "INSERT INTO AREA_DE_ALMACENAMIENTO VALUES (";
 		sql += area.getId() + ",'";
-		sql += area.getCapacidad() + "',";
-		sql += area.getOcupacionActual() + ")";
+	
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -147,8 +143,6 @@ public class DAOAreaAlmacenamiento
 	public void updateAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
 		String sql = "UPDATE AREA_DE_ALMACENAMIENTO SET ";
-		sql += "capacidad='" + area.getCapacidad() + "',";
-		sql += "ocupacion_actual=" + area.getOcupacionActual();
 		sql += " WHERE id = " + area.getId();
 
 		System.out.println("SQL stmt:" + sql);

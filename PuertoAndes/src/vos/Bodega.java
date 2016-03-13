@@ -10,9 +10,6 @@ public class Bodega
 	@JsonProperty(value="idArea")
 	private int idArea; 
 	
-	@JsonProperty(value="ocupacionTotal")
-	private int ocupacionTotal;
-	
 	@JsonProperty(value="plataformaExterna")
 	private String plataformaExterna; 
 	
@@ -28,14 +25,11 @@ public class Bodega
 	@JsonProperty(value="largo")
 	private int largo;
 	
-	@JsonProperty(value="capacidad")
-	private int capacidad; 
 	
 	public Bodega(@JsonProperty(value="id")int nId, @JsonProperty(value="idArea")int nIdArea,
-			@JsonProperty(value="ocupacionTotal")int nOcupacion, @JsonProperty(value="plataformaExterna")String nPlataforma,
+		 @JsonProperty(value="plataformaExterna")String nPlataforma,
 			@JsonProperty(value="cantidadCuartosFrios")int nCantidad, @JsonProperty(value="separacionColumnas")int nSeparacion,
-			@JsonProperty(value="ancho")int nAncho, @JsonProperty(value="largo")int nLargo, 
-			@JsonProperty(value="capacidad")int nCapacidad)
+			@JsonProperty(value="ancho")int nAncho, @JsonProperty(value="largo")int nLargo)
 	{
 		id = nId; 
 		idArea = nIdArea; 
@@ -64,13 +58,6 @@ public class Bodega
 		this.idArea = idArea;
 	}
 
-	public int getOcupacionTotal() {
-		return ocupacionTotal;
-	}
-
-	public void setOcupacionTotal(int ocupacionTotal) {
-		this.ocupacionTotal = ocupacionTotal;
-	}
 
 	public String getPlataformaExterna() {
 		return plataformaExterna;
@@ -112,12 +99,5 @@ public class Bodega
 		this.largo = largo;
 	}
 
-	public int getCapacidad() {
-		return capacidad;
-	}
-
-	public void setCapacidad(int capacidad) {
-		this.capacidad = capacidad;
-	}
 	
 }

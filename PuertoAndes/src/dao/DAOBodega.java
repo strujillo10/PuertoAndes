@@ -80,14 +80,12 @@ public class DAOBodega
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String plataforma = rs.getString("PLATAFORMA_EXTERNA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CUARTOS_FRIOS"));
 			int separacion = Integer.parseInt(rs.getString("SEPARACION_ENTRE_COLUMNAS"));
 			int ancho = Integer.parseInt(rs.getString("ANCHO_EN_METROS"));
 			int largo = Integer.parseInt(rs.getString("LARGO_EN_METROS"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			bodegas.add(new Bodega(id, idArea, ocupacion, plataforma, cantidad, separacion, ancho, largo, capacidad));
+			bodegas.add(new Bodega(id, idArea,  plataforma, cantidad, separacion, ancho, largo));
 		}
 		return bodegas;
 	}
@@ -114,14 +112,12 @@ public class DAOBodega
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String plataforma = rs.getString("PLATAFORMA_EXTERNA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CUARTOS_FRIOS"));
 			int separacion = Integer.parseInt(rs.getString("SEPARACION_ENTRE_COLUMNAS"));
 			int ancho = Integer.parseInt(rs.getString("ANCHO_EN_METROS"));
 			int largo = Integer.parseInt(rs.getString("LARGO_EN_METROS"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			bodegas.add(new Bodega(id2, idArea, ocupacion, plataforma, cantidad, separacion, ancho, largo, capacidad));
+			bodegas.add(new Bodega(id2, idArea, plataforma, cantidad, separacion, ancho, largo));
 		}
 		return bodegas;
 	}
@@ -139,13 +135,13 @@ public class DAOBodega
 		String sql = "INSERT INTO BODEGAS VALUES (";
 		sql += bodega.getId() + ",'";
 		sql += bodega.getIdArea() + "',";
-		sql += bodega.getOcupacionTotal() + "',";
+
 		sql += bodega.getPlataformaExterna() + "',";
 		sql += bodega.getCantidadCuartosFrios() + "',";
 		sql += bodega.getSeparacionColumnas() + "',";
 		sql += bodega.getAncho() + "',";
 		sql += bodega.getLargo() + "',";
-		sql += bodega.getCapacidad() + ")";
+
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -167,13 +163,11 @@ public class DAOBodega
 	{
 		String sql = "UPDATE BODEGAS SET ";
 		sql += "id_area='" + bodega.getIdArea() + "',";
-		sql += "ocupacion_actual='" + bodega.getOcupacionTotal() + "',";
 		sql += "plataforma_externa='" + bodega.getPlataformaExterna() + "',";
 		sql += "cantidad_de_cuartos_frios='" + bodega.getCantidadCuartosFrios() + "',";
 		sql += "separacion_entre_columnas='" + bodega.getSeparacionColumnas() + "',";
 		sql += "ancho_en_metros='" + bodega.getAncho() + "',";
 		sql += "largo_en_metros='" + bodega.getLargo() + "',";
-		sql += "capacidad=" + bodega.getCapacidad();
 		sql += " WHERE id = " + bodega.getId();
 
 		System.out.println("SQL stmt:" + sql);
