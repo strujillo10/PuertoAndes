@@ -146,8 +146,8 @@ public class DAOAdministrador
 	public void updateAdministrador(Administrador administrador) throws SQLException, Exception 
 	{
 		String sql = "UPDATE ADMINISTRADOR SET ";
-		sql += "nombre='" + administrador.getNombre() + "',";
-		sql += " WHERE id = " + administrador.getId();
+		sqla += "nombre='" + administrador.getNombre() + "',";
+		sqla += " WHERE id = " + administrador.getId();
 
 		System.out.println("SQL stmt:" + sql);
 
