@@ -10,15 +10,12 @@ public class Administrador
 	@JsonProperty(value="nombre")
 	private String nombre;
 	
-	@JsonProperty(value="idUsuario")
-	private int idUsuario;
+
 	
-	public Administrador(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre, 
-			@JsonProperty(value="idUsuario")int nIdUsuario)
+	public Administrador(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre)
 	{
 		id = nId;
 		nombre = nNombre; 
-		idUsuario = nIdUsuario;
 	}
 
 	public int getId() {
@@ -37,11 +34,4 @@ public class Administrador
 		this.nombre = nombre;
 	}
 
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 }

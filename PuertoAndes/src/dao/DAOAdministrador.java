@@ -81,8 +81,7 @@ public class DAOAdministrador
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String name = rs.getString("NOMBRE");
-			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
-			administradores.add(new Administrador(id, name, idUsuario));
+			administradores.add(new Administrador(id, name));
 		}
 		return administradores;
 	}
@@ -109,8 +108,7 @@ public class DAOAdministrador
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String name = rs.getString("NOMBRE");
-			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
-			administradores.add(new Administrador(id, name, idUsuario));
+			administradores.add(new Administrador(id, name));
 		}
 		return administradores;
 	}
@@ -128,7 +126,6 @@ public class DAOAdministrador
 		String sql = "INSERT INTO ADMINISTRADOR VALUES (";
 		sql += administrador.getId() + ",'";
 		sql += administrador.getNombre() + "',";
-		sql += administrador.getIdUsuario() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -150,7 +147,6 @@ public class DAOAdministrador
 	{
 		String sql = "UPDATE ADMINISTRADOR SET ";
 		sql += "nombre='" + administrador.getNombre() + "',";
-		sql += "id_usuario=" + administrador.getIdUsuario();
 		sql += " WHERE id = " + administrador.getId();
 
 		System.out.println("SQL stmt:" + sql);
