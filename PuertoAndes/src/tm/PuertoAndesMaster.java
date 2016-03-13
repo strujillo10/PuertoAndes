@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.ibm.wsdl.FaultImpl;
+import oracle.jdbc.driver.OracleDriver; 
 
 import dao.DAOAdministrador;
 import dao.DAOAreaAlmacenamiento;
