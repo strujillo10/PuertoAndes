@@ -10,15 +10,10 @@ public class OperadorPortuario
 	@JsonProperty(value="nombre")
 	private String nombre; 
 	
-	@JsonProperty(value="idUsuario")
-	private int idUsuario; 
-	
-	public OperadorPortuario(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
-			@JsonProperty(value="idUsuario")int nIdUsuario)
+	public OperadorPortuario(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre)
 	{
 		id = nId; 
 		nombre = nNombre; 
-		idUsuario = nIdUsuario; 
 	}
 
 	public int getId() {
@@ -35,14 +30,5 @@ public class OperadorPortuario
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public int getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(int idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-	
+	}	
 }

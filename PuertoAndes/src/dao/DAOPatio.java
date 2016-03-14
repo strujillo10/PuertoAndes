@@ -79,11 +79,9 @@ public class DAOPatio
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String dimension = rs.getString("DIMENSION");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			patios.add(new Patio(id, idArea, capacidad, ocupacion, dimension, tipo));
+			patios.add(new Patio(id, idArea, dimension, tipo));
 		}
 		return patios;
 	}
@@ -110,11 +108,9 @@ public class DAOPatio
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String dimension = rs.getString("DIMENSION");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			patios.add(new Patio(id2, idArea, capacidad, ocupacion, dimension, tipo));
+			patios.add(new Patio(id2, idArea, dimension, tipo));
 		}
 		return patios;
 	}
@@ -132,8 +128,6 @@ public class DAOPatio
 		String sql = "INSERT INTO PATIOS VALUES (";
 		sql += patio.getId() + ",'";
 		sql += patio.getIdArea() + ",'";
-		sql += patio.getCapacidad() + ",'";
-		sql += patio.getOcupacionTotal() + ",'";
 		sql += patio.getDimension() + ",'";
 		sql += patio.getTipoCarga() + ")";
 
@@ -157,8 +151,6 @@ public class DAOPatio
 	{
 		String sql = "UPDATE PATIOS SET ";
 		sql += "id_area='" + patio.getIdArea() + "',";
-		sql += "capacidad='" + patio.getCapacidad() + "',";
-		sql += "ocupacion_actual='" + patio.getOcupacionTotal() + "',";
 		sql += "dimension='" + patio.getDimension() + "',";
 		sql += "tipo_de_carga='" + patio.getTipoCarga() + "',";
 		sql += " WHERE id = " + patio.getId();

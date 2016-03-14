@@ -80,11 +80,9 @@ public class DAOCobertizo
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String dimension = rs.getString("DIMENSION");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			cobertizos.add(new Cobertizo(id, idArea, capacidad, ocupacion, dimension, tipo));
+			cobertizos.add(new Cobertizo(id, idArea, dimension, tipo));
 		}
 		return cobertizos;
 	}
@@ -111,11 +109,9 @@ public class DAOCobertizo
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			String dimension = rs.getString("DIMENSION");
 			String tipo = rs.getString("TIPO_DE_CARGA");
-			cobertizos.add(new Cobertizo(id2, idArea, capacidad, ocupacion, dimension, tipo));
+			cobertizos.add(new Cobertizo(id2, idArea, dimension, tipo));
 		}
 		return cobertizos;
 	}
@@ -133,8 +129,6 @@ public class DAOCobertizo
 		String sql = "INSERT INTO COBERTIZOS VALUES (";
 		sql += cobertizo.getId() + ",'";
 		sql += cobertizo.getIdArea() + ",'";
-		sql += cobertizo.getCapacidad() + ",'";
-		sql += cobertizo.getOcupacionTotal() + ",'";
 		sql += cobertizo.getDimensionTotal() + ",'";
 		sql += cobertizo.getTipoCarga() + ")";
 
@@ -158,8 +152,6 @@ public class DAOCobertizo
 	{
 		String sql = "UPDATE COBERTIZOS SET ";
 		sql += "id_area='" + cobertizo.getIdArea() + "',";
-		sql += "capacidad='" + cobertizo.getCapacidad() + "',";
-		sql += "ocupacion_actual='" + cobertizo.getOcupacionTotal() + "',";
 		sql += "dimension='" + cobertizo.getDimensionTotal() + "',";
 		sql += "tipo_de_carga='" + cobertizo.getTipoCarga() + "',";
 		sql += " WHERE id = " + cobertizo.getId();

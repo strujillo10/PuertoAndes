@@ -79,10 +79,9 @@ public class DAOSitio
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
 			String nombre = rs.getString("NOMBRE");
-			sitios.add(new Sitio(id, idArea, capacidad, ocupacion, nombre));
+			sitios.add(new Sitio(id, idArea, capacidad, nombre));
 		}
 		return sitios;
 	}
@@ -109,10 +108,9 @@ public class DAOSitio
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			int idArea = Integer.parseInt(rs.getString("ID_AREA"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
 			String nombre = rs.getString("NOMBRE");
-			sitios.add(new Sitio(id2, idArea, capacidad, ocupacion, nombre));
+			sitios.add(new Sitio(id2, idArea, capacidad, nombre));
 		}
 		return sitios;
 	}
@@ -131,7 +129,6 @@ public class DAOSitio
 		sql += sitio.getId() + ",'";
 		sql += sitio.getIdArea() + ",'";
 		sql += sitio.getCapacidad() + ",'";
-		sql += sitio.getOcupacionTotal() + ",'";
 		sql += sitio.getNombre() + ")";
 
 		System.out.println("SQL stmt:" + sql);
@@ -155,7 +152,6 @@ public class DAOSitio
 		String sql = "UPDATE SITIOS SET ";
 		sql += "id_area='" + sitio.getIdArea() + "',";
 		sql += "capacidad='" + sitio.getCapacidad() + "',";
-		sql += "ocupacion_actual='" + sitio.getOcupacionTotal() + "',";
 		sql += "nombre='" + sitio.getNombre() + "',";
 		sql += " WHERE id = " + sitio.getId();
 

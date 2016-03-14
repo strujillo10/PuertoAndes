@@ -79,8 +79,7 @@ public class DAOOperadorPortuario
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMBRE");
-			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
-			operadores.add(new OperadorPortuario(id, nombre, idUsuario));
+			operadores.add(new OperadorPortuario(id, nombre));
 		}
 		return operadores;
 	}
@@ -107,8 +106,7 @@ public class DAOOperadorPortuario
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMBRE");
-			int idUsuario = Integer.parseInt(rs.getString("ID_USUARIO"));
-			operadores.add(new OperadorPortuario(id2, nombre, idUsuario));
+			operadores.add(new OperadorPortuario(id2, nombre));
 		}
 		return operadores;
 	}
@@ -125,8 +123,7 @@ public class DAOOperadorPortuario
 	{
 		String sql = "INSERT INTO OPERADOR_PORTUARIO VALUES (";
 		sql += operador.getId() + ",'";
-		sql += operador.getNombre() + ",'";
-		sql += operador.getIdUsuario() + ")";
+		sql += operador.getNombre() + ",')";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -148,7 +145,6 @@ public class DAOOperadorPortuario
 	{
 		String sql = "UPDATE OPERADOR SET ";
 		sql += "nombre='" + operador.getNombre() + "',";
-		sql += "id_usuario='" + operador.getIdUsuario() + "',";
 		sql += " WHERE id = " + operador.getId();
 
 		System.out.println("SQL stmt:" + sql);

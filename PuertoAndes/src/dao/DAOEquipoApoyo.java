@@ -78,7 +78,7 @@ public class DAOEquipoApoyo
 
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
-			String nombre = rs.getString("NOMBRE");
+			String nombre = rs.getString("CAPACIDAD_EN_TONELADAS");
 			String tipo = rs.getString("TIPO");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_EN_PUERTO"));
 			equipos.add(new EquipoApoyo(id, nombre, tipo, cantidad));
@@ -107,7 +107,7 @@ public class DAOEquipoApoyo
 		
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
-			String nombre = rs.getString("NOMBRE");
+			String nombre = rs.getString("CAPACIDAD_EN_TONELADAS");
 			String tipo = rs.getString("TIPO");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_EN_PUERTO"));
 			equipos.add(new EquipoApoyo(id2, nombre, tipo, cantidad));

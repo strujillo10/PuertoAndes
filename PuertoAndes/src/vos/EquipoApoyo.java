@@ -7,8 +7,8 @@ public class EquipoApoyo
 	@JsonProperty(value="id")
 	private int id; 
 	
-	@JsonProperty(value="nombre")
-	private String nombre; 
+	@JsonProperty(value="capacidad")
+	private String capacidad; 
 	
 	@JsonProperty(value="tipo")
 	private String tipo; 
@@ -16,11 +16,11 @@ public class EquipoApoyo
 	@JsonProperty(value="cantidadPuerto")
 	private int cantidadPuerto; 
 	
-	public EquipoApoyo(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
+	public EquipoApoyo(@JsonProperty(value="id")int nId, @JsonProperty(value="capacidad")String nNombre,
 			@JsonProperty(value="tipo")String nTipo, @JsonProperty(value="cantidadPuerto")int nCantidad)
 	{
 		id = nId; 
-		nombre = nNombre; 
+		capacidad = nNombre; 
 		tipo = nTipo;
 		cantidadPuerto = nCantidad; 
 	}
@@ -34,11 +34,11 @@ public class EquipoApoyo
 	}
 
 	public String getNombre() {
-		return nombre;
+		return capacidad;
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.capacidad = nombre;
 	}
 
 	public String getTipo() {
