@@ -33,13 +33,11 @@ public class Bodega
 	{
 		id = nId; 
 		idArea = nIdArea; 
-		ocupacionTotal = nOcupacion; 
 		plataformaExterna = nPlataforma; 
 		cantidadCuartosFrios = nCantidad; 
 		separacionColumnas = nSeparacion; 
 		ancho = nAncho; 
 		largo = nLargo; 
-		capacidad = nCapacidad;
 	}
 
 	public int getId() {

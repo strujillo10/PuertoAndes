@@ -53,7 +53,6 @@ public class BuqueMultiproposito extends Buque
 		procedencia = nProcedencia; 
 		fechaLlegada = nFechaLlegada; 
 		fechaSalida = nFechaSalida; 
-		agenciaMaritima = nAgencia; 
 		horaLlegada = nHoraLlegada; 
 		horaSalida = nHoraSalida; 
 		destino = nDestino; 
@@ -106,14 +105,6 @@ public class BuqueMultiproposito extends Buque
 
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-	}
-
-	public String getAgenciaMaritima() {
-		return agenciaMaritima;
-	}
-
-	public void setAgenciaMaritima(String agenciaMaritima) {
-		this.agenciaMaritima = agenciaMaritima;
 	}
 
 	public Time getHoraLlegada() {

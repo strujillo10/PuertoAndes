@@ -12,8 +12,6 @@ public class AreaAlmacenamiento
 	public AreaAlmacenamiento(@JsonProperty(value="id")int nId)
 	{
 		id = nId; 
-		capacidad = nCapacidad;
-		ocupacionActual = nOcupacion;
 	}
 
 	public int getId() {

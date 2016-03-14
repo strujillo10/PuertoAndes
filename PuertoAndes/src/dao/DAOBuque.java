@@ -80,7 +80,7 @@ public class DAOBuque
 
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
-			String nombre = rs.getString("NOMRE");
+			String nombre = rs.getString("NOMBRE");
 			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String agencia = rs.getString("AGENCIA_MARITIMA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
@@ -110,7 +110,7 @@ public class DAOBuque
 		
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
-			String nombre = rs.getString("NOMRE");
+			String nombre = rs.getString("NOMBRE");
 			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String agencia = rs.getString("AGENCIA_MARITIMA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));

@@ -140,7 +140,7 @@ public class DAOBodega
 		sql += bodega.getCantidadCuartosFrios() + "',";
 		sql += bodega.getSeparacionColumnas() + "',";
 		sql += bodega.getAncho() + "',";
-		sql += bodega.getLargo() + "',";
+		sql += bodega.getLargo() + "')";
 
 
 		System.out.println("SQL stmt:" + sql);

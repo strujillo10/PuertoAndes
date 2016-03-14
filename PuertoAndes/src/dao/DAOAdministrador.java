@@ -125,7 +125,7 @@ public class DAOAdministrador
 	{
 		String sql = "INSERT INTO ADMINISTRADOR VALUES (";
 		sql += administrador.getId() + ",'";
-		sql += administrador.getNombre() + "',";
+		sql += administrador.getNombre() + "')";
 
 		System.out.println("SQL stmt:" + sql);
 
