@@ -85,17 +85,14 @@ public class DAOBuquePortacontenedores
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
 			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TEUS"));
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String agencia = rs.getString("AGENCIA_MARITIMA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
 			String destino = rs.getString("DESTINO");
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueP.add(new BuquePortaContenedores(id, nombre, capacidad, registro, procedencia, fechaLlegada, fechaSalida, agencia, horaLlegada, horaSalida, cantidad, destino, buqueId));
+			buqueP.add(new BuquePortaContenedores(id, nombre, capacidad, procedencia, fechaLlegada, fechaSalida, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueP;
 	}
@@ -123,17 +120,14 @@ public class DAOBuquePortacontenedores
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
 			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TEUS"));
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String agencia = rs.getString("AGENCIA_MARITIMA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
 			String destino = rs.getString("DESTINO");
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueP.add(new BuquePortaContenedores(id2, nombre, capacidad, registro, procedencia, fechaLlegada, fechaSalida, agencia, horaLlegada, horaSalida, cantidad, destino, buqueId));
+			buqueP.add(new BuquePortaContenedores(id2, nombre, capacidad, procedencia, fechaLlegada, fechaSalida, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueP;
 	}

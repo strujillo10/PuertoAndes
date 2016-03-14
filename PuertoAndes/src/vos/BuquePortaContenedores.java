@@ -48,7 +48,7 @@ public class BuquePortaContenedores extends Buque
 			 @JsonProperty(value="destino")String nDestino,
 			@JsonProperty(value="buqueId")int nBuqueId)
 	{
-		super(nId, nNombre);
+		super(nId, nNombre, nProcedencia, nDestino, nBuqueId);
 		id = nId; 
 		nombre = nNombre; 
 		capacidad = nCapacidad; 

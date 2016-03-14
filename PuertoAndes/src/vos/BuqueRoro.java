@@ -13,9 +13,6 @@ public class BuqueRoro
 	@JsonProperty(value="nombre")
 	private String nombre; 
 	
-	@JsonProperty(value="registroCapitania")
-	private String registroCapitania; 
-	
 	@JsonProperty(value="procedencia")
 	private String procedencia; 
 	
@@ -24,9 +21,6 @@ public class BuqueRoro
 	
 	@JsonProperty(value="fechaSalida")
 	private Date fechaSalida; 
-	
-	@JsonProperty(value="agenciaMaritima")
-	private String agenciaMaritima; 
 	
 	@JsonProperty(value="horaLlegada")
 	private Time horaLlegada;
@@ -41,20 +35,17 @@ public class BuqueRoro
 	private int buqueId;
 	
 	public BuqueRoro(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
-			@JsonProperty(value="registroCapitania")String nRegistro,
 			@JsonProperty(value="procedencia")String nProcedencia, @JsonProperty(value="fechaLlegada")Date nFechaLlegada,
-			@JsonProperty(value="fechaSalida")Date nFechaSalida, @JsonProperty(value="agenciaMaritima")String nAgencia,
+			@JsonProperty(value="fechaSalida")Date nFechaSalida,
 			@JsonProperty(value="horaLlegada")Time nHoraLlegada, @JsonProperty(value="horaSalida")Time nHoraSalida,
 			@JsonProperty(value="destino")String nDestino,
 			@JsonProperty(value="buqueId")int nBuqueId)
 	{
 		id = nId; 
 		nombre = nNombre; 
-		registroCapitania = nRegistro; 
 		procedencia = nProcedencia; 
 		fechaLlegada = nFechaLlegada; 
 		fechaSalida = nFechaSalida; 
-		agenciaMaritima = nAgencia; 
 		horaLlegada = nHoraLlegada; 
 		horaSalida = nHoraSalida; 
 		destino = nDestino; 
@@ -75,14 +66,6 @@ public class BuqueRoro
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getRegistroCapitania() {
-		return registroCapitania;
-	}
-
-	public void setRegistroCapitania(String registroCapitania) {
-		this.registroCapitania = registroCapitania;
 	}
 
 	public String getProcedencia() {
@@ -107,14 +90,6 @@ public class BuqueRoro
 
 	public void setFechaSalida(Date fechaSalida) {
 		this.fechaSalida = fechaSalida;
-	}
-
-	public String getAgenciaMaritima() {
-		return agenciaMaritima;
-	}
-
-	public void setAgenciaMaritima(String agenciaMaritima) {
-		this.agenciaMaritima = agenciaMaritima;
 	}
 
 	public Time getHoraLlegada() {

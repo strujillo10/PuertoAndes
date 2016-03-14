@@ -82,16 +82,14 @@ public class DAOBuqueRoro
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String agencia = rs.getString("AGENCIA_MARITIMA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
 			String destino = rs.getString("DESTINO");
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueR.add(new BuqueRoro(id, nombre, registro, procedencia, fechaLlegada, fechaSalida, agencia, horaLlegada, horaSalida, destino, buqueId));
+			buqueR.add(new BuqueRoro(id, nombre, procedencia, fechaLlegada, fechaSalida, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueR;
 	}
@@ -118,16 +116,14 @@ public class DAOBuqueRoro
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
-			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
-			String agencia = rs.getString("AGENCIA_MARITIMA");
 			Time horaLlegada = rs.getTime("HORA_LLEGADA");
 			Time horaSalida = rs.getTime("HORA_SALIDA");
 			String destino = rs.getString("DESTINO");
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueR.add(new BuqueRoro(id2, nombre, registro, procedencia, fechaLlegada, fechaSalida, agencia, horaLlegada, horaSalida, destino, buqueId));
+			buqueR.add(new BuqueRoro(id2, nombre, procedencia, fechaLlegada, fechaSalida, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueR;
 	}
@@ -145,11 +141,9 @@ public class DAOBuqueRoro
 		String sql = "INSERT INTO BUQUE_RORO VALUES (";
 		sql += buqueR.getId() + ",'";
 		sql += buqueR.getNombre() + ",'";
-		sql += buqueR.getRegistroCapitania() + ",'";
 		sql += buqueR.getProcedencia() + ",'";
 		sql += buqueR.getFechaLlegada() + ",'";
 		sql += buqueR.getFechaSalida() + ",'";
-		sql += buqueR.getAgenciaMaritima() + ",'";
 		sql += buqueR.getHoraLlegada() + ",'";
 		sql += buqueR.getHoraSalida() + ",'";
 		sql += buqueR.getDestino() + ",'";
@@ -175,11 +169,9 @@ public class DAOBuqueRoro
 	{
 		String sql = "UPDATE BUQUE_RORO SET ";
 		sql += "nomre='" + buqueR.getNombre() + "',";
-		sql += "registro_de_capitania='" + buqueR.getRegistroCapitania() + "',";
 		sql += "procedencia='" + buqueR.getProcedencia() + "',";
 		sql += "fecha_llegada='" + buqueR.getFechaLlegada() + "',";
 		sql += "fecha_salida='" + buqueR.getFechaSalida() + "',";
-		sql += "agencia_maritima='" + buqueR.getAgenciaMaritima() + "',";
 		sql += "hora_llegada='" + buqueR.getHoraLlegada() + "',";
 		sql += "hora_salida='" + buqueR.getHoraSalida() + "',";
 		sql += "destino='" + buqueR.getDestino() + "',";

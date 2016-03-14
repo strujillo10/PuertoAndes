@@ -46,7 +46,7 @@ public class BuqueMultiproposito extends Buque
 			 @JsonProperty(value="destino")String nDestino,
 			@JsonProperty(value="buqueId")int nBuqueId)
 	{
-		super(nId, nNombre, nAgencia);
+		super(nId, nNombre, "", nDestino, nBuqueId);
 		id = nId; 
 		nombre = nNombre; 
 		tipoCarga = nTipoCarga; 
