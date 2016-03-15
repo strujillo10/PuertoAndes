@@ -29,6 +29,7 @@ import dao.DAOFactura;
 import dao.DAOImportador;
 import dao.DAOOperadorPortuario;
 import dao.DAOPatio;
+import dao.DAORFC1;
 import dao.DAOSitio;
 import dao.DAOUsuario;
 import vos.Administrador;
@@ -65,10 +66,12 @@ import vos.ListaFactura;
 import vos.ListaImportador;
 import vos.ListaOperadorPortuario;
 import vos.ListaPatio;
+import vos.ListaRFC1;
 import vos.ListaSitio;
 import vos.ListaUsuario;
 import vos.OperadorPortuario;
 import vos.Patio;
+import vos.RFC1;
 import vos.Sitio;
 import vos.Usuario;
 
@@ -3800,5 +3803,37 @@ public class PuertoAndesMaster
 				throw exception;
 			}
 		}
+	}
+
+	public ListaRFC1 darRFC1() throws Exception 
+	{
+		ArrayList<RFC1> rfc1s;
+		DAORFC1 daoRFC1 = new DAORFC1();
+		try 
+		{
+			this.conn = darConexion();
+			daoRFC1.setConn(conn);
+			rfc1s = daoRFC1.darRFC1s();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoRFC1.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaRFC1(rfc1s);
 	}
 }

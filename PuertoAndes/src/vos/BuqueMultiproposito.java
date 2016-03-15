@@ -11,10 +11,7 @@ public class BuqueMultiproposito extends Buque
 	private int id; 
 	
 	@JsonProperty(value="nombre")
-	private String nombre; 
-	
-	@JsonProperty(value="tipoCarga")
-	private String tipoCarga; 
+	private String nombre;  
 	
 	@JsonProperty(value="procedencia")
 	private String procedencia; 
@@ -39,7 +36,6 @@ public class BuqueMultiproposito extends Buque
 	private int buqueId;
 	
 	public BuqueMultiproposito(@JsonProperty(value="id")int nId, @JsonProperty(value="nombre")String nNombre,
-			@JsonProperty(value="tipoCarga")String nTipoCarga, 
 			@JsonProperty(value="procedencia")String nProcedencia, @JsonProperty(value="fechaLlegada")Date nFechaLlegada,
 			@JsonProperty(value="fechaSalida")Date nFechaSalida, @JsonProperty(value="agenciaMaritima")String nAgencia,
 			@JsonProperty(value="horaLlegada")Time nHoraLlegada, @JsonProperty(value="horaSalida")Time nHoraSalida,
@@ -49,7 +45,6 @@ public class BuqueMultiproposito extends Buque
 		super(nId, nNombre, "", nDestino, nBuqueId);
 		id = nId; 
 		nombre = nNombre; 
-		tipoCarga = nTipoCarga; 
 		procedencia = nProcedencia; 
 		fechaLlegada = nFechaLlegada; 
 		fechaSalida = nFechaSalida; 
@@ -73,14 +68,6 @@ public class BuqueMultiproposito extends Buque
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public String getTipoCarga() {
-		return tipoCarga;
-	}
-
-	public void setTipoCarga(String tipoCarga) {
-		this.tipoCarga = tipoCarga;
 	}
 
 	public String getProcedencia() {

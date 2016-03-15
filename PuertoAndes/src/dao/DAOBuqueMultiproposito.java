@@ -82,7 +82,6 @@ public class DAOBuqueMultiproposito {
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
-			String tipo = rs.getString("TIPO_DE_CARGA");
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
@@ -90,7 +89,7 @@ public class DAOBuqueMultiproposito {
 			Time horaSalida = rs.getTime("HORA_SALIDA");
 			String destino = rs.getString("DESTINO");
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueM.add(new BuqueMultiproposito(id, nombre, tipo, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
+			buqueM.add(new BuqueMultiproposito(id, nombre, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueM;
 	}
@@ -117,8 +116,6 @@ public class DAOBuqueMultiproposito {
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("NOMRE");
-			String tipo = rs.getString("TIPO_DE_CARGA");
-
 			String procedencia = rs.getString("PROCEDENCIA");
 			Date fechaLlegada = rs.getDate("FECHA_LLEGADA");
 			Date fechaSalida = rs.getDate("FECHA_SALIDA");
@@ -127,7 +124,7 @@ public class DAOBuqueMultiproposito {
 			String destino = rs.getString("DESTINO");
 
 			int buqueId = Integer.parseInt(rs.getString("BUQUE_ID"));
-			buqueM.add(new BuqueMultiproposito(id2, nombre, tipo, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
+			buqueM.add(new BuqueMultiproposito(id2, nombre, procedencia, fechaLlegada, fechaSalida, procedencia, horaLlegada, horaSalida, destino, buqueId));
 		}
 		return buqueM;
 	}
@@ -145,7 +142,6 @@ public class DAOBuqueMultiproposito {
 		String sql = "INSERT INTO BUQUE_PORTACONTENEDORES VALUES (";
 		sql += buqueP.getId() + ",'";
 		sql += buqueP.getNombre() + ",'";
-		sql += buqueP.getTipoCarga() + ",'";
 		sql += buqueP.getProcedencia() + ",'";
 		sql += buqueP.getFechaLlegada() + ",'";
 		sql += buqueP.getFechaSalida() + ",'";
@@ -174,7 +170,6 @@ public class DAOBuqueMultiproposito {
 	{
 		String sql = "UPDATE BUQUE_PORTACONTENEDORES SET ";
 		sql += "nomre='" + buqueP.getNombre() + "',";
-		sql += "tipo_de_carga='" + buqueP.getTipoCarga() + "',";
 		sql += "procedencia='" + buqueP.getProcedencia() + "',";
 		sql += "fecha_llegada='" + buqueP.getFechaLlegada() + "',";
 		sql += "fecha_salida='" + buqueP.getFechaSalida() + "',";
