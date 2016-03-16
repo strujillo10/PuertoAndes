@@ -121,7 +121,7 @@ public class DAOAreaAlmacenamiento
 	public void addAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
 		String sql = "INSERT INTO AREA_DE_ALMACENAMIENTO VALUES (";
-		sql += area.getId() + "')";
+		sql += area.getId() + ")";
 	
 
 		System.out.println("SQL stmt:" + sql);

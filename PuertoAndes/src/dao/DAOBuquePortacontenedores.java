@@ -144,17 +144,17 @@ public class DAOBuquePortacontenedores
 	{
 		String sql = "INSERT INTO BUQUE_PORTACONTENEDORES VALUES (";
 		sql += buqueP.getId() + ",'";
-		sql += buqueP.getNombre() + ",'";
+		sql += buqueP.getNombre() + "',";
 		sql += buqueP.getCapacidad() + ",'";
-		sql += buqueP.getRegistroCapitania() + ",'";
-		sql += buqueP.getProcedencia() + ",'";
-		sql += buqueP.getFechaLlegada() + ",'";
-		sql += buqueP.getFechaSalida() + ",'";
-		sql += buqueP.getAgenciaMaritima() + ",'";
-		sql += buqueP.getHoraLlegada() + ",'";
-		sql += buqueP.getHoraSalida() + ",'";
+		sql += buqueP.getRegistroCapitania() + "','";
+		sql += buqueP.getProcedencia() + "',";
+		sql += "TO_DATE('" + buqueP.getFechaLlegada() + "','YYYY-MM-DD HH24:MI:SS'),";
+		sql += "TO_DATE('" + buqueP.getFechaSalida() + "','YYYY-MM-DD HH24:MI:SS'),'";
+		sql += buqueP.getAgenciaMaritima() + "',";
+		sql += "TO_TIMESTAMP('" + buqueP.getHoraLlegada() + "','YYYY-MM-DD HH24:MI:FF'),";
+		sql += "TO_TIMESTAMP('" + buqueP.getHoraSalida() + "','YYYY-MM-DD HH24:MI:FF'),";
 		sql += buqueP.getCantidadContenedores() + ",'";
-		sql += buqueP.getDestino() + ",'";
+		sql += buqueP.getDestino() + "',";
 		sql += buqueP.getBuqueId() + ")";
 
 		System.out.println("SQL stmt:" + sql);

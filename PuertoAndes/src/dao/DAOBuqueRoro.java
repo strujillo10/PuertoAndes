@@ -140,13 +140,13 @@ public class DAOBuqueRoro
 	{
 		String sql = "INSERT INTO BUQUE_RORO VALUES (";
 		sql += buqueR.getId() + ",'";
-		sql += buqueR.getNombre() + ",'";
-		sql += buqueR.getProcedencia() + ",'";
-		sql += buqueR.getFechaLlegada() + ",'";
-		sql += buqueR.getFechaSalida() + ",'";
-		sql += buqueR.getHoraLlegada() + ",'";
-		sql += buqueR.getHoraSalida() + ",'";
-		sql += buqueR.getDestino() + ",'";
+		sql += buqueR.getNombre() + "','";
+		sql += buqueR.getProcedencia() + "',";
+		sql += "TO_DATE('" + buqueR.getFechaLlegada() + "','YYYY-MM-DD HH24:MI:SS'),";
+		sql += "TO_DATE('" + buqueR.getFechaSalida() + "','YYYY-MM-DD HH24:MI:SS'),";
+		sql += "TO_TIMESTAMP('" + buqueR.getHoraLlegada() + "','YYYY-MM-DD HH24:MI:FF'),";
+		sql += "TO_TIMESTAMP('" + buqueR.getHoraSalida() + "','YYYY-MM-DD HH24:MI:FF'),'";
+		sql += buqueR.getDestino() + "',";
 		sql += buqueR.getBuqueId() + ")";
 
 		System.out.println("SQL stmt:" + sql);

@@ -123,7 +123,7 @@ public class DAOUsuario
 	{
 		String sql = "INSERT INTO USUARIO VALUES (";
 		sql += usuario.getId() + ",'";
-		sql += usuario.getNombre() + ")";
+		sql += usuario.getNombre() + "')";
 
 		System.out.println("SQL stmt:" + sql);
 

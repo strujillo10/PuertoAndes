@@ -126,7 +126,7 @@ public class DAOCarga
 	{
 		String sql = "INSERT INTO CARGA VALUES (";
 		sql += carga.getId() + ",'";
-		sql += carga.getTipo() + ")";
+		sql += carga.getTipo() + "')";
 
 		System.out.println("SQL stmt:" + sql);
 

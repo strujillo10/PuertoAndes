@@ -129,9 +129,9 @@ public class DAOImportador
 	{
 		String sql = "INSERT INTO IMPORTADOR VALUES (";
 		sql += importador.getId() + ",'";
-		sql += importador.getNombre() + ",'";
-		sql += importador.getRegistroAduana() + ",'";
-		sql += importador.getTipo() + ",'";
+		sql += importador.getNombre() + "','";
+		sql += importador.getRegistroAduana() + "','";
+		sql += importador.getTipo() + "',";
 		sql += importador.getIdUsuario() + ")";
 
 		System.out.println("SQL stmt:" + sql);

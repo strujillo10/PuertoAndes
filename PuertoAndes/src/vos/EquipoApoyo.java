@@ -13,16 +13,16 @@ public class EquipoApoyo
 	@JsonProperty(value="tipo")
 	private String tipo; 
 	
-	@JsonProperty(value="cantidadPuerto")
-	private int cantidadPuerto; 
+	@JsonProperty(value="idOperario")
+	private int idOperario; 
 	
 	public EquipoApoyo(@JsonProperty(value="id")int nId, @JsonProperty(value="capacidad")String nNombre,
-			@JsonProperty(value="tipo")String nTipo, @JsonProperty(value="cantidadPuerto")int nCantidad)
+			@JsonProperty(value="tipo")String nTipo, @JsonProperty(value="idOperario")int nCantidad)
 	{
 		id = nId; 
 		capacidad = nNombre; 
 		tipo = nTipo;
-		cantidadPuerto = nCantidad; 
+		idOperario = nCantidad; 
 	}
 
 	public int getId() {
@@ -49,12 +49,12 @@ public class EquipoApoyo
 		this.tipo = tipo;
 	}
 
-	public int getCantidadPuerto() {
-		return cantidadPuerto;
+	public int getIdOperario() {
+		return idOperario;
 	}
 
-	public void setCantidadPuerto(int cantidadPuerto) {
-		this.cantidadPuerto = cantidadPuerto;
+	public void setIdOperario(int cantidadPuerto) {
+		this.idOperario = cantidadPuerto;
 	}
 	
 }

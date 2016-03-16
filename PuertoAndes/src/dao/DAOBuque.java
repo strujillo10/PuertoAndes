@@ -131,9 +131,9 @@ public class DAOBuque
 	{
 		String sql = "INSERT INTO BUQUE VALUES (";
 		sql += buque.getId() + ",'";
-		sql += buque.getNombre() + ",'";
-		sql += buque.getRegistroCapitania() + ",'";
-		sql += buque.getAgenciaMaritima() + ",'";
+		sql += buque.getNombre() + "','";
+		sql += buque.getRegistroCapitania() + "','";
+		sql += buque.getAgenciaMaritima() + "',";
 		sql += buque.getCantidadContenedores() + ")";
 
 		System.out.println("SQL stmt:" + sql);

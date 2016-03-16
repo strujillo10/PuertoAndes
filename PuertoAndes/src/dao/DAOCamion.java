@@ -139,14 +139,14 @@ public class DAOCamion
 	{
 		String sql = "INSERT INTO CAMION VALUES (";
 		sql += camion.getId() + ",'";
-		sql += camion.getProcedencia() + ",'";
-		sql += camion.getFechaLlegada() + ",'";
-		sql += camion.getFechaSalida() + ",'";
-		sql += camion.getEmpresaOperaria() + ",'";
-		sql += camion.getHoraLlegada() + ",'";
-		sql += camion.getHoraSalida() + ",'";
+		sql += camion.getProcedencia() + ",";
+		sql += "TO_DATE('" + camion.getFechaLlegada() + "','YYYY-MM-DD HH24:MI:SS'),";
+		sql += "TO_DATE('" + camion.getFechaSalida() + "','YYYY-MM-DD HH24:MI:SS'),'";
+		sql += camion.getEmpresaOperaria() + "',";
+		sql += "TO_TIMESTAMP('" + camion.getHoraLlegada() + "','YYYY-MM-DD HH24:MI:FF'),";
+		sql += "TO_TIMESTAMP('" + camion.getHoraSalida() + "','YYYY-MM-DD HH24:MI:FF'),";
 		sql += camion.getCantidadContenedores() + ",'";
-		sql += camion.getDestino() + ")";
+		sql += camion.getDestino() + "')";
 
 		System.out.println("SQL stmt:" + sql);
 

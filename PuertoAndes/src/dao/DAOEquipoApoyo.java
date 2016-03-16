@@ -80,7 +80,7 @@ public class DAOEquipoApoyo
 			int id = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("CAPACIDAD_EN_TONELADAS");
 			String tipo = rs.getString("TIPO");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_EN_PUERTO"));
+			int cantidad = Integer.parseInt(rs.getString("ID_OPERARIO"));
 			equipos.add(new EquipoApoyo(id, nombre, tipo, cantidad));
 		}
 		return equipos;
@@ -109,7 +109,7 @@ public class DAOEquipoApoyo
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String nombre = rs.getString("CAPACIDAD_EN_TONELADAS");
 			String tipo = rs.getString("TIPO");
-			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_EN_PUERTO"));
+			int cantidad = Integer.parseInt(rs.getString("ID_OPERARIO"));
 			equipos.add(new EquipoApoyo(id2, nombre, tipo, cantidad));
 		}
 		return equipos;
@@ -129,7 +129,7 @@ public class DAOEquipoApoyo
 		sql += equipo.getId() + ",'";
 		sql += equipo.getNombre() + ",'";
 		sql += equipo.getTipo() + ",'";
-		sql += equipo.getCantidadPuerto() + ")";
+		sql += equipo.getIdOperario() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -152,7 +152,7 @@ public class DAOEquipoApoyo
 		String sql = "UPDATE EQUIPO_DE_APOYO SET ";
 		sql += "nombre='" + equipo.getNombre() + "',";
 		sql += "tipo='" + equipo.getTipo() + "',";
-		sql += "cantidad_en_puerto='" + equipo.getCantidadPuerto() + "',";
+		sql += "id_operario='" + equipo.getIdOperario() + "',";
 		sql += " WHERE id = " + equipo.getId();
 
 		System.out.println("SQL stmt:" + sql);
