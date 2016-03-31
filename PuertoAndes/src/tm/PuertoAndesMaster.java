@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -3870,5 +3871,105 @@ public class PuertoAndesMaster
 			}
 		}
 		return new ListaRFC2(rfc2s);
+	}
+	
+	public void cargarBuque() throws Exception
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void descargarBuque() throws Exception
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void deshabilitarBuque() throws Exception
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void cerrarArea() throws Exception
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
