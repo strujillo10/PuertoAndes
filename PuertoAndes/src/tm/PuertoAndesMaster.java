@@ -3873,7 +3873,7 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
-	public void cargarBuque() throws Exception
+	public void cargarBuque(Buque buque, ArrayList<Carga> cargas, ArrayList<AreaAlmacenamiento> areas) throws Exception
 	{
 		try 
 		{
@@ -3881,6 +3881,47 @@ public class PuertoAndesMaster
 			Savepoint save = conn.setSavepoint();
 			try
 			{
+				DAOBuque daoBuque = new DAOBuque(); 
+				DAOCarga daoCarga = new DAOCarga(); 
+				DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento();
+				
+				int pesoCargas = 0;
+				for(int i=0; i<cargas.size(); i++)
+				{
+					pesoCargas += cargas.get(i).getPeso();
+				}
+				
+				int capacidad = buque.getCapacidad() - buque.getOcupacionActual();
+				if(pesoCargas > capacidad)
+				{
+					throw new Exception("El buque no tiene la capacidad. Las cargas se quedan en el almacenamiento.");
+				}
+				else
+				{
+					//RF10.1
+					buque.setEstado("Proceso de carga");
+					//RF10.2
+					for(int i=0; i<cargas.size(); i++)
+					{
+						Carga actual = cargas.get(i); 
+					}
+				}
+				
+				//RF10.2	RF6
+				//A partir de ese momento el operador toma la mercancía de las áreas y la almacena en el buque. 
+				//Este requerimiento puede verse como desocupar una a una las áreas de almacenamiento e 
+				//ir cargando el buque de forma incremental. Una vez se termina de transportar la 
+				//totalidad del contenido desde un área de almacenamiento, se actualiza la carga del buque, 
+				//esto significa, se registra por tipo de carga, el número de elementos y el peso de los mismos (RF6). 
+				//Recuerde que los elementos pueden ser contenedores, vehículos, entre otros. 
+				//En caso en el que el buque ya tenga el tipo de carga solicitada, 
+				//se actualiza el número de elementos y su peso.
+
+				//RF10.3	Liberar área RF8
+				//Al terminar de desocupar una de las áreas, el área de almacenamiento se libera.
+				
+				//RF10.4	El buque queda cargado
+				buque.setEstado("Cargado");
 				
 			}
 			catch(Exception rollBack)

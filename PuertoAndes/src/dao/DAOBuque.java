@@ -84,7 +84,10 @@ public class DAOBuque
 			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String agencia = rs.getString("AGENCIA_MARITIMA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
-			buque.add(new Buque(id, nombre, registro, agencia, cantidad));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			String estado = rs.getString("ESTADO");
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			buque.add(new Buque(id, nombre, registro, agencia, cantidad,capacidad,estado,ocupacion));
 		}
 		return buque;
 	}
@@ -114,7 +117,10 @@ public class DAOBuque
 			String registro = rs.getString("REGISTRO_DE_CAPITANIA");
 			String agencia = rs.getString("AGENCIA_MARITIMA");
 			int cantidad = Integer.parseInt(rs.getString("CANTIDAD_DE_CONTENEDORES"));
-			buque.add(new Buque(id2, nombre, registro, agencia, cantidad));
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			String estado = rs.getString("ESTADO");
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			buque.add(new Buque(id2, nombre, registro, agencia, cantidad,capacidad,estado,ocupacion));
 		}
 		return buque;
 	}
@@ -134,7 +140,10 @@ public class DAOBuque
 		sql += buque.getNombre() + "','";
 		sql += buque.getRegistroCapitania() + "','";
 		sql += buque.getAgenciaMaritima() + "',";
-		sql += buque.getCantidadContenedores() + ")";
+		sql += buque.getCantidadContenedores() + ",";
+		sql += buque.getCapacidad() + ",'";
+		sql += buque.getEstado() + "',";
+		sql += buque.getOcupacionActual() + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -159,6 +168,9 @@ public class DAOBuque
 		sql += "registro_de_capitania='" + buque.getRegistroCapitania() + "',";
 		sql += "agencia_maritima='" + buque.getAgenciaMaritima() + "',";
 		sql += "cantidad_de_contenedores='" + buque.getCantidadContenedores() + "',";
+		sql += "capacidad_en_toneladas='" + buque.getCapacidad() + "',";
+		sql += "estado='" + buque.getEstado() + "',";
+		sql += "ocupacion_actual='" + buque.getOcupacionActual()+ "',";
 		sql += " WHERE id = " + buque.getId();
 
 		System.out.println("SQL stmt:" + sql);
