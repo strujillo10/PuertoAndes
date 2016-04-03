@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
 
+import vos.AreaAlmacenamiento;
+import vos.Buque;
 import vos.Camion;
 import vos.Carga;
 
@@ -133,7 +135,19 @@ public class DAOCarga
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
+	}
+	
+	public void addCargaBuque(Carga carga, Buque buque) throws SQLException, Exception 
+	{
+		String sql = "INSERT INTO CARGA_EN_BUQUE VALUES (";
+		sql += carga.getId() + ",";
+		sql += buque.getId() + ")";
 
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
 	}
 	
 	/**
@@ -169,6 +183,19 @@ public class DAOCarga
 	{
 
 		String sql = "DELETE FROM CARGA";
+		sql += " WHERE id = " + carga.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void deleteCargaArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+
+		String sql = "DELETE FROM CARGA_EN_AREA";
 		sql += " WHERE id = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);
