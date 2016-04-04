@@ -3928,7 +3928,7 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public void descargarBuque() throws Exception
+	public void descargarBuque(Buque buque) throws Exception
 	{
 		try 
 		{
@@ -3936,7 +3936,21 @@ public class PuertoAndesMaster
 			Savepoint save = conn.setSavepoint();
 			try
 			{
+				//RF11.1 - Para iniciar el proceso, se solicita reservar un área de almacenamiento a partir de una fecha 
+				//para guardar un número de elementos de un tipo de carga, que tienen un peso dado. 
+				//Esta reserva se realiza si el área de almacenamiento es apropiada para el tipo de carga 
+				//y tiene la capacidad requerida.
 				
+				//RF11.2 - Una vez el área es reservada se debe registrar que el buque está en proceso de descargue.
+				
+				//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
+				//se registra la carga que quedó en el área de almacenamiento.
+				
+				//RF11.4 - Al final del proceso de descargue, el buque queda con la carga que no 
+				//tiene como destino a PuertoAndes, y disponible para ser cargado de mercancía actualmente en el puerto.
+
+				//DEBE utilizar como subtransacción la implementación del requerimiento RF7 
+				//y un requerimiento de registrar la descarga de una carga de un buque, de la iteración anterior.
 			}
 			catch(Exception rollBack)
 			{
@@ -3953,7 +3967,7 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public void deshabilitarBuque() throws Exception
+	public void deshabilitarBuque(Buque buque, String motivo) throws Exception
 	{
 		try 
 		{
@@ -3961,7 +3975,21 @@ public class PuertoAndesMaster
 			Savepoint save = conn.setSavepoint();
 			try
 			{
-				
+				DAOBuque daoBuque = new DAOBuque(); 
+				if(motivo.equals("Legal"))
+				{
+					buque.setEstado("Deshabilitado");
+					daoBuque.updateBuque(buque);
+				} 
+				else
+				{
+					buque.setEstado("Mantenimiento");
+					daoBuque.updateBuque(buque);
+					//Descargar Buque.. RF11
+					descargarBuque(buque);
+					//Se pudieron mover las cargas? Cuales no?
+				}
+				//DEBE implementar un esquema de Savepoints para no repetir todo el trabajo en caso de falla
 			}
 			catch(Exception rollBack)
 			{
@@ -3978,8 +4006,9 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public ArrayList<Carga> cerrarArea(AreaAlmacenamiento area) throws Exception
+	public String cerrarArea(AreaAlmacenamiento area) throws Exception
 	{
+		String respuesta = "";
 		ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
 		try 
 		{
@@ -3996,11 +4025,26 @@ public class PuertoAndesMaster
 				{
 					Carga actual = cargas.get(i);
 					ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
-					AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
 					
-					daoCarga.moverCargaAArea(actual, areaNueva);
+					if(!areasDisponibles.isEmpty())
+					{
+						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
+						daoCarga.moverCargaAArea(actual, areaNueva);
+					}
+					else
+					{
+						cargasNoUbicadas.add(actual);
+					}
 				}
-				
+				if(cargasNoUbicadas.isEmpty())
+				{
+					respuesta = "Las cargas se movieron exitosamente";
+				}
+				else
+				{
+					respuesta = "Las siguientes cargas no se pudieron mover: " + cargasNoUbicadas;
+					CORREGIR
+				}
 			}
 			catch(Exception rollBack)
 			{
@@ -4015,6 +4059,6 @@ public class PuertoAndesMaster
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return cargasNoUbicadas;
+		return respuesta;
 	}
 }
