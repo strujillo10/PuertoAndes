@@ -90,6 +90,26 @@ public class DAOCarga
 		return cargas;
 	}
 	
+	public ArrayList<Carga> darCargasDeBuque(Buque buque) throws SQLException, Exception 
+	{
+		ArrayList<Carga> cargas = new ArrayList<Carga>();
+
+		String sql = "SELECT * FROM CARGA_EN_BUQUE INNER JOIN CARGA ON "
+				+ "CARGA_EN_BUQUE.ID_CARGA = CARGA.ID WHERE ID_BUQUE = " + buque.getId();
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int peso = Integer.parseInt(rs.getString("PESO"));
+			cargas.add(new Carga(id, tipo, peso));
+		}
+		return cargas;
+	}
+	
 	public AreaAlmacenamiento darAreadeCarga(Carga carga) throws SQLException, Exception 
 	{
 		AreaAlmacenamiento area = null;

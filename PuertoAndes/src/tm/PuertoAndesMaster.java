@@ -3898,7 +3898,7 @@ public class PuertoAndesMaster
 				else
 				{
 					//RF10.1
-					buque.setEstado("Proceso de carga");
+					buque.setEstado("PROCESO");
 					daoBuque.updateBuque(buque);
 					//RF10.2
 					for(int i=0; i<cargas.size(); i++)
@@ -3910,7 +3910,7 @@ public class PuertoAndesMaster
 					}
 				}				
 				//RF10.4	El buque queda cargado
-				buque.setEstado("Cargado");
+				buque.setEstado("CARGADO");
 				daoBuque.updateBuque(buque);
 			}
 			catch(Exception rollBack)
@@ -3936,6 +3936,9 @@ public class PuertoAndesMaster
 			Savepoint save = conn.setSavepoint();
 			try
 			{
+				DAOCarga daoCarga = new DAOCarga(); 
+				ArrayList<Carga> cargasEnBuque = daoCarga.darCargasDeBuque(buque);
+				
 				//RF11.1 - Para iniciar el proceso, se solicita reservar un área de almacenamiento a partir de una fecha 
 				//para guardar un número de elementos de un tipo de carga, que tienen un peso dado. 
 				//Esta reserva se realiza si el área de almacenamiento es apropiada para el tipo de carga 
@@ -3967,8 +3970,9 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public void deshabilitarBuque(Buque buque, String motivo) throws Exception
+	public String deshabilitarBuque(Buque buque, String motivo) throws Exception
 	{
+		String respuesta = "";
 		try 
 		{
 			conn.setAutoCommit(false);
@@ -4004,6 +4008,7 @@ public class PuertoAndesMaster
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return respuesta;
 	}
 	
 	public String cerrarArea(AreaAlmacenamiento area) throws Exception
