@@ -3978,14 +3978,28 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public void cerrarArea() throws Exception
+	public ArrayList<Carga> cerrarArea(AreaAlmacenamiento area) throws Exception
 	{
+		ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
 		try 
 		{
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
 			{
+				DAOCarga daoCarga = new DAOCarga();
+				DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento();
+				
+				ArrayList<Carga> cargas = daoArea.darCargasEnArea(area);
+				
+				for(int i=0; i<cargas.size(); i++)
+				{
+					Carga actual = cargas.get(i);
+					ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
+					AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
+					
+					daoCarga.moverCargaAArea(actual, areaNueva);
+				}
 				
 			}
 			catch(Exception rollBack)
@@ -4001,5 +4015,6 @@ public class PuertoAndesMaster
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return cargasNoUbicadas;
 	}
 }

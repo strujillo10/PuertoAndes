@@ -170,6 +170,19 @@ public class DAOCarga
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
+	
+	public void moverCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		String sql = "UPDATE CARGA_EN_AREA SET ";
+		sql += "id_area='" + area.getId() + "',";
+		sql += " WHERE id_carga = " + carga.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
 
 	/**
 	 * Método que elimina el almacen que entra como parámetro en la base de datos.

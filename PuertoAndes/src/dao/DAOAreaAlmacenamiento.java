@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import vos.AreaAlmacenamiento;
+import vos.Carga;
 
 public class DAOAreaAlmacenamiento 
 {
@@ -82,6 +83,48 @@ public class DAOAreaAlmacenamiento
 			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 
 			areas.add(new AreaAlmacenamiento(id,capacidad,ocupacion));
+		}
+		return areas;
+	}
+	
+	public ArrayList<Carga> darCargasEnArea(AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		ArrayList<Carga> cargas = new ArrayList<Carga>();
+
+		String sql = "SELECT * FROM (CARGA_EN_AREA INNER JOIN CARGA ON CARGA_EN_AREA.ID_CARGA = CARGA.ID)"
+				+ " WHERE ID_AREA = " + area.getId();
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+
+			cargas.add(new Carga(id, tipo, nPeso, nArea, nBuque));
+		}
+		return cargas;
+	}
+	
+	public ArrayList<AreaAlmacenamiento> darAreaConCapacidad(int capacidad) throws SQLException, Exception 
+	{
+		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
+
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE CAPACIDAD <" + capacidad;
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int nCapacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int nOcupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+
+			areas.add(new AreaAlmacenamiento(id, tipo, nCapacidad, nOcupacion));
 		}
 		return areas;
 	}
