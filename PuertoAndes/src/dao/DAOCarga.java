@@ -84,9 +84,31 @@ public class DAOCarga
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
-			cargas.add(new Carga(id, tipo));
+			int peso = Integer.parseInt(rs.getString("PESO"));
+			cargas.add(new Carga(id, tipo, peso));
 		}
 		return cargas;
+	}
+	
+	public AreaAlmacenamiento darAreadeCarga(Carga carga) throws SQLException, Exception 
+	{
+		AreaAlmacenamiento area = null;
+		String sql = "SELECT * FROM CARGA_EN_AREA INNER JOIN AREA_DE_ALMACENAMIENTO "
+				+ "ON CARGA_EN_AREA.ID_AREA = AREA_DE_ALMACENAMIENTO.ID WHERE "
+				+ "CARGA_EN_AREA.ID_CARGA = " + carga.getId();
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			area = new AreaAlmacenamiento(id, capacidad, tipo, ocupacion);
+		}
+		return area;
 	}
 
 	/**
@@ -111,7 +133,8 @@ public class DAOCarga
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
-			cargas.add(new Carga(id2, tipo));
+			int peso = Integer.parseInt(rs.getString("PESO"));
+			cargas.add(new Carga(id2, tipo, peso));
 		}
 		return cargas;
 	}

@@ -13,20 +13,20 @@ public class Carga
 	@JsonProperty(value="peso")
 	private int peso;
 	
-	@JsonProperty(value="area")
-	private AreaAlmacenamiento area;
-	
-	@JsonProperty(value="buque")
-	private Buque buque;
+//	@JsonProperty(value="area")
+//	private AreaAlmacenamiento area;
+//	
+//	@JsonProperty(value="buque")
+//	private Buque buque;
 	
 	public Carga(@JsonProperty(value="id")int nId, @JsonProperty(value="tipo")String nTipo,
-			@JsonProperty(value="peso")int nPeso, @JsonProperty(value="area")AreaAlmacenamiento nArea,
-			@JsonProperty(value="buque")Buque nBuque)
+			@JsonProperty(value="peso")int nPeso)
 	{
 		id = nId; 
-		tipo = nTipo; 
-		area = nArea;
-		buque = nBuque;
+		tipo = nTipo;
+		peso = nPeso;
+//		area = nArea;
+//		buque = nBuque;
 	}
 
 	public int getId() {
@@ -53,20 +53,20 @@ public class Carga
 		this.peso = peso;
 	}
 
-	public AreaAlmacenamiento getArea() {
-		return area;
-	}
-
-	public void setArea(AreaAlmacenamiento area) {
-		this.area = area;
-	}
-
-	public Buque getBuque() {
-		return buque;
-	}
-
-	public void setBuque(Buque buque) {
-		this.buque = buque;
-	}
+//	public AreaAlmacenamiento getArea() {
+//		return area;
+//	}
+//
+//	public void setArea(AreaAlmacenamiento area) {
+//		this.area = area;
+//	}
+//
+//	public Buque getBuque() {
+//		return buque;
+//	}
+//
+//	public void setBuque(Buque buque) {
+//		this.buque = buque;
+//	}
 	
 }

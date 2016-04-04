@@ -79,10 +79,11 @@ public class DAOAreaAlmacenamiento
 
 		while (rs.next()) {
 			int id = Integer.parseInt(rs.getString("ID"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			String tipo = rs.getString("TIPO");
+			int nCapacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int nOcupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 
-			areas.add(new AreaAlmacenamiento(id,capacidad,ocupacion));
+			areas.add(new AreaAlmacenamiento(id, nCapacidad, tipo, nOcupacion));
 		}
 		return areas;
 	}
@@ -102,8 +103,8 @@ public class DAOAreaAlmacenamiento
 			int id = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
 			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
-
-			cargas.add(new Carga(id, tipo, nPeso, nArea, nBuque));
+			int peso = Integer.parseInt(rs.getString("PESO"));
+			cargas.add(new Carga(id, tipo, peso));
 		}
 		return cargas;
 	}
@@ -124,7 +125,7 @@ public class DAOAreaAlmacenamiento
 			int nCapacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
 			int nOcupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 
-			areas.add(new AreaAlmacenamiento(id, tipo, nCapacidad, nOcupacion));
+			areas.add(new AreaAlmacenamiento(id, nCapacidad, tipo, nOcupacion));
 		}
 		return areas;
 	}
@@ -150,9 +151,11 @@ public class DAOAreaAlmacenamiento
 		
 		while (rs.next()) {
 			int id2 = Integer.parseInt(rs.getString("ID"));
-			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
-			areas.add(new AreaAlmacenamiento(id2,capacidad,ocupacion));
+			String tipo = rs.getString("TIPO");
+			int nCapacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int nOcupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+
+			areas.add(new AreaAlmacenamiento(id2, nCapacidad, tipo, nOcupacion));
 		}
 		return areas;
 	}

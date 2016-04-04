@@ -3905,7 +3905,7 @@ public class PuertoAndesMaster
 					{
 						Carga actual = cargas.get(i);
 						daoCarga.addCargaBuque(actual, buque);
-						AreaAlmacenamiento areaActual = actual.getArea();
+						AreaAlmacenamiento areaActual = daoCarga.darAreadeCarga(actual);
 						daoCarga.deleteCargaArea(actual, areaActual);
 					}
 				}				
@@ -4042,8 +4042,13 @@ public class PuertoAndesMaster
 				}
 				else
 				{
-					respuesta = "Las siguientes cargas no se pudieron mover: " + cargasNoUbicadas;
-					CORREGIR
+					respuesta = "Las siguientes cargas no se pudieron mover: ";
+					for(int i=0; i<cargasNoUbicadas.size(); i++)
+					{
+						 respuesta += "\n" + "ID: " + cargasNoUbicadas.get(i).getId();
+						 respuesta += "\n" + "Peso: " + cargasNoUbicadas.get(i).getPeso();
+						 respuesta += "\n" + "Tipo: " + cargasNoUbicadas.get(i).getTipo();
+					}
 				}
 			}
 			catch(Exception rollBack)
