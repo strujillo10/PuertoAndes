@@ -16,7 +16,7 @@ import tm.PuertoAndesMaster;
 import vos.ListaRFC1;
 import vos.RFC1;
 
-@Path("rfc1")
+@Path("rf10")
 public class RF10CargarBuqueServices 
 {
 	// Servicios REST tipo GET:

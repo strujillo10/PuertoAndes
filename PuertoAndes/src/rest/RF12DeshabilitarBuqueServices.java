@@ -16,7 +16,7 @@ import tm.PuertoAndesMaster;
 import vos.ListaRFC1;
 import vos.RFC1;
 
-@Path("rfc1")
+@Path("rf12")
 public class RF12DeshabilitarBuqueServices 
 {
 	// Servicios REST tipo GET:

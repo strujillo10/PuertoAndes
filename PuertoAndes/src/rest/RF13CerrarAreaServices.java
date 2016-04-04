@@ -16,7 +16,7 @@ import tm.PuertoAndesMaster;
 import vos.ListaRFC1;
 import vos.RFC1;
 
-@Path("rfc1")
+@Path("rf13")
 public class RF13CerrarAreaServices 
 {
 	// Servicios REST tipo GET:
