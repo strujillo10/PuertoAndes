@@ -3970,7 +3970,7 @@ public class PuertoAndesMaster
 		}
 	}
 	
-	public String deshabilitarBuque(Buque buque, String motivo) throws Exception
+	public String deshabilitarBuqueLegal(Buque buque) throws Exception
 	{
 		String respuesta = "";
 		try 
@@ -3980,19 +3980,44 @@ public class PuertoAndesMaster
 			try
 			{
 				DAOBuque daoBuque = new DAOBuque(); 
-				if(motivo.equals("Legal"))
-				{
-					buque.setEstado("Deshabilitado");
-					daoBuque.updateBuque(buque);
-				} 
-				else
-				{
-					buque.setEstado("Mantenimiento");
-					daoBuque.updateBuque(buque);
-					//Descargar Buque.. RF11
-					descargarBuque(buque);
-					//Se pudieron mover las cargas? Cuales no?
-				}
+				
+				buque.setEstado("Deshabilitado");
+				daoBuque.updateBuque(buque);
+				//DEBE implementar un esquema de Savepoints para no repetir todo el trabajo en caso de falla
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return respuesta;
+	}
+	
+	public String deshabilitarBuque(Buque buque) throws Exception
+	{
+		String respuesta = "";
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				DAOBuque daoBuque = new DAOBuque();
+				
+				buque.setEstado("Mantenimiento");
+				daoBuque.updateBuque(buque);
+				//Descargar Buque.. RF11
+				descargarBuque(buque);
+				//Se pudieron mover las cargas? Cuales no?
+				
 				//DEBE implementar un esquema de Savepoints para no repetir todo el trabajo en caso de falla
 			}
 			catch(Exception rollBack)
