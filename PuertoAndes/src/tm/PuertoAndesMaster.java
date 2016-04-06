@@ -3987,6 +3987,8 @@ public class PuertoAndesMaster
 				//para guardar un número de elementos de un tipo de carga, que tienen un peso dado. 
 				//Esta reserva se realiza si el área de almacenamiento es apropiada para el tipo de carga 
 				//y tiene la capacidad requerida.
+				AREA TIENE ESTADO OCUPADO.
+				
 				
 				//RF11.2 - Una vez el área es reservada se debe registrar que el buque está en proceso de descargue.
 				
