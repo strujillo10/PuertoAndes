@@ -3873,6 +3873,50 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
+	public void RF10P1(Buque buque) throws Exception
+	{
+		try 
+		{
+			conn.setAutoCommit(false);
+			Savepoint save = conn.setSavepoint();
+			try
+			{
+				DAOBuque daoBuque = new DAOBuque(); 
+				DAOCarga daoCarga = new DAOCarga(); 
+				
+				int pesoCargas = 0;
+				for(int i=0; i<cargas.size(); i++)
+				{
+					pesoCargas += cargas.get(i).getPeso();
+				}
+				
+				int capacidad = buque.getCapacidad() - buque.getOcupacionActual();
+				if(pesoCargas > capacidad)
+				{
+					throw new Exception("El buque no tiene la capacidad. Las cargas se quedan en el almacenamiento.");
+				}
+				else
+				{
+					//RF10.1
+					buque.setEstado("PROCESO");
+					daoBuque.updateBuque(buque);
+				}
+			}
+			catch(Exception rollBack)
+			{
+				conn.rollback(save);
+				throw new Exception();
+			}
+			conn.commit(); 
+			conn.setAutoCommit(true);
+		} 
+		catch (SQLException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public void cargarBuque(Buque buque, ArrayList<Carga> cargas, ArrayList<AreaAlmacenamiento> areas) throws Exception
 	{
 		try 
