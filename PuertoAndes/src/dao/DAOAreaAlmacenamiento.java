@@ -104,7 +104,8 @@ public class DAOAreaAlmacenamiento
 			String tipo = rs.getString("TIPO");
 			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			int peso = Integer.parseInt(rs.getString("PESO"));
-			cargas.add(new Carga(id, tipo, peso));
+			String destino = rs.getString("DESTINO");
+			cargas.add(new Carga(id, tipo, peso, destino));
 		}
 		return cargas;
 	}
@@ -113,7 +114,8 @@ public class DAOAreaAlmacenamiento
 	{
 		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
 
-		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE CAPACIDAD <" + capacidad;
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE CAPACIDAD <" + capacidad + 
+				" AND ESTADO = LIBRE";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -173,7 +175,8 @@ public class DAOAreaAlmacenamiento
 		String sql = "INSERT INTO AREA_DE_ALMACENAMIENTO VALUES (";
 		sql += area.getId() + ",";
 		sql += area.getCapacidad() + ",";
-		sql += area.getOcupacion() + ")";
+		sql += area.getOcupacion() + ",";
+		sql += area.getEstado() + ")";
 	
 
 		System.out.println("SQL stmt:" + sql);
@@ -197,6 +200,7 @@ public class DAOAreaAlmacenamiento
 		String sql = "UPDATE AREA_DE_ALMACENAMIENTO SET ";
 		sql += "capacidad_en_toneladas='" + area.getCapacidad()+ "',";
 		sql += "ocupacion_actual='" + area.getOcupacion()+ "',";
+		sql += "estado='" + area.getEstado()+ "',";
 		sql += " WHERE id = " + area.getId();
 
 		System.out.println("SQL stmt:" + sql);

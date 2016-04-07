@@ -16,6 +16,9 @@ public class AreaAlmacenamiento
 	@JsonProperty(value="ocupacion")
 	private int ocupacion;
 	
+	@JsonProperty(value="estado")
+	private String estado;
+	
 	public AreaAlmacenamiento(@JsonProperty(value="id")int nId, @JsonProperty(value="capacidad")int nCapacidad,
 			@JsonProperty(value="tipo")String nTipo, @JsonProperty(value="ocupacion")int nOcupacion)
 	{
@@ -23,6 +26,7 @@ public class AreaAlmacenamiento
 		capacidad = nCapacidad;
 		tipo = nTipo;
 		ocupacion = nOcupacion;
+		estado = "LIBRE";
 	}
 
 	public int getId() {
@@ -56,6 +60,12 @@ public class AreaAlmacenamiento
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
-	
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 }

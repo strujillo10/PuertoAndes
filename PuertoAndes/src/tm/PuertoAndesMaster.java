@@ -3873,50 +3873,6 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
-	public void RF10P1(Buque buque) throws Exception
-	{
-		try 
-		{
-			conn.setAutoCommit(false);
-			Savepoint save = conn.setSavepoint();
-			try
-			{
-				DAOBuque daoBuque = new DAOBuque(); 
-				DAOCarga daoCarga = new DAOCarga(); 
-				
-				int pesoCargas = 0;
-				for(int i=0; i<cargas.size(); i++)
-				{
-					pesoCargas += cargas.get(i).getPeso();
-				}
-				
-				int capacidad = buque.getCapacidad() - buque.getOcupacionActual();
-				if(pesoCargas > capacidad)
-				{
-					throw new Exception("El buque no tiene la capacidad. Las cargas se quedan en el almacenamiento.");
-				}
-				else
-				{
-					//RF10.1
-					buque.setEstado("PROCESO");
-					daoBuque.updateBuque(buque);
-				}
-			}
-			catch(Exception rollBack)
-			{
-				conn.rollback(save);
-				throw new Exception();
-			}
-			conn.commit(); 
-			conn.setAutoCommit(true);
-		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 	public void cargarBuque(Buque buque, ArrayList<Carga> cargas, ArrayList<AreaAlmacenamiento> areas) throws Exception
 	{
 		try 
@@ -3981,23 +3937,46 @@ public class PuertoAndesMaster
 			try
 			{
 				DAOCarga daoCarga = new DAOCarga(); 
+				DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento(); 
+				DAOBuque daoBuque = new DAOBuque();
+				
+				ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
 				ArrayList<Carga> cargasEnBuque = daoCarga.darCargasDeBuque(buque);
 				
 				//RF11.1 - Para iniciar el proceso, se solicita reservar un área de almacenamiento a partir de una fecha 
 				//para guardar un número de elementos de un tipo de carga, que tienen un peso dado. 
 				//Esta reserva se realiza si el área de almacenamiento es apropiada para el tipo de carga 
 				//y tiene la capacidad requerida.
-				AREA TIENE ESTADO OCUPADO.
-				
-				
-				//RF11.2 - Una vez el área es reservada se debe registrar que el buque está en proceso de descargue.
-				
-				//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
-				//se registra la carga que quedó en el área de almacenamiento.
-				
+				for(int i=0; i<cargasEnBuque.size(); i++)
+				{
+					Carga actual = cargasEnBuque.get(i);
+					ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
+					
+					if(!areasDisponibles.isEmpty())
+					{
+						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
+						areaNueva.setEstado("RESERVA");
+						daoArea.updateAreaAlmacenamiento(areaNueva);
+						
+						//RF11.2-Una vez el área es reservada se debe registrar que el buque está en descargue.
+						buque.setEstado("DESCARGUE");
+						daoBuque.updateBuque(buque);
+						
+						//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
+						//se registra la carga que quedó en el área de almacenamiento.
+						daoCarga.addCargaAArea(actual, areaNueva);
+					}
+					else
+					{
+						cargasNoUbicadas.add(actual);
+					}
+				}
+								
 				//RF11.4 - Al final del proceso de descargue, el buque queda con la carga que no 
 				//tiene como destino a PuertoAndes, y disponible para ser cargado de mercancía actualmente en el puerto.
-
+				buque.setEstado("DISPONIBLE");
+				daoBuque.updateBuque(buque);
+				
 				//DEBE utilizar como subtransacción la implementación del requerimiento RF7 
 				//y un requerimiento de registrar la descarga de una carga de un buque, de la iteración anterior.
 			}

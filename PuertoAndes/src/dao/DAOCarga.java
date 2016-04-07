@@ -6,7 +6,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import vos.AreaAlmacenamiento;
 import vos.Buque;
@@ -85,7 +87,8 @@ public class DAOCarga
 			int id = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
 			int peso = Integer.parseInt(rs.getString("PESO"));
-			cargas.add(new Carga(id, tipo, peso));
+			String destino = rs.getString("DESTINO");
+			cargas.add(new Carga(id, tipo, peso,destino));
 		}
 		return cargas;
 	}
@@ -105,7 +108,8 @@ public class DAOCarga
 			int id = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
 			int peso = Integer.parseInt(rs.getString("PESO"));
-			cargas.add(new Carga(id, tipo, peso));
+			String destino = rs.getString("DESTINO");
+			cargas.add(new Carga(id, tipo, peso,destino));
 		}
 		return cargas;
 	}
@@ -154,7 +158,8 @@ public class DAOCarga
 			int id2 = Integer.parseInt(rs.getString("ID"));
 			String tipo = rs.getString("TIPO");
 			int peso = Integer.parseInt(rs.getString("PESO"));
-			cargas.add(new Carga(id2, tipo, peso));
+			String destino = rs.getString("DESTINO");
+			cargas.add(new Carga(id2, tipo, peso,destino));
 		}
 		return cargas;
 	}
@@ -185,6 +190,23 @@ public class DAOCarga
 		String sql = "INSERT INTO CARGA_EN_BUQUE VALUES (";
 		sql += carga.getId() + ",";
 		sql += buque.getId() + ")";
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void addCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		java.util.Calendar cal = java.util.Calendar.getInstance(); 
+		java.sql.Date timeNow = new Date(cal.getTimeInMillis());
+		
+		String sql = "INSERT INTO CARGA_EN_AREA VALUES (";
+		sql += carga.getId() + ",";
+		sql += area.getId() + ",";
+		sql +=  timeNow + ")";
 
 		System.out.println("SQL stmt:" + sql);
 
