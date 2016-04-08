@@ -164,13 +164,13 @@ public class DAOBuque
 	public void updateBuque(Buque buque) throws SQLException, Exception 
 	{
 		String sql = "UPDATE BUQUE SET ";
-		sql += "nomre='" + buque.getNombre() + "',";
+		sql += "nombre='" + buque.getNombre() + "',";
 		sql += "registro_de_capitania='" + buque.getRegistroCapitania() + "',";
 		sql += "agencia_maritima='" + buque.getAgenciaMaritima() + "',";
-		sql += "cantidad_de_contenedores='" + buque.getCantidadContenedores() + "',";
-		sql += "capacidad_en_toneladas='" + buque.getCapacidad() + "',";
+		sql += "cantidad_de_contenedores=" + buque.getCantidadContenedores() + ",";
+		sql += "capacidad_en_toneladas=" + buque.getCapacidad() + ",";
+		sql += "ocupacion_actual=" + buque.getOcupacionActual()+ ",";
 		sql += "estado='" + buque.getEstado() + "',";
-		sql += "ocupacion_actual='" + buque.getOcupacionActual()+ "',";
 		sql += " WHERE id = " + buque.getId();
 
 		System.out.println("SQL stmt:" + sql);

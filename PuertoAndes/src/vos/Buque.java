@@ -39,8 +39,8 @@ public class Buque
 		agenciaMaritima = nAgencia; 
 		cantidadContenedores = nCantidad; 
 		capacidad = nCapacidad; 
-		estado = nEstado; 
 		ocupacionActual = nOcupacion;
+		estado = nEstado; 
 	}
 
 	public int getId() {
