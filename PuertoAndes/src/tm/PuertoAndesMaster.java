@@ -3873,7 +3873,7 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
-	public void cargarBuque(Buque buque, ArrayList<Carga> cargas, ArrayList<AreaAlmacenamiento> areas) throws Exception
+	public void cargarBuque(Buque buque, ArrayList<Carga> cargas) throws Exception
 	{
 		try 
 		{
@@ -3949,36 +3949,40 @@ public class PuertoAndesMaster
 				//y tiene la capacidad requerida.
 				for(int i=0; i<cargasEnBuque.size(); i++)
 				{
-					Carga actual = cargasEnBuque.get(i);
-					ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
+					if(cargasEnBuque.get(i).getDestino().equals("PuertoAndes"))
+					{
+						Carga actual = cargasEnBuque.get(i);
+						ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
 					
-					if(!areasDisponibles.isEmpty())
-					{
-						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
-						areaNueva.setEstado("RESERVA");
-						daoArea.updateAreaAlmacenamiento(areaNueva);
+						if(!areasDisponibles.isEmpty())
+						{
+							AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
+							areaNueva.setEstado("RESERVA");
+							daoArea.updateAreaAlmacenamiento(areaNueva);
 						
-						//RF11.2-Una vez el área es reservada se debe registrar que el buque está en descargue.
-						buque.setEstado("DESCARGUE");
+							//RF11.2-Una vez el área es reservada se debe registrar que el buque está en descargue.
+							buque.setEstado("DESCARGUE");
+							daoBuque.updateBuque(buque);
+						
+							//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
+							//se registra la carga que quedó en el área de almacenamiento.
+							daoCarga.addCargaAArea(actual, areaNueva);
+						}
+						else
+						{
+							cargasNoUbicadas.add(actual);
+						}
+								
+						//RF11.4 - Al final del proceso de descargue, el buque queda con la carga que no 
+						//tiene como destino a PuertoAndes, y disponible para ser cargado de mercancía actualmente en el puerto.
+						buque.setEstado("DISPONIBLE");
 						daoBuque.updateBuque(buque);
-						
-						//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
-						//se registra la carga que quedó en el área de almacenamiento.
-						daoCarga.addCargaAArea(actual, areaNueva);
-					}
-					else
-					{
-						cargasNoUbicadas.add(actual);
+				
+						//DEBE utilizar como subtransacción la implementación del requerimiento RF7 
+						//y un requerimiento de registrar la descarga de una carga de un buque, de la iteración anterior.
+				
 					}
 				}
-								
-				//RF11.4 - Al final del proceso de descargue, el buque queda con la carga que no 
-				//tiene como destino a PuertoAndes, y disponible para ser cargado de mercancía actualmente en el puerto.
-				buque.setEstado("DISPONIBLE");
-				daoBuque.updateBuque(buque);
-				
-				//DEBE utilizar como subtransacción la implementación del requerimiento RF7 
-				//y un requerimiento de registrar la descarga de una carga de un buque, de la iteración anterior.
 			}
 			catch(Exception rollBack)
 			{

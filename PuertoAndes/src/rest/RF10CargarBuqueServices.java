@@ -9,6 +9,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -46,16 +47,20 @@ public class RF10CargarBuqueServices
 		}
 
 		@POST
-		@Path("/cargar")
+		@Path("/{buque}/{cargas}")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response updateRF10(Buque buque,ArrayList<Carga> cargas, ArrayList<AreaAlmacenamiento> areas) {
+		public Response updateRF10(@PathParam("buque")Buque buque,@PathParam("cargas")ArrayList<Carga> cargas) 
+		{
 			PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
-			try {
-				tm.cargarBuque(buque, cargas, areas);
-			} catch (Exception e) {
+			try 
+			{
+				tm.cargarBuque(buque, cargas);
+			} 
+			catch (Exception e) 
+			{
 				return Response.status(500).entity(doErrorMessage(e)).build();
 			}
-			return Response.status(200).entity(admin).build();
+			return Response.status(200).entity(buque).build();
 		}
 }
