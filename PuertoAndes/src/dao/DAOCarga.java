@@ -242,8 +242,8 @@ public class DAOCarga
 		java.sql.Date timeNow = new Date(cal.getTimeInMillis()); 
 		
 		String sql = "UPDATE CARGA_EN_AREA SET ";
-		sql += "id_area='" + area.getId() + "','";
-		sql += "fecha_entrada_carga" + "TO_DATE('" + timeNow + "'),"; 
+		sql += "id_area=" + area.getId() + ",'";
+		sql += "fecha_entrada_carga=" + "TO_DATE('" + timeNow + "','YYYY-MM-DD')"; 
 		sql += " WHERE id_carga = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);

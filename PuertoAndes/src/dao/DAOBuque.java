@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 
 import org.jboss.com.sun.corba.se.impl.encoding.BufferQueue;
 
+import vos.AreaAlmacenamiento;
 import vos.Buque;
+import vos.Carga;
 
 public class DAOBuque 
 {
@@ -193,6 +196,128 @@ public class DAOBuque
 
 		String sql = "DELETE FROM BUQUE";
 		sql += " WHERE id = " + buque.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public ArrayList<Carga> darCargasDeBuque(Buque buque) throws SQLException, Exception 
+	{
+		ArrayList<Carga> cargas = new ArrayList<Carga>();
+
+		String sql = "SELECT * FROM CARGA_EN_BUQUE INNER JOIN CARGA ON "
+				+ "CARGA_EN_BUQUE.ID_CARGA = CARGA.ID WHERE ID_BUQUE = " + buque.getId();
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int peso = Integer.parseInt(rs.getString("PESO"));
+			String destino = rs.getString("DESTINO");
+			cargas.add(new Carga(id, tipo, peso,destino));
+		}
+		return cargas;
+	}
+	
+	public ArrayList<AreaAlmacenamiento> darAreaConCapacidad(int capacidad) throws SQLException, Exception 
+	{
+		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
+
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE (CAPACIDAD_EN_TONELADAS-OCUPACION_ACTUAL) >" 
+					+ capacidad + " AND ESTADO = 'LIBRE'";
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int nCapacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int nOcupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+
+			areas.add(new AreaAlmacenamiento(id, nCapacidad, tipo, nOcupacion));
+		}
+		return areas;
+	}
+	
+	public void updateAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		String sql = "UPDATE AREA_DE_ALMACENAMIENTO SET ";
+		sql += "capacidad_en_toneladas=" + area.getCapacidad()+ ",";
+		sql += "ocupacion_actual=" + area.getOcupacion()+ ",";
+		sql += "estado='" + area.getEstado()+ "'";
+		sql += " WHERE id = " + area.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void addCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		java.util.Calendar cal = java.util.Calendar.getInstance(); 
+		java.sql.Date timeNow = new Date(cal.getTimeInMillis());
+		
+		String sql = "INSERT INTO CARGA_EN_AREA VALUES (";
+		sql += carga.getId() + ",";
+		sql += area.getId() + ",";
+		sql += "TO_DATE('" + timeNow + "')";
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void addCargaBuque(Carga carga, Buque buque) throws SQLException, Exception 
+	{
+		String sql = "INSERT INTO CARGA_EN_BUQUE VALUES (";
+		sql += carga.getId() + ",";
+		sql += buque.getId() + ")";
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public AreaAlmacenamiento darAreadeCarga(Carga carga) throws SQLException, Exception 
+	{
+		AreaAlmacenamiento area = null;
+		String sql = "SELECT * FROM CARGA_EN_AREA INNER JOIN AREA_DE_ALMACENAMIENTO "
+				+ "ON CARGA_EN_AREA.ID_AREA = AREA_DE_ALMACENAMIENTO.ID WHERE "
+				+ "CARGA_EN_AREA.ID_CARGA = " + carga.getId();
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		ResultSet rs = prepStmt.executeQuery();
+
+		while (rs.next()) {
+			int id = Integer.parseInt(rs.getString("ID"));
+			String tipo = rs.getString("TIPO");
+			int capacidad = Integer.parseInt(rs.getString("CAPACIDAD_EN_TONELADAS"));
+			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
+			area = new AreaAlmacenamiento(id, capacidad, tipo, ocupacion);
+		}
+		return area;
+	}
+	
+	public void deleteCargaArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+
+		String sql = "DELETE FROM CARGA_EN_AREA";
+		sql += " WHERE id = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);
 

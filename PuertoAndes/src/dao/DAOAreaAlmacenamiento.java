@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -100,9 +101,8 @@ public class DAOAreaAlmacenamiento
 		ResultSet rs = prepStmt.executeQuery();
 
 		while (rs.next()) {
-			int id = Integer.parseInt(rs.getString("ID"));
+			int id = Integer.parseInt(rs.getString("ID_CARGA"));
 			String tipo = rs.getString("TIPO");
-			int ocupacion = Integer.parseInt(rs.getString("OCUPACION_ACTUAL"));
 			int peso = Integer.parseInt(rs.getString("PESO"));
 			String destino = rs.getString("DESTINO");
 			cargas.add(new Carga(id, tipo, peso, destino));
@@ -114,8 +114,8 @@ public class DAOAreaAlmacenamiento
 	{
 		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
 
-		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE (CAPACIDAD_EN_TONELADAS-OCUPACION_ACTUAL) <" 
-					+ capacidad + " AND ESTADO = LIBRE";
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE (CAPACIDAD_EN_TONELADAS-OCUPACION_ACTUAL) >" 
+					+ capacidad + " AND ESTADO = 'LIBRE'";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -223,6 +223,23 @@ public class DAOAreaAlmacenamiento
 
 		String sql = "DELETE FROM AREA_DE_ALMACENAMIENTO";
 		sql += " WHERE id = " + area.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
+	public void moverCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+		java.util.Calendar cal = java.util.Calendar.getInstance(); 
+		java.sql.Date timeNow = new Date(cal.getTimeInMillis()); 
+		
+		String sql = "UPDATE CARGA_EN_AREA SET ";
+		sql += "id_area=" + area.getId() + ",";
+		sql += "fecha_entrada_carga=" + "TO_DATE('" + timeNow + "','YYYY-MM-DD')"; 
+		sql += " WHERE id_carga = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);
 

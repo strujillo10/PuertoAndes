@@ -3875,13 +3875,10 @@ public class PuertoAndesMaster
 	
 	public void cargarBuque(Buque buque, ListaCarga cargas) throws Exception
 	{
-		DAOBuque daoBuque = new DAOBuque(); 
-		DAOCarga daoCarga = new DAOCarga(); 
-		
+		DAOBuque daoBuque = new DAOBuque(); 	
 		try 
 		{
 			this.conn = darConexion();
-			daoCarga.setConn(conn); 
 			daoBuque.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
@@ -3906,9 +3903,9 @@ public class PuertoAndesMaster
 					//RF10.2
 					for(Carga actual:cargas.getCargas())
 					{
-						daoCarga.addCargaBuque(actual, buque);
-						AreaAlmacenamiento areaActual = daoCarga.darAreadeCarga(actual);
-						daoCarga.deleteCargaArea(actual, areaActual);
+						daoBuque.addCargaBuque(actual, buque);
+						AreaAlmacenamiento areaActual = daoBuque.darAreadeCarga(actual);
+						daoBuque.deleteCargaArea(actual, areaActual);
 					}
 				}				
 				//RF10.4	El buque queda cargado
@@ -3933,7 +3930,6 @@ public class PuertoAndesMaster
 			throw e;
 		} finally {
 			try {
-				daoCarga.cerrarRecursos();
 				daoBuque.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
@@ -3947,18 +3943,17 @@ public class PuertoAndesMaster
 	
 	public void descargarBuque(Buque buque) throws Exception
 	{
+		DAOBuque daoBuque = new DAOBuque(); 
 		try 
 		{
+			this.conn = darConexion();
+			daoBuque.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
-			{
-				DAOCarga daoCarga = new DAOCarga(); 
-				DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento(); 
-				DAOBuque daoBuque = new DAOBuque();
-				
+			{							
 				ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
-				ArrayList<Carga> cargasEnBuque = daoCarga.darCargasDeBuque(buque);
+				ArrayList<Carga> cargasEnBuque = daoBuque.darCargasDeBuque(buque);
 				
 				//RF11.1 - Para iniciar el proceso, se solicita reservar un área de almacenamiento a partir de una fecha 
 				//para guardar un número de elementos de un tipo de carga, que tienen un peso dado. 
@@ -3966,16 +3961,16 @@ public class PuertoAndesMaster
 				//y tiene la capacidad requerida.
 				for(int i=0; i<cargasEnBuque.size(); i++)
 				{
-					if(cargasEnBuque.get(i).getDestino().equals("PuertoAndes"))
+					if(cargasEnBuque.get(i).getDestino().equals("Cartagena"))
 					{
 						Carga actual = cargasEnBuque.get(i);
-						ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
+						ArrayList<AreaAlmacenamiento> areasDisponibles = daoBuque.darAreaConCapacidad(actual.getPeso());
 					
 						if(!areasDisponibles.isEmpty())
 						{
 							AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
 							areaNueva.setEstado("RESERVA");
-							daoArea.updateAreaAlmacenamiento(areaNueva);
+							daoBuque.updateAreaAlmacenamiento(areaNueva);
 						
 							//RF11.2-Una vez el área es reservada se debe registrar que el buque está en descargue.
 							buque.setEstado("DESCARGUE");
@@ -3983,7 +3978,7 @@ public class PuertoAndesMaster
 						
 							//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
 							//se registra la carga que quedó en el área de almacenamiento.
-							daoCarga.addCargaAArea(actual, areaNueva);
+							daoBuque.addCargaAArea(actual, areaNueva);
 						}
 						else
 						{
@@ -3997,7 +3992,6 @@ public class PuertoAndesMaster
 				
 						//DEBE utilizar como subtransacción la implementación del requerimiento RF7 
 						//y un requerimiento de registrar la descarga de una carga de un buque, de la iteración anterior.
-				
 					}
 				}
 			}
@@ -4009,10 +4003,24 @@ public class PuertoAndesMaster
 			conn.commit(); 
 			conn.setAutoCommit(true);
 		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
+		catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuque.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
 		}
 	}
 	
@@ -4111,14 +4119,12 @@ public class PuertoAndesMaster
 	public String cerrarArea(AreaAlmacenamiento area) throws Exception
 	{
 		String respuesta = "";
-		DAOCarga daoCarga = new DAOCarga();
 		DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento();
 		ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
 		try 
 		{
 			this.conn = darConexion();
-			daoCarga.setConn(conn); 
-			daoArea.setConn(conn);
+			daoArea.setConn(conn); 
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
@@ -4128,16 +4134,17 @@ public class PuertoAndesMaster
 				{
 					Carga actual = cargas.get(i);
 					ArrayList<AreaAlmacenamiento> areasDisponibles = daoArea.darAreaConCapacidad(actual.getPeso());
-					
 					if(!areasDisponibles.isEmpty())
 					{
 						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
-						daoCarga.moverCargaAArea(actual, areaNueva);
+						daoArea.moverCargaAArea(actual, areaNueva);
 						int ocupado = areaNueva.getOcupacion() + actual.getPeso();
 						areaNueva.setOcupacion(ocupado);
 						daoArea.updateAreaAlmacenamiento(areaNueva);
-						area.setEstado("CERRADO");
+						System.out.println("8");
+						area.setEstado("CERRADA");
 						daoArea.updateAreaAlmacenamiento(area);
+						System.out.println("9");
 					}
 					else
 					{
@@ -4177,7 +4184,6 @@ public class PuertoAndesMaster
 			throw e;
 		} finally {
 			try {
-				daoCarga.cerrarRecursos();
 				daoArea.cerrarRecursos();
 				if(this.conn!=null)
 					this.conn.close();
