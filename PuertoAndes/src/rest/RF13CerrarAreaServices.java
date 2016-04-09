@@ -55,7 +55,7 @@ public class RF13CerrarAreaServices
 		@Path("/cerrar")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response updateRF10(AreaAlmacenamiento area) {
+		public Response updateRF13(AreaAlmacenamiento area) {
 			PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 			try {
 				tm.cerrarArea(area);

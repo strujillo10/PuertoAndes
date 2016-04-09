@@ -114,8 +114,8 @@ public class DAOAreaAlmacenamiento
 	{
 		ArrayList<AreaAlmacenamiento> areas = new ArrayList<AreaAlmacenamiento>();
 
-		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE CAPACIDAD <" + capacidad + 
-				" AND ESTADO = LIBRE";
+		String sql = "SELECT * FROM AREA_DE_ALMACENAMIENTO WHERE (CAPACIDAD_EN_TONELADAS-OCUPACION_ACTUAL) <" 
+					+ capacidad + " AND ESTADO = LIBRE";
 
 		PreparedStatement prepStmt = conn.prepareStatement(sql);
 		recursos.add(prepStmt);
@@ -198,9 +198,9 @@ public class DAOAreaAlmacenamiento
 	public void updateAreaAlmacenamiento(AreaAlmacenamiento area) throws SQLException, Exception 
 	{
 		String sql = "UPDATE AREA_DE_ALMACENAMIENTO SET ";
-		sql += "capacidad_en_toneladas='" + area.getCapacidad()+ "',";
-		sql += "ocupacion_actual='" + area.getOcupacion()+ "',";
-		sql += "estado='" + area.getEstado()+ "',";
+		sql += "capacidad_en_toneladas=" + area.getCapacidad()+ ",";
+		sql += "ocupacion_actual=" + area.getOcupacion()+ ",";
+		sql += "estado='" + area.getEstado()+ "'";
 		sql += " WHERE id = " + area.getId();
 
 		System.out.println("SQL stmt:" + sql);

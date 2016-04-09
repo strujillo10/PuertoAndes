@@ -206,7 +206,7 @@ public class DAOCarga
 		String sql = "INSERT INTO CARGA_EN_AREA VALUES (";
 		sql += carga.getId() + ",";
 		sql += area.getId() + ",";
-		sql +=  timeNow + ")";
+		sql += "TO_DATE('" + timeNow + "')";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -238,8 +238,12 @@ public class DAOCarga
 	
 	public void moverCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
 	{
+		java.util.Calendar cal = java.util.Calendar.getInstance(); 
+		java.sql.Date timeNow = new Date(cal.getTimeInMillis()); 
+		
 		String sql = "UPDATE CARGA_EN_AREA SET ";
-		sql += "id_area='" + area.getId() + "',";
+		sql += "id_area='" + area.getId() + "','";
+		sql += "fecha_entrada_carga" + "TO_DATE('" + timeNow + "'),"; 
 		sql += " WHERE id_carga = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);

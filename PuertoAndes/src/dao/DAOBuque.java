@@ -141,9 +141,9 @@ public class DAOBuque
 		sql += buque.getRegistroCapitania() + "','";
 		sql += buque.getAgenciaMaritima() + "',";
 		sql += buque.getCantidadContenedores() + ",";
-		sql += buque.getCapacidad() + ",'";
-		sql += buque.getEstado() + "',";
-		sql += buque.getOcupacionActual() + ")";
+		sql += buque.getCapacidad() + ",";
+		sql += buque.getOcupacionActual() + ",'";
+		sql += buque.getEstado() + "')";
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -170,7 +170,7 @@ public class DAOBuque
 		sql += "cantidad_de_contenedores=" + buque.getCantidadContenedores() + ",";
 		sql += "capacidad_en_toneladas=" + buque.getCapacidad() + ",";
 		sql += "ocupacion_actual=" + buque.getOcupacionActual()+ ",";
-		sql += "estado='" + buque.getEstado() + "',";
+		sql += "estado='" + buque.getEstado() + "'";
 		sql += " WHERE id = " + buque.getId();
 
 		System.out.println("SQL stmt:" + sql);

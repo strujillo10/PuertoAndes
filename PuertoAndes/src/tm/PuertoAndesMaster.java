@@ -3875,39 +3875,18 @@ public class PuertoAndesMaster
 	
 	public void cargarBuque(Buque buque, ListaCarga cargas) throws Exception
 	{
+		DAOBuque daoBuque = new DAOBuque(); 
+		DAOCarga daoCarga = new DAOCarga(); 
+		
 		try 
 		{
-//				for(Administrador administrador : admins.getAdmins())
-//					daoAdministrador.addAdministrador(administrador);
-//				conn.commit();
-//			} catch (SQLException e) {
-//				System.err.println("SQLException:" + e.getMessage());
-//				e.printStackTrace();
-//				conn.rollback();
-//				throw e;
-//			} catch (Exception e) {
-//				System.err.println("GeneralException:" + e.getMessage());
-//				e.printStackTrace();
-//				conn.rollback();
-//				throw e;
-//			} finally {
-//				try {
-//					daoAdministrador.cerrarRecursos();
-//					if(this.conn!=null)
-//						this.conn.close();
-//				} catch (SQLException exception) {
-//					System.err.println("SQLException closing resources:" + exception.getMessage());
-//					exception.printStackTrace();
-//					throw exception;
-//				}
-//			}
+			this.conn = darConexion();
+			daoCarga.setConn(conn); 
+			daoBuque.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
 			{
-				DAOBuque daoBuque = new DAOBuque(); 
-				DAOCarga daoCarga = new DAOCarga(); 
-				
 				int pesoCargas = 0;
 				for(Carga cargaActual:cargas.getCargas())
 				{
@@ -3944,10 +3923,25 @@ public class PuertoAndesMaster
 			conn.commit(); 
 			conn.setAutoCommit(true);
 		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
+		catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCarga.cerrarRecursos();
+				daoBuque.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
 		}
 	}
 	
@@ -4024,16 +4018,17 @@ public class PuertoAndesMaster
 	
 	public String deshabilitarBuqueLegal(Buque buque) throws Exception
 	{
+		DAOBuque daoBuque = new DAOBuque(); 
 		String respuesta = "";
 		try 
 		{
+			this.conn = darConexion();
+			daoBuque.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
-			{
-				DAOBuque daoBuque = new DAOBuque(); 
-				
-				buque.setEstado("Deshabilitado");
+			{			
+				buque.setEstado("DESHABILITADO");
 				daoBuque.updateBuque(buque);
 				//DEBE implementar un esquema de Savepoints para no repetir todo el trabajo en caso de falla
 			}
@@ -4045,10 +4040,24 @@ public class PuertoAndesMaster
 			conn.commit(); 
 			conn.setAutoCommit(true);
 		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
+		catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuque.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
 		}
 		return respuesta;
 	}
@@ -4056,15 +4065,16 @@ public class PuertoAndesMaster
 	public String deshabilitarBuque(Buque buque) throws Exception
 	{
 		String respuesta = "";
+		DAOBuque daoBuque = new DAOBuque();
 		try 
 		{
+			this.conn = darConexion();
+			daoBuque.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
-			{
-				DAOBuque daoBuque = new DAOBuque();
-				
-				buque.setEstado("Mantenimiento");
+			{				
+				buque.setEstado("MANTENIMIENTO");
 				daoBuque.updateBuque(buque);
 				//Descargar Buque.. RF11
 				descargarBuque(buque);
@@ -4080,10 +4090,20 @@ public class PuertoAndesMaster
 			conn.commit(); 
 			conn.setAutoCommit(true);
 		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
+		catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
 			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoBuque.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
 		}
 		return respuesta;
 	}
@@ -4091,18 +4111,19 @@ public class PuertoAndesMaster
 	public String cerrarArea(AreaAlmacenamiento area) throws Exception
 	{
 		String respuesta = "";
+		DAOCarga daoCarga = new DAOCarga();
+		DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento();
 		ArrayList<Carga> cargasNoUbicadas = new ArrayList<Carga>();
 		try 
 		{
+			this.conn = darConexion();
+			daoCarga.setConn(conn); 
+			daoArea.setConn(conn);
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
-			{
-				DAOCarga daoCarga = new DAOCarga();
-				DAOAreaAlmacenamiento daoArea = new DAOAreaAlmacenamiento();
-				
+			{			
 				ArrayList<Carga> cargas = daoArea.darCargasEnArea(area);
-				
 				for(int i=0; i<cargas.size(); i++)
 				{
 					Carga actual = cargas.get(i);
@@ -4112,6 +4133,11 @@ public class PuertoAndesMaster
 					{
 						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
 						daoCarga.moverCargaAArea(actual, areaNueva);
+						int ocupado = areaNueva.getOcupacion() + actual.getPeso();
+						areaNueva.setOcupacion(ocupado);
+						daoArea.updateAreaAlmacenamiento(areaNueva);
+						area.setEstado("CERRADO");
+						daoArea.updateAreaAlmacenamiento(area);
 					}
 					else
 					{
@@ -4141,10 +4167,25 @@ public class PuertoAndesMaster
 			conn.commit(); 
 			conn.setAutoCommit(true);
 		} 
-		catch (SQLException e) 
-		{
-			// TODO Auto-generated catch block
+		catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
 			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoCarga.cerrarRecursos();
+				daoArea.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
 		}
 		return respuesta;
 	}
