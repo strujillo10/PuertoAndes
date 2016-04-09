@@ -3873,10 +3873,34 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
-	public void cargarBuque(Buque buque, ArrayList<Carga> cargas) throws Exception
+	public void cargarBuque(Buque buque, ListaCarga cargas) throws Exception
 	{
 		try 
 		{
+//				for(Administrador administrador : admins.getAdmins())
+//					daoAdministrador.addAdministrador(administrador);
+//				conn.commit();
+//			} catch (SQLException e) {
+//				System.err.println("SQLException:" + e.getMessage());
+//				e.printStackTrace();
+//				conn.rollback();
+//				throw e;
+//			} catch (Exception e) {
+//				System.err.println("GeneralException:" + e.getMessage());
+//				e.printStackTrace();
+//				conn.rollback();
+//				throw e;
+//			} finally {
+//				try {
+//					daoAdministrador.cerrarRecursos();
+//					if(this.conn!=null)
+//						this.conn.close();
+//				} catch (SQLException exception) {
+//					System.err.println("SQLException closing resources:" + exception.getMessage());
+//					exception.printStackTrace();
+//					throw exception;
+//				}
+//			}
 			conn.setAutoCommit(false);
 			Savepoint save = conn.setSavepoint();
 			try
@@ -3885,9 +3909,9 @@ public class PuertoAndesMaster
 				DAOCarga daoCarga = new DAOCarga(); 
 				
 				int pesoCargas = 0;
-				for(int i=0; i<cargas.size(); i++)
+				for(Carga cargaActual:cargas.getCargas())
 				{
-					pesoCargas += cargas.get(i).getPeso();
+					pesoCargas += cargaActual.getPeso();
 				}
 				
 				int capacidad = buque.getCapacidad() - buque.getOcupacionActual();
@@ -3901,9 +3925,8 @@ public class PuertoAndesMaster
 					buque.setEstado("PROCESO");
 					daoBuque.updateBuque(buque);
 					//RF10.2
-					for(int i=0; i<cargas.size(); i++)
+					for(Carga actual:cargas.getCargas())
 					{
-						Carga actual = cargas.get(i);
 						daoCarga.addCargaBuque(actual, buque);
 						AreaAlmacenamiento areaActual = daoCarga.darAreadeCarga(actual);
 						daoCarga.deleteCargaArea(actual, areaActual);

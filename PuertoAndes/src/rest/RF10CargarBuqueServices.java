@@ -20,6 +20,7 @@ import vos.Administrador;
 import vos.AreaAlmacenamiento;
 import vos.Buque;
 import vos.Carga;
+import vos.ListaCarga;
 import vos.ListaRFC1;
 import vos.RFC1;
 
@@ -47,10 +48,10 @@ public class RF10CargarBuqueServices
 		}
 
 		@POST
-		@Path("/{buque}/{cargas}")
+		@Path("/buque")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response updateRF10(@PathParam("buque")Buque buque,@PathParam("cargas")ArrayList<Carga> cargas) 
+		public Response updateRF10(Buque buque, ListaCarga cargas) 
 		{
 			PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 			try 
