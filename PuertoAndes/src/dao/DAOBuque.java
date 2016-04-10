@@ -106,7 +106,7 @@ public class DAOBuque
 	{
 		ArrayList<Buque> buque = new ArrayList<Buque>();
 
-		String sql = "SELECT * FROM BUQUE WHERE ID ='" + id + "'";
+		String sql = "SELECT * FROM BUQUE WHERE ID =" + id;
 
 		System.out.println("SQL stmt:" + sql);
 
@@ -317,7 +317,7 @@ public class DAOBuque
 	{
 
 		String sql = "DELETE FROM CARGA_EN_AREA";
-		sql += " WHERE id = " + carga.getId();
+		sql += " WHERE id_area = " + carga.getId();
 
 		System.out.println("SQL stmt:" + sql);
 

@@ -3908,7 +3908,7 @@ public class PuertoAndesMaster
 		return new ListaRFC6(rfc6s);
 	}
 	
-	public void cargarBuque(Buque buque, ListaCarga cargas) throws Exception
+	public void cargarBuque(int idBuque, ListaCarga cargas) throws Exception
 	{
 		DAOBuque daoBuque = new DAOBuque(); 	
 		try 
@@ -3919,13 +3919,13 @@ public class PuertoAndesMaster
 			Savepoint save = conn.setSavepoint();
 			try
 			{
+				Buque buque = daoBuque.buscarBuquePorId(idBuque).get(0);
 				int pesoCargas = 0;
 				for(Carga cargaActual:cargas.getCargas())
 				{
 					pesoCargas += cargaActual.getPeso();
 				}
-				
-				int capacidad = buque.getCapacidad() - buque.getOcupacionActual();
+				int capacidad = (buque.getCapacidad() - buque.getOcupacionActual())*1000;
 				if(pesoCargas > capacidad)
 				{
 					throw new Exception("El buque no tiene la capacidad. Las cargas se quedan en el almacenamiento.");
@@ -3941,8 +3941,14 @@ public class PuertoAndesMaster
 						daoBuque.addCargaBuque(actual, buque);
 						AreaAlmacenamiento areaActual = daoBuque.darAreadeCarga(actual);
 						daoBuque.deleteCargaArea(actual, areaActual);
+						int contenedores = buque.getCantidadContenedores() + 1; 
+						buque.setCantidadContenedores(contenedores);
+						int peso = buque.getOcupacionActual() + (actual.getPeso()/1000); 
+						buque.setOcupacionActual(peso);
+						daoBuque.updateBuque(buque);
 					}
 				}				
+				System.out.println("5");
 				//RF10.4	El buque queda cargado
 				buque.setEstado("CARGADO");
 				daoBuque.updateBuque(buque);
@@ -3950,7 +3956,7 @@ public class PuertoAndesMaster
 			catch(Exception rollBack)
 			{
 				conn.rollback(save);
-				throw new Exception();
+				throw new Exception(rollBack.getMessage());
 			}
 			conn.commit(); 
 			conn.setAutoCommit(true);
@@ -4014,7 +4020,9 @@ public class PuertoAndesMaster
 							//RF11.3 - Una vez se termina el proceso de descargue al área de almacenamiento, 
 							//se registra la carga que quedó en el área de almacenamiento.
 							daoBuque.addCargaAArea(actual, areaNueva);
-						}
+							int cantidadContenedores = buque.getCantidadContenedores()-1;
+							buque.setCantidadContenedores(cantidadContenedores);
+						} 
 						else
 						{
 							cargasNoUbicadas.add(actual);

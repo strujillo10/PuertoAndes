@@ -48,20 +48,20 @@ public class RF10CargarBuqueServices
 		}
 
 		@POST
-		@Path("/buque")
+		@Path("/{id}")
 		@Consumes(MediaType.APPLICATION_JSON)
 		@Produces(MediaType.APPLICATION_JSON)
-		public Response updateRF10(Buque buque, ListaCarga cargas) 
+		public Response updateRF10(@javax.ws.rs.PathParam("id") int id, ListaCarga cargas) 
 		{
 			PuertoAndesMaster tm = new PuertoAndesMaster(getPath());
 			try 
 			{
-				tm.cargarBuque(buque, cargas);
+				tm.cargarBuque(id, cargas);
 			} 
 			catch (Exception e) 
 			{
 				return Response.status(500).entity(doErrorMessage(e)).build();
 			}
-			return Response.status(200).entity(buque).build();
+			return Response.status(200).entity(cargas).build();
 		}
 }

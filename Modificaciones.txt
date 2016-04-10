@@ -1,0 +1,6 @@
+Modificaciones al estado del mundo:
+1. Se agregó la capacidad, estado y ocupación actual a los buques
+2. Se agregó capacidad total y ocupación actual a las áreas. 
+3. Se agrega el peso a la carga. 
+4. Agregarle fechas carga en area.
+5. Se agrega destino a la carga.
