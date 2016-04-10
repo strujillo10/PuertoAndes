@@ -32,6 +32,7 @@ import dao.DAOOperadorPortuario;
 import dao.DAOPatio;
 import dao.DAORFC1;
 import dao.DAORFC2;
+import dao.DAORFC6;
 import dao.DAOSitio;
 import dao.DAOUsuario;
 import vos.Administrador;
@@ -70,12 +71,14 @@ import vos.ListaOperadorPortuario;
 import vos.ListaPatio;
 import vos.ListaRFC1;
 import vos.ListaRFC2;
+import vos.ListaRFC6;
 import vos.ListaSitio;
 import vos.ListaUsuario;
 import vos.OperadorPortuario;
 import vos.Patio;
 import vos.RFC1;
 import vos.RFC2;
+import vos.RFC6;
 import vos.Sitio;
 import vos.Usuario;
 
@@ -3873,6 +3876,38 @@ public class PuertoAndesMaster
 		return new ListaRFC2(rfc2s);
 	}
 	
+	public ListaRFC6 darRFC6() throws Exception 
+	{
+		ArrayList<RFC6> rfc6s;
+		DAORFC6 daoRFC6 = new DAORFC6();
+		try 
+		{
+			this.conn = darConexion();
+			daoRFC6.setConn(conn);
+			rfc6s = daoRFC6.darRFC6s();
+
+		} catch (SQLException e) {
+			System.err.println("SQLException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			System.err.println("GeneralException:" + e.getMessage());
+			e.printStackTrace();
+			throw e;
+		} finally {
+			try {
+				daoRFC6.cerrarRecursos();
+				if(this.conn!=null)
+					this.conn.close();
+			} catch (SQLException exception) {
+				System.err.println("SQLException closing resources:" + exception.getMessage());
+				exception.printStackTrace();
+				throw exception;
+			}
+		}
+		return new ListaRFC6(rfc6s);
+	}
+	
 	public void cargarBuque(Buque buque, ListaCarga cargas) throws Exception
 	{
 		DAOBuque daoBuque = new DAOBuque(); 	
@@ -4137,9 +4172,13 @@ public class PuertoAndesMaster
 					if(!areasDisponibles.isEmpty())
 					{
 						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
+						System.out.println("6");
+						daoArea.deleteCargaArea(actual, areaNueva);
+						System.out.println("6.5");
 						daoArea.moverCargaAArea(actual, areaNueva);
 						int ocupado = areaNueva.getOcupacion() + actual.getPeso();
 						areaNueva.setOcupacion(ocupado);
+						System.out.println("7");
 						daoArea.updateAreaAlmacenamiento(areaNueva);
 						System.out.println("8");
 						area.setEstado("CERRADA");

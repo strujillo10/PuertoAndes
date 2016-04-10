@@ -231,19 +231,37 @@ public class DAOAreaAlmacenamiento
 		prepStmt.executeQuery();
 	}
 	
+	public void deleteCargaArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
+	{
+
+		String sql = "DELETE FROM CARGA_EN_AREA";
+		sql += " WHERE id_carga = " + carga.getId();
+
+		System.out.println("SQL stmt:" + sql);
+
+		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		recursos.add(prepStmt);
+		prepStmt.executeQuery();
+	}
+	
 	public void moverCargaAArea(Carga carga, AreaAlmacenamiento area) throws SQLException, Exception 
 	{
 		java.util.Calendar cal = java.util.Calendar.getInstance(); 
 		java.sql.Date timeNow = new Date(cal.getTimeInMillis()); 
+		
+		String sql2 = "INSERT INTO CARGA_EN_AREA VALUES(";
+		sql2 += area.getId() + ",";	
+		sql2 += carga.getId() + ",";
+		sql2 += "TO_DATE('" + timeNow + "','YYYY-MM-DD'),";
 		
 		String sql = "UPDATE CARGA_EN_AREA SET ";
 		sql += "id_area=" + area.getId() + ",";
 		sql += "fecha_entrada_carga=" + "TO_DATE('" + timeNow + "','YYYY-MM-DD')"; 
 		sql += " WHERE id_carga = " + carga.getId();
 
-		System.out.println("SQL stmt:" + sql);
+		System.out.println("SQL stmt:" + sql2);
 
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		PreparedStatement prepStmt = conn.prepareStatement(sql2);
 		recursos.add(prepStmt);
 		prepStmt.executeQuery();
 	}
