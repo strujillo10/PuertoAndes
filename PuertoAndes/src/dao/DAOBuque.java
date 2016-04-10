@@ -270,7 +270,7 @@ public class DAOBuque
 		String sql = "INSERT INTO CARGA_EN_AREA VALUES (";
 		sql += carga.getId() + ",";
 		sql += area.getId() + ",";
-		sql += "TO_DATE('" + timeNow + "')";
+		sql += "TO_DATE('" + timeNow + "','YYYY-MM-DD'),'')";
 
 		System.out.println("SQL stmt:" + sql);
 

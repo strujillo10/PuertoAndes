@@ -252,7 +252,7 @@ public class DAOAreaAlmacenamiento
 		String sql2 = "INSERT INTO CARGA_EN_AREA VALUES(";
 		sql2 += area.getId() + ",";	
 		sql2 += carga.getId() + ",";
-		sql2 += "TO_DATE('" + timeNow + "','YYYY-MM-DD'),";
+		sql2 += "TO_DATE('" + timeNow + "','YYYY-MM-DD'),'')";
 		
 		String sql = "UPDATE CARGA_EN_AREA SET ";
 		sql += "id_area=" + area.getId() + ",";

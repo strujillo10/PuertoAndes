@@ -4172,18 +4172,16 @@ public class PuertoAndesMaster
 					if(!areasDisponibles.isEmpty())
 					{
 						AreaAlmacenamiento areaNueva = areasDisponibles.get(0);
-						System.out.println("6");
 						daoArea.deleteCargaArea(actual, areaNueva);
-						System.out.println("6.5");
 						daoArea.moverCargaAArea(actual, areaNueva);
 						int ocupado = areaNueva.getOcupacion() + actual.getPeso();
 						areaNueva.setOcupacion(ocupado);
-						System.out.println("7");
 						daoArea.updateAreaAlmacenamiento(areaNueva);
-						System.out.println("8");
+						
+						int despejado = area.getOcupacion()-actual.getPeso();
+						area.setCapacidad(despejado);
 						area.setEstado("CERRADA");
 						daoArea.updateAreaAlmacenamiento(area);
-						System.out.println("9");
 					}
 					else
 					{
