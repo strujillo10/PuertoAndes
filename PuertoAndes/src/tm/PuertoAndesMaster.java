@@ -32,6 +32,7 @@ import dao.DAOOperadorPortuario;
 import dao.DAOPatio;
 import dao.DAORFC1;
 import dao.DAORFC2;
+import dao.DAORFC5;
 import dao.DAORFC6;
 import dao.DAOSitio;
 import dao.DAOUsuario;
@@ -71,6 +72,7 @@ import vos.ListaOperadorPortuario;
 import vos.ListaPatio;
 import vos.ListaRFC1;
 import vos.ListaRFC2;
+import vos.ListaRFC5;
 import vos.ListaRFC6;
 import vos.ListaSitio;
 import vos.ListaUsuario;
@@ -78,6 +80,7 @@ import vos.OperadorPortuario;
 import vos.Patio;
 import vos.RFC1;
 import vos.RFC2;
+import vos.RFC5;
 import vos.RFC6;
 import vos.Sitio;
 import vos.Usuario;
@@ -3874,6 +3877,38 @@ public class PuertoAndesMaster
 			}
 		}
 		return new ListaRFC2(rfc2s);
+	}
+	
+	public ListaRFC5 darRFC5() throws Exception 
+	{
+	ArrayList<RFC5> rfc5s;
+	DAORFC5 daoRFC5 = new DAORFC5();
+	try 
+	{
+	this.conn = darConexion();
+	daoRFC5.setConn(conn);
+	rfc5s = daoRFC5.darRFC5s();
+
+	} catch (SQLException e) {
+	System.err.println("SQLException:" + e.getMessage());
+	e.printStackTrace();
+	throw e;
+	} catch (Exception e) {
+	System.err.println("GeneralException:" + e.getMessage());
+	e.printStackTrace();
+	throw e;
+	} finally {
+	try {
+	daoRFC5.cerrarRecursos();
+	if(this.conn!=null)
+	this.conn.close();
+	} catch (SQLException exception) {
+	System.err.println("SQLException closing resources:" + exception.getMessage());
+	exception.printStackTrace();
+	throw exception;
+	}
+	}
+	return new ListaRFC5(rfc5s);
 	}
 	
 	public ListaRFC6 darRFC6() throws Exception 
