@@ -106,9 +106,11 @@ public class DAORFC6
 				+ "x.SEPARACION_ENTRE_COLUMNAS, f.AREA as area_cuarto_frio, f.AREA_UTILIZADA as area_utilizada_cuarto,"
 				+ "f.DIMENSIONES as dimensiones_cuarto"
 				+ "from bodegas x left join CUARTOS_FRIOS f on x.id = f.ID_BODEGA)"
-				+ ") b on a.id = b.id_area);";
+				+ ") b on a.id = b.id_area)";
+		
+		String sql2 = "select a.*, b.nombre_sitio, b.dimension, b.tipo_de_carga, b.plataforma_externa, b.cantidad_de_cuartos_frios, b.ANCHO_EN_METROS,b.LARGO_EN_METROS, b.SEPARACION_ENTRE_COLUMNAS, b.AREA_CUARTO_FRIO, b.AREA_UTILIZADA_CUARTO, b.DIMENSIONES_CUARTO FROM ((select * from AREA_DE_ALMACENAMIENTO) a inner join((Select id_Area, 'N/A' as nombre_sitio, dimension, tipo_de_carga,'N/A' as plataforma_externa, 0 as cantidad_de_cuartos_frios, 0 AS ANCHO_EN_METROS,0 AS LARGO_EN_METROS, 0 AS SEPARACION_ENTRE_COLUMNAS, null AS AREA_CUARTO_FRIO,null AS AREA_UTILIZADA_CUARTO, null AS DIMENSIONES_CUARTO FROM PATIOS)UNION(SELECT id_Area, 'N/A' as nombre_sitio, dimension, tipo_de_carga,'N/A' as plataforma_externa, 0 as cantidad_de_cuartos_frios, 0 AS ANCHO_EN_METROS,0 AS LARGO_EN_METROS, 0 AS SEPARACION_ENTRE_COLUMNAS, null AS AREA_CUARTO_FRIO,null AS AREA_UTILIZADA_CUARTO, null AS DIMENSIONES_CUARTO FROM COBERTIZOS)UNION(select id_area, nombre as Nombre_Sitio, 'N/A' as dimension, 'N/A' as tipo_de_carga,'N/A' as plataforma_externa, 0 as cantidad_de_cuartos_frios, 0 AS ANCHO_EN_METROS,0 AS LARGO_EN_METROS, 0 AS SEPARACION_ENTRE_COLUMNAS, null AS AREA_CUARTO_FRIO,null AS AREA_UTILIZADA_CUARTO, null AS DIMENSIONES_CUARTO from sitios)UNION(select x.id_area, 'N/A' as Nombre_Sitio, 'N/A' as dimension,'N/A' as tipo_de_carga, x.plataforma_externa, x.CANTIDAD_DE_CUARTOS_FRIOS, x.ANCHO_EN_METROS, x.LARGO_EN_METROS,x.SEPARACION_ENTRE_COLUMNAS, f.AREA as area_cuarto_frio, f.AREA_UTILIZADA as area_utilizada_cuarto,f.DIMENSIONES as dimensiones_cuarto from bodegas x left join CUARTOS_FRIOS f on x.id = f.ID_BODEGA)) b on a.id = b.id_area)";
 
-		PreparedStatement prepStmt = conn.prepareStatement(sql);
+		PreparedStatement prepStmt = conn.prepareStatement(sql2);
 		recursos.add(prepStmt);
 		ResultSet rs = prepStmt.executeQuery();
 		
